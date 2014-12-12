@@ -1,0 +1,13 @@
+import java.io.IOException;
+
+
+public class IOsample  {
+
+		public static void Run() throws Exception {
+			try{
+				int val;
+				while ( (val = System.in.read()) != -1)
+					System.out.println((byte)val);
+			} catch ( IOException e ) {}
+		}
+}

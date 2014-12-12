@@ -1,0 +1,7 @@
+
+public class IOsample  {
+
+		public static void Run() throws Exception {
+			
+		}
+}

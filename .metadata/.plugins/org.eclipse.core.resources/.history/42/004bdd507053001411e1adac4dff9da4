@@ -1,0 +1,55 @@
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.MessageDigest;
+
+import javax.crypto.Cipher;
+
+
+public class DigitalSignatureHardwayExample {
+	public static void Run() throws Exception {
+		String[] args = new String[] {"Test Digital Signature in hard way"};
+		byte[] plainText = args[0].getBytes("UTF8");
+		
+		// get an MD5 message digest object and compute the plaintext digest
+		MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+		System.out.println("\n" + messageDigest.getProvider().getInfo());
+		messageDigest.update(plainText);
+		byte[] md = messageDigest.digest();
+		System.out.println( "\nDigest: " );
+	    System.out.println( new String( md, "UTF8") );
+		
+		// generate an RSA keypair
+		System.out.println( "\nStart generating RSA key" );
+		KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
+		keyGen.initialize(1024);
+		KeyPair key = keyGen.generateKeyPair();
+		System.out.println( "Finish generating RSA key" );
+		
+		// get a RSA cipher object and print the provider
+		Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
+		System.out.println("\n" + cipher.getProvider().getInfo());
+		
+		/// encrypt the message digest with the RSA private key
+	    // to create the signature
+		System.out.println( "\nStart encryption" );
+		cipher.init(Cipher.ENCRYPT_MODE, key.getPrivate());
+		byte[] cipherText = cipher.doFinal(md);
+		System.out.println("Finish encryption: ");
+		System.out.println(new String(cipherText, "UTF8"));
+		
+		// to verify, start by decrypting the signature with the
+	    // RSA private key
+		System.out.println("\nStart decryption" );
+		cipher.init(Cipher.DECRYPT_MODE, key.getPublic());
+		byte[] newMD = cipher.doFinal(cipherText);
+		System.out.println("Finish decryption:");
+		System.out.println( new String(newMD, "UTF8") );
+		
+		// then, recreate the message digest from the plaintext
+	    // to simulate what a recipient must do
+		System.out.println( "\nStart signature verification" );
+		messageDigest.reset();
+		messageDigest.update(plainText);
+		byte[] oldMD = message.digest();
+	}
+}

@@ -1,0 +1,12 @@
+
+public class Debut {
+	public static void main(String[] args) throws Exception {
+//		System.out.println("Go Head!");
+//		
+//		Person person = new Person();
+//		String name = person.GetName();
+//		System.out.println(name);
+		
+		HttpRequestDemo.sendGet();
+	}
+}

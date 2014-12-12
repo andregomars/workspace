@@ -1,0 +1,8 @@
+
+public class PrivateExample {
+	public static void Run(){
+		String[] args = "Test Private Key".split("");
+		
+		
+	}
+}
