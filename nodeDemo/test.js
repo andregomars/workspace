@@ -1,35 +1,15 @@
-var events = require('events');
-var util = require('util');
+var readline = require('readline');
+var fs = require('fs');
 
-function Door(location) {
-	this.location = location;
-	events.EventEmitter.call(this);
+var rs = fs.createReadStream('./in/997.txt');
 
-	this.open = function() {
-		this.emit('open');
-	};
+//rs.pipe(process.stdout);
 
-	this.close = function() {
-		this.emit('close');
-	};
-}
-
-//Door.prototype = events.EventEmitter.prototype;
-util.inherits(Door, events.EventEmitter);
-var frontDoor = new Door('front');
-frontDoor.once('open', function(){
-	console.log('ring ring ring');
-});
-frontDoor.addListener('open', function(){
-	console.log('hello!');
-});
-frontDoor.on('close', function(){
-	console.log('bye!');
+var rl = readline.createInterface({
+  input: rs,
+  output: process.stdout
 });
 
-// console.log(require('util').inspect(frontDoor.listeners('open')));
-// console.log(require('util').inspect(frontDoor.listeners('close')));
-
-frontDoor.open();
-frontDoor.open();
-frontDoor.close();
+rl.on('line', function(data){
+	//console.log(data);
+});
