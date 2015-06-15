@@ -13,10 +13,9 @@ var mergeSort = function(array, p, r) {
     if (r > p){
     	//divide
         var q = Math.floor((p+r)/2);   
+        mergeSort(array, p, q);    //[0..3] -> [0..1][2..3] -> [0..0][1..1]/[2..2][3..3]
+        mergeSort(array, q+1, r);  //[4..7] -> [4..5][6..7]  -> [4..4][5..5]/[6..6][7..7]
         //combine
-        mergeSort(array, p, q);   //[0..3]  [0..1]/[2..3]
-        mergeSort(array, q+1, r);  //[4..7]  [4..5]/[6..7]
-        //conquer
         merge(array, p, q, r);
 
 
@@ -50,7 +49,7 @@ mergeSort(array, 0, array.length-1);
 console.log("Array after sorting: " + array);
 assert.deepEqual(array, [2, 3, 6, 7, 9, 11, 12, 14]);
 
-var array = [14, 7, 0, 12, 9, 11, 6, -2];
+var array = [14, 7, 0, 12, 9, 11, 18, 6, -2];
 mergeSort(array, 0, array.length-1);
 console.log("Array after sorting: " + array);
-assert.deepEqual(array, [-2, 0, 6, 7, 9, 11, 12, 14]);
+assert.deepEqual(array, [-2, 0, 6, 7, 9, 11, 12, 14, 18]);
