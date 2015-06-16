@@ -53,3 +53,8 @@ var array = [14, 7, 0, 12, 9, 11, 18, 6, -2];
 mergeSort(array, 0, array.length-1);
 console.log("Array after sorting: " + array);
 assert.deepEqual(array, [-2, 0, 6, 7, 9, 11, 12, 14, 18]);
+
+var array = [14];
+mergeSort(array, 0, array.length-1);
+console.log("Array after sorting: " + array);
+assert.deepEqual(array, [14]);

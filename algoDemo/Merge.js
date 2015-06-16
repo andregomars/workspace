@@ -57,3 +57,13 @@ merge(array, 0,
     array.length-1);
 console.log("Array after merging: " + array);
 assert.deepEqual(array, [2, 3, 6, 7, 9, 11, 12, 14]);
+
+var array = [6,7,21,5,8];
+merge(array, 0,Math.floor((0 + array.length-1) / 2),array.length-1);
+console.log("Array after merging: " + array);
+assert.deepEqual(array, [5,6,7,8,21]);
+
+var array = [14];
+merge(array, 0,Math.floor((0 + array.length-1) / 2),array.length-1);
+console.log("Array after merging: " + array);
+assert.deepEqual(array, [14]);
