@@ -1,3 +1,5 @@
+'use strict';
+
 var assert = require('assert');
 // This function partitions given array and returns 
 //  the index of the pivot.
