@@ -29,7 +29,6 @@ var primes =   [2,  3,  5,  7, 11,
                 31, 37, 41, 43, 47, 
                 53, 59, 61, 67, 71, 
                 73, 79, 83, 89, 97];
-//var primes = [2,3,5,7,11];
 
 var result = doSearch(primes, 19);
 console.log("Found prime at index " + result);
