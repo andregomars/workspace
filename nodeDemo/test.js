@@ -1,15 +1,15 @@
-var readline = require('readline');
-var fs = require('fs');
+'use strict';
+var assert = require('assert');
 
-var rs = fs.createReadStream('./in/997.txt');
+Array.prototype.avg = function() {
+	return this.reduce(function(a,b){
+		return a+b;
+	},0)/this.length;
+	//return this.length;
+};
 
-//rs.pipe(process.stdout);
+console.log([2.75,4.0,3.75].avg());
+assert.equal(3.5,[2.75,4.0,3.75].avg());
 
-var rl = readline.createInterface({
-  input: rs,
-  output: process.stdout
-});
-
-rl.on('line', function(data){
-	//console.log(data);
-});
+console.log([].avg());
+console.log([2.75,4.0,3.75,4,4,4,4,4].avg());
