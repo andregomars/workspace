@@ -1,42 +1,45 @@
-var swap = function(array, firstIndex, secondIndex) {
-    var temp = array[firstIndex];
-    array[firstIndex] = array[secondIndex];
-    array[secondIndex] = temp;
+'use strict';
+var assert = require('assert');
+
+var swap = function(array, p, r) {
+    var temp = array[p];
+    array[p] = array[r];
+    array[r] = temp;
 };
 
-var indexOfMinimum = function(array, startIndex) {
-
-    var minValue = array[startIndex];
-    var minIndex = startIndex;
-
-    for(var i = minIndex + 1; i < array.length; i++) {
-        if(array[i] < minValue) {
-            minIndex = i;
-            minValue = array[i];
+var getLowestIndex = function(array, p) {
+    /*
+        start from p, pick the lowest value with its index
+    */
+    var lowestIndex = p;
+    for (var i = p+1; i < array.length; i++) {
+        if (array[i] < array[lowestIndex]) {
+            lowestIndex = i;
         }
-    } 
-    return minIndex;
-}; 
+    }
+    return lowestIndex;
+};
 
 var selectionSort = function(array) {
-    /* loop from index 0 to len(array) - 1:
-        minIndex = indexOfMinimum(array, index) //min of subarray
-        swap array[index] with array[minIndex]
-        
-    */
-    for (var i = 0; i < array.length; i++)
-    {
-        var minIndex = indexOfMinimum(array, i);
-        swap(array, i, minIndex);
+    for (var i = 0; i < array.length; i++) {
+        var index = getLowestIndex(array, i, array.length);
+        swap(array, i, index);
     }
 };
 
-var array = [22, 11, 99, 88, 9, 7, 42];
+var array = [64,25,12,22,11];
 selectionSort(array);
-println("Array after sorting:  " + array);
+console.log(array);
+assert.deepEqual(array,[11,12,22,25,64]);
 
-Program.assertEqual(array, [7, 9, 11, 22, 42, 88, 99]);
+var array = [];
+selectionSort(array);
+assert.deepEqual(array,[]);
 
-var array2 = [23,89,11,4,22];
-selectionSort(array2);
-Program.assertEqual(array2, [4,11,22,23,89]);
+var array = [22];
+selectionSort(array);
+assert.deepEqual(array,[22]);
+
+var array = [-22,33];
+selectionSort(array);
+assert.deepEqual(array,[-22,33]);
