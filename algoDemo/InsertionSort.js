@@ -7,28 +7,23 @@ var swap = function(array, p, r) {
     array[r] = temp;
 };
 
-var insertSortedArray = function(array, p, r){
-    var temp = array[r];
-    for (var i = r-1; i >= p; i--) {
-        if(array[i] < array[r]) {
-            array[i+1] = temp;
-            return;
-        } else {
-            array[i+1] = array[i];
-        }
-    };
+function insertLastOne(array, r, value){
+    for (var j = r-1; j >= 0 && array[j] > value; j--) {
+        array[j+1] = array[j];
+    }
+    array[j+1] = value;
 };
 
 var insertionSort = function(array) {
     for (var i = 1; i < array.length; i++) {
-        insertSortedArray(array, 0, i);
+        insertLastOne(array, i, array[i]);
     };
 };
 
-var array = [64,25,12,22,11];
+var array = [22, 11, 99, 88, 9, 7, 42];
 insertionSort(array);
 console.log(array);
-assert.deepEqual(array,[11,12,22,25,64]);
+assert.deepEqual(array,[7, 9, 11, 22, 42, 88, 99]);
 
 var array = [];
 insertionSort(array);
