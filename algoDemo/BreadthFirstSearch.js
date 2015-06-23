@@ -22,7 +22,7 @@ Queue.prototype.isEmpty = function() {
  * @returns {array} Array of objects describing each vertex, like
  *     [{distance: _, predecessor: _ }]
  */
-var doBFS = function(graph, source) {
+function doBFS(graph, source) {
     var bfsInfo = [];
 
     for (var i = 0; i < graph.length; i++) {
@@ -36,8 +36,19 @@ var doBFS = function(graph, source) {
     var queue = new Queue();
     queue.enqueue(source);
 
+
     // Traverse the graph
-    
+    while(!queue.isEmpty()) {
+        var u = queue.dequeue();
+        for (var i = 0; i < graph[u].length; i++) {
+            var v = graph[u][i];
+            if (bfsInfo[v].distance === null) {
+                bfsInfo[v].distance =  bfsInfo[u].distance + 1;
+                bfsInfo[v].predecessor =  u;
+                queue.enqueue(v);
+            }
+        }
+    }
     // As long as the queue is not empty:
     //  Repeatedly dequeue a vertex u from the queue.
     //  
@@ -69,13 +80,13 @@ for (var i = 0; i < adjList.length; i++) {
     console.log("vertex " + i + ": distance = " + bfsInfo[i].distance + ", predecessor = " + bfsInfo[i].predecessor);
 }
 
-/*
-Program.assertEqual(bfsInfo[0], {distance: 4, predecessor: 1});
-Program.assertEqual(bfsInfo[1], {distance: 3, predecessor: 4});
-Program.assertEqual(bfsInfo[2], {distance: 1, predecessor: 3});
-Program.assertEqual(bfsInfo[3], {distance: 0, predecessor: null});
-Program.assertEqual(bfsInfo[4], {distance: 2, predecessor: 2});
-Program.assertEqual(bfsInfo[5], {distance: 2, predecessor: 2});
-Program.assertEqual(bfsInfo[6], {distance: 1, predecessor: 3});
-Program.assertEqual(bfsInfo[7], {distance: null, predecessor: null});
-*/
+
+assert.deepEqual(bfsInfo[0], {distance: 4, predecessor: 1});
+assert.deepEqual(bfsInfo[1], {distance: 3, predecessor: 4});
+assert.deepEqual(bfsInfo[2], {distance: 1, predecessor: 3});
+assert.deepEqual(bfsInfo[3], {distance: 0, predecessor: null});
+assert.deepEqual(bfsInfo[4], {distance: 2, predecessor: 2});
+assert.deepEqual(bfsInfo[5], {distance: 2, predecessor: 2});
+assert.deepEqual(bfsInfo[6], {distance: 1, predecessor: 3});
+assert.deepEqual(bfsInfo[7], {distance: null, predecessor: null});
+
