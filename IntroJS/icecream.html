@@ -1,0 +1,36 @@
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" 
+		src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.4.9/processing.min.js"></script>
+</head>
+<body>
+	<script type="text/processing" data-processing-target="mycanvas">
+	void setup() {
+	  size(1024,768);
+	  background(255,255,255);
+	  //fill(255);
+	  noLoop();
+	  PFont fontA = loadFont("courier");
+	  textFont(fontA, 14);  
+	}
+
+	void draw() {  
+		fill(0, 255, 242);
+		ellipse(200, 92, 80, 80);  // Top scoop
+		fill(183, 0, 255);
+		ellipse(200, 141, 80, 80); // Middle scoop!
+		fill(0, 255, 0);
+		ellipse(200, 189, 80, 80);  // Bottom scoop!
+		fill(255, 242, 0);
+		rect(150, 200, 100, 112);  // The cup!
+
+		fill(255, 0, 0);
+		ellipse(200, 46, 20, 20);  // The cherry, yum
+		fill(255, 0, 0);
+		line(200, 27, 200, 36);   // And the cherry stem
+	}
+	</script>
+	<canvas id="mycanvas"></canvas>
+</body>
+</html>

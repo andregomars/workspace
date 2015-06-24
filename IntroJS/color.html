@@ -1,0 +1,51 @@
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" 
+		src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.4.9/processing.min.js"></script>
+</head>
+<body>
+	<script type="text/processing" data-processing-target="mycanvas">
+	void setup() {
+	  size(1024,768);
+	  background(255,255,255);
+	  //fill(255);
+	  noLoop();
+	  PFont fontA = loadFont("courier");
+	  textFont(fontA, 14);  
+	}
+
+	void draw() {  
+		background(173, 236, 255);
+
+		// body
+		stroke(28, 84, 0);
+		fill(55, 166, 0);
+		triangle(100, 410, 200, 200, 300, 410);
+
+		// face
+		stroke(145, 104, 0);
+		fill(250, 212, 147);
+		ellipse(200, 180, 191, 200);
+
+		// hands
+		ellipse(100, 300, 42, 42);
+		ellipse(300, 300, 42, 42);
+
+		// mouth
+		stroke(255, 0, 0); //red stroke
+		line(183, 246, 245, 230);
+
+		// glasses frames
+		stroke(0, 0, 0);  //black stroke
+		line(107, 163, 292, 163);
+
+		// glasses lenses
+		fill(0, 0, 0);
+		rect(132, 152, 50, 38);
+		rect(215, 152, 50, 38);
+	}
+	</script>
+	<canvas id="mycanvas"></canvas>
+</body>
+</html>
