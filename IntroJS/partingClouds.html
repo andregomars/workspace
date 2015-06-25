@@ -1,0 +1,41 @@
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" 
+		src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.4.9/processing.min.js"></script>
+</head>
+<body>
+	<script type="text/processing" data-processing-target="mycanvas">
+	size(500,400);
+	noStroke();
+	var leftX = 123;
+	var rightX = 309;
+	var sunRadius = 100;
+
+	var draw() {
+	    background(184, 236, 255);
+	    
+	    fill(255, 170, 0);
+	    ellipse(200, 100, sunRadius, sunRadius);
+	    
+	    // clouds 
+	    fill(255, 255, 255);
+	    // left cloud
+	    ellipse(leftX, 150, 126, 97);
+	    ellipse(leftX+62, 150, 70, 60);
+	    ellipse(leftX-62, 150, 70, 60);
+	    
+	    // right cloud
+	    ellipse(rightX, 100, 126, 97);
+	    ellipse(rightX+62, 100, 70, 60);
+	    ellipse(rightX-62, 100, 70, 60);
+	    
+	    leftX--;
+	    rightX++;
+	    sunRadius+=2;
+	    
+	};
+	</script>
+	<canvas id="mycanvas"></canvas>
+</body>
+</html>
