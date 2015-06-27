@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.js"></script>
+	<style type="text/css">
+		.show-scope-demo.ng-scope,
+		.show-scope-demo .ng-scope  {
+		  border: 1px solid red;
+		  margin: 3px;
+		}
+	</style>
+
+</head>
+<body>
+	<div ng-app="patientApp">
+		{{ patientAppVersion }} | {{patientAppGreeting}}
+	</div>
+	<script type="text/javascript">
+		
+		    (function () {
+			    "use strict";
+			 
+			 	angular.module("patientApp.Services",[]);
+			 	angular.module("patientApp.Controllers",[]);
+			 	angular.module("patientApp",["patientApp.Services",
+			 									"patientApp.Controllers"]);
+
+			    var app = angular.module("patientApp", []);
+			    app.run(function ($rootScope) {
+			        $rootScope.patientAppVersion = "0.0.0.1";
+			    });
+			 
+			}());
+
+			(function() {
+			    "use strict";
+			 
+
+			    var app = angular.module("patientApp");
+			    app.run(["$rootScope", function($rootScope) {
+			        $rootScope.patientAppGreeting = "Hello!";
+			    }]);  
+			 
+			}());
+
+	</script>
+</body>
+</html>
