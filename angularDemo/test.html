@@ -17,31 +17,44 @@
 	</div>
 	<script type="text/javascript">
 		
-		    (function () {
-			    "use strict";
-			 
-			 	angular.module("patientApp.Services",[]);
-			 	angular.module("patientApp.Controllers",[]);
-			 	angular.module("patientApp",["patientApp.Services",
-			 									"patientApp.Controllers"]);
+		(function () {
+		    "use strict";
+		 
+		    angular.module("patientApp.Services", []);
+		    angular.module("patientApp.Controllers", []);   
+		    angular.module("patientApp", ["patientApp.Services",
+		                                  "patientApp.Controllers"]);
+		 
+		    var app = angular.module("patientApp");
+		    app.run(["$rootScope", function ($rootScope) {
+		        $rootScope.patientAppVersion = "0.0.0.1";
+		    }]);
+		     
+		}());
 
-			    var app = angular.module("patientApp", []);
-			    app.run(function ($rootScope) {
-			        $rootScope.patientAppVersion = "0.0.0.1";
-			    });
-			 
-			}());
+		(function () {
+		    var alerter = function () {
+		        return {
+		            alert: function (message) {
+		                console.log(message);
+		            }
+		        };
+		    };
+		 
+		    angular.module("patientApp.Services")           
+		           .factory("alerter", alerter);
+		}());
 
-			(function() {
-			    "use strict";
+			// (function() {
+			//     "use strict";
 			 
 
-			    var app = angular.module("patientApp");
-			    app.run(["$rootScope", function($rootScope) {
-			        $rootScope.patientAppGreeting = "Hello!";
-			    }]);  
+			//     var app = angular.module("patientApp");
+			//     app.run(["$rootScope", function($rootScope) {
+			//         $rootScope.patientAppGreeting = "Hello!";
+			//     }]);  
 			 
-			}());
+			// }());
 
 	</script>
 </body>
