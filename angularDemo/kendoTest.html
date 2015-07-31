@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+  	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2015.2.624/js/angular.min.js"></script>
+    <script src="http://cdn.kendostatic.com/2015.2.624/js/kendo.all.min.js"></script>
+
+	<script type="text/javascript" src="kendoTest.js"></script>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.css"/>
+	<link rel="stylesheet" href="http://cdn.kendostatic.com/2015.2.624/styles/kendo.common.min.css">
+	<link rel="stylesheet" href="http://cdn.kendostatic.com/2015.2.624/styles/kendo.default.min.css">
+
+</head>
+<body ng-app="myApp">
+<!--  	<div>		
+		<select kendo-drop-down-list>
+		  <option value="1">Thing 1</option>
+		  <option value="2">Thing 2</option>
+		  <option value="3">Thing 3</option>
+		</select>
+	</div> -->
+
+<div ng-controller="myCtrl">
+<!-- 	  <label>Search:</label>
+	  <input type="text" ng-model="searchText"/>
+	  You are searching for {{searchText}}
+	  <hr/>
+	  <h1>Customers</h1>
+	  <table>
+	    <tr ng-repeat="cust in customers">
+	      <td>{{cust.id}}</td>
+	      <td>{{cust.name}}</td>
+	      <td>{{cust.sex}}</td>
+	    </tr>
+	  </table>
+ -->
+	<div kendo-grid
+		k-options="{selectable: 'row', 
+			dataSource: customers,
+			batch: true,
+			editable: true,
+			toolbar: ['create', 'save', 'cancel'],
+			columns: [
+				{field:'name', title:'Customer Name'},
+  				{field:'sex', title:'Gender'},
+  				{command:'destroy', title:'&nbsp;'}]}"
+		k-on-change="currentRow = data">
+	</div>
+	<p ng-show="currentRow">
+		<label>Name:
+			<input ng-model="currentRow.name" />
+		</label>
+		<label>Gender:
+			<input ng-model="currentRow.sex" />
+		</label>
+	</p>
+	<button kendo-button ng-click="update()">
+		Update from embedded code
+	</button>
+</div> 
+</body>
+
+</html>
