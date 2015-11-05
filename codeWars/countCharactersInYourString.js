@@ -1,3 +1,5 @@
+var assert = require('assert');
+
 function count (str) {  
   var list = [];
   for (var i = 0; i < str.length; i++) {
@@ -24,18 +26,8 @@ function array2obj (array) {
 	return obj;
 };
 
-console.log(count('aba'));
+//console.log(count('aba'));
 
-
-/*
-[a,b,a]
-
-newlist = [a,1]
-
-when i=1
-	current = b
-	when j = 0
-
-
-
-*/
+assert.deepEqual(count('aba'),{'a':2,'b':1});
+assert.deepEqual(count('aaa'),{'a':3});
+assert.deepEqual(count(''),{});
