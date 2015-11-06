@@ -1,5 +1,6 @@
 var assert = require('assert');
 
+/*
 function count (str) {  
   var list = [];
   for (var i = 0; i < str.length; i++) {
@@ -25,9 +26,22 @@ function array2obj (array) {
 	};
 	return obj;
 };
+*/
 
-//console.log(count('aba'));
+// function count (string) {  
+//   var list = {};
+//   string.split('').forEach((s) => list[s] ? list[s]++ : list[s] = 1 );
+//   return list;
+// }
+
+function count (string) {
+  return string.split('').reduce(function(list,char){
+    list[char] = (list[char]||0) + 1;
+    return list;
+  },{});
+}
 
 assert.deepEqual(count('aba'),{'a':2,'b':1});
 assert.deepEqual(count('aaa'),{'a':3});
+assert.deepEqual(count('a'),{'a':1});
 assert.deepEqual(count(''),{});
