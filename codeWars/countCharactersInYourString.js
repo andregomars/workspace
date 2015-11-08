@@ -37,7 +37,7 @@ function array2obj (array) {
 function count (string) {
   return string.split('').reduce(function(list,char){
     list[char] = (list[char]||0) + 1;
-    return list;
+    return listr;
   },{});
 }
 
