@@ -17,6 +17,10 @@ function pattern(n){
 // 	return pattern(n-1) + output;
 // }
 
-assert.equal(pattern(1),"1");
-assert.equal(pattern(2),"1\n22");
-assert.equal(pattern(5),"1\n22\n333\n4444\n55555");
+describe('#pattern()', function(){
+	it('should return expected pattern', function(){
+		assert.equal(pattern(1),"1");
+		assert.equal(pattern(2),"1\n22");
+		assert.equal(pattern(5),"1\n22\n333\n4444\n55555");
+	});
+});
