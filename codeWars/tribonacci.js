@@ -2,7 +2,7 @@ var assert = require('assert');
 
 function trib(signature,n)
 {
-	if (n < 3) return signature.slice(0, n);
+	if (n < 3) return signature.slice(0,n);
 	else if (n === 3) return signature;
 	else signature.push(signature.slice(-3).reduce((a,b)=>(a+b)));
 	return trib(signature,n-1);
