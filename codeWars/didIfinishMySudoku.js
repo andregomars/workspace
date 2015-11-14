@@ -1,5 +1,6 @@
 var assert = require('assert');
 
+/*
 function doneOrNot(board){
   var valid = '1,2,3,4,5,6,7,8,9';
   //loop each line to compare against valid
@@ -39,6 +40,26 @@ function devideRegions(board) {
 	}
 	debugger;
 	return regions;
+
+}
+*/
+
+function doneOrNot(board){
+	var regions = []
+	for (var i = 0; i < 9; i++) {
+		var row = [], col = [], region = [];
+		for (var j = 0; j < 9; j++) {
+			row.push(board[i][j]);
+			col.push(board[j][i]);
+			region.push(board[Math.floor(j/3)+Math.floor(i/3)*3][j%3+(i%3)*3]);
+		};
+		regions.push(row.sort().join(''));
+		regions.push(col.sort().join(''));
+		regions.push(region.sort().join(''));
+	};
+	return regions.reduce((a,b)=>b==='123456789'?true&a:false&a,true) ? "Finished!" : "Try again!";
+}
+
 	/*
 	00,01,02  03,04,05 
 	10,11,12  13,14,15
@@ -51,26 +72,13 @@ function devideRegions(board) {
 	60,61,62
 	70,71,72
 	80,81,82
-	
 	*/
-
-	/*
-	00,01,02  03,04,05 
-	10,11,12  13,14,15
-	20,21,22  23,24,25
-
-	30,31,32
-	40,41,42
-	50,51,52
-	
-	60,61,62
-	70,71,72
-	80,81,82
-	*/
-
+	//0,1,2 -- 0   floor(i/3)*3
+	//3,4,5 -- 3	
+	//6,7,8 -- 6
 
    	/*
-	--i=0  m,n   m:floor(j/3)  n:
+	--i=0  m,n   m:floor(j/3)+floor(i/3)*3  n:j%3+(i%3)*3
 	j = 0: 0,0
 	j = 1: 0,1
 	j = 2: 0,2
@@ -81,7 +89,7 @@ function devideRegions(board) {
 	j = 7: 2,1
 	j = 8: 2,2
 
-	--i=1  m,n	m:floor(j/3)
+	--i=1  m,n	m:floor(j/3)+floor(i/3)*3  n:j%3+(i%3)*3
 	j = 0: 0,3
 	j = 1: 0,4
 	j = 2: 0,5
@@ -92,7 +100,7 @@ function devideRegions(board) {
 	j = 7: 2,4
 	j = 8: 2,5
 
-	--i=3  m,n	m:floor(j/3)+i	n:
+	--i=3  m,n	m:floor(j/3)+floor(i/3)*3	n:j%3+(i%3)*3
 	j = 0: 3,0
 	j = 1: 3,1
 	j = 2: 3,2
@@ -104,7 +112,6 @@ function devideRegions(board) {
 	j = 8: 5,2
 	*/
 
-}
 
 var board = [[5, 3, 4, 6, 7, 8, 9, 1, 2], 
              [6, 7, 2, 1, 9, 5, 3, 4, 8],
