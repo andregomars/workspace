@@ -1,6 +1,3 @@
-var assert = require("assert");
-var App = function() {}
-
 function eqSumPowdig(hMax, exp) {
   /*
 	n = 2
