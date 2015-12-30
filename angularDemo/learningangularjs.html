@@ -1,0 +1,32 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script>
+  	var app = angular.module("myApp", []);
+  	app.controller("costCtrl", ["$scope", function($scope) {
+  		$scope.cost = 49.99;
+  		$scope.addtax = true;
+  		function update() {
+  			$scope.tax = $scope.addtax? $scope.cost * 0.09 : 0.0;
+  			$scope.total = parseFloat($scope.cost) + $scope.tax;
+  		}
+  		$scope.$watch("cost+addtax", update);
+  		//$scope.$watch("addtax", update);
+  	}]);
+  </script>
+</head>
+<body>
+	<div ng-controller="costCtrl">
+	<div>
+		<input type="checkbox" ng-model="addtax"/>Add Tax
+		<input type="checkbox" ng-model="showtotal"/>Show Total
+	</div>
+		Cost: <input type="text" ng-model="cost" placeholder="cost" />
+	<p>This is your cost: {{cost|currency}}</p>
+	<p>This is your tax: {{tax|currency}}</p>
+	<p ng-show="showtotal">This is your total: {{total|currency}}</p>
+	</div>
+</body>
+
+</html>
