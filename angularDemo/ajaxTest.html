@@ -1,0 +1,58 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script>
+    var url = "http://apis.newegg.org/datastore/v1/bsdcenter/weeklyreport";
+    var newdata = {
+          "ID":"1360b0de-af4b-11e5-b560-782bcb7b3ec0",
+          "title": "EDI-0012 test new",
+          "detail": "22% just start",
+          "eta": "Estimated at 02/22",
+          "label": "current week",
+          "startDate": "2015-12-14",
+          "userID": "as13"
+    }
+
+  	var app = angular.module("myApp", []);
+    app.service("dataService", function($http){
+      //get
+      this.getData = function(cb) {
+        $http.get(url).success(function (data){
+            cb(data);
+          });
+      };
+
+      //add
+      this.addData = function(cb) {
+        $http.post(url, newdata).success(function (msg){
+            cb(msg);
+          });
+      };      
+    });
+
+  	app.controller("ajaxCtrl", function($scope, dataService) {
+      $scope.data = null;
+      $scope.message = null;
+
+      // dataService.addData(function(dataResponse){
+      //   $scope.message = dataResponse;
+      //   console.log($scope.message);
+      // });
+
+      dataService.getData(function(dataResponse){
+        $scope.data = dataResponse;
+        console.log($scope.data);
+      });
+  	});
+
+
+  </script>
+</head>
+<body>
+	<div ng-controller="ajaxCtrl">
+
+	</div>
+</body>
+
+</html>
