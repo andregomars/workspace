@@ -1,0 +1,55 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+	<script src="https://code.angularjs.org/1.4.8/angular.min.js"></script>
+	<script>
+	angular.module("app", [])
+	// .controller("MainCtrl", ["$scope", function($scope) {
+	// 	$scope.user = null;
+	// 	$scope.setUser = function(name) {
+	// 		$scope.user = name;
+	// 	};
+	// }])
+	// .controller("LoginCtrl", ["$scope", function($scope) {
+	// 	$scope.name = "";
+	// 	$scope.login = function() {
+	// 		$scope.setUser($scope.name);
+	// 	};
+	// 	$scope.logout = function() {
+	// 		$scope.setUser(null);
+	// 	};
+	// }]);
+	.controller("MainCtrl", ["$scope", function($scope) {
+		$scope.user = null;
+		$scope.$on("login", function(event, name) {
+			$scope.user = name;
+		});
+		$scope.$on("logout", function(event) {
+			$scope.user = null;
+		});
+	}])
+	.controller("LoginCtrl", ["$scope", function($scope) {
+		$scope.name = "";
+		$scope.login = function() {
+			$scope.$emit("login", $scope.name);
+		};
+		$scope.logout = function() {
+			$scope.$emit("login");
+		};
+	}]);
+	</script>
+</head>
+<body ng-controller="MainCtrl">
+	<div ng-show="user">{{user}} is logged in</div>
+	<div ng-hide="user">No user logged in</div>
+	<div ng-controller="LoginCtrl">
+		<div ng-hide="user">
+			Login: <input type="text" ng-model="name"/>
+		</div>
+		<div>
+			<input type="submit" ng-show="user" ng-click="logout()" value="Logout" />
+			<input type="submit" ng-hide="user" ng-click="login()" value="Login" />
+		</div>
+	</div>
+</body>
+</html>

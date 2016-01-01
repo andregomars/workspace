@@ -1,0 +1,51 @@
+<!doctype html>
+<html ng-app="app">
+<head>
+  <style type="text/css">
+  .gray {background: #eee;}
+  </style>
+	<script src="https://code.angularjs.org/1.4.8/angular.min.js"></script>
+  <script>
+    angular.module("app", [])
+    .controller("ContactsCtrl", ["$scope", function($scope) {
+      $scope.people = [
+        {name:'andre', phones:['252-1073', '343-8088']},
+        {name:'carol', phones:['252-1716']},
+        {name:'blake', phones:['252-1101']}
+      ];
+      $scope.add = function() {
+        $scope.people.push(
+            {name:'god', phones:['332-3332']}
+          );
+      };
+    }])
+    .controller("PersonCtrl", ["$scope", function($scope) {
+      $scope.show = function() {
+        $scope.showPhones = true;
+      }
+      $scope.hide = function() {
+        $scope.showPhones = false;
+      }
+    }]);
+  </script>
+</head>
+<body>
+	<div ng-controller="ContactsCtrl">
+    <input type="button" value="Add" ng-click="add()"/>
+    <div ng-repeat="person in people" ng-init="showPhones=false" ng-controller="PersonCtrl"
+      ng-class-odd="'gray'">
+      {{person.name}} 
+      (
+      <a href="#" ng-click="show()" ng-hide="showPhones">Show</a>
+      <a href="#" ng-click="hide()" ng-show="showPhones">Hide</a>
+      )
+      <div style="margin-left:50px" ng-show="showPhones">
+        <div ng-repeat="phone in person.phones">
+        <!-- <span ng-if="$index>0">,</span> -->
+          {{phone}}
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>
