@@ -1,11 +1,31 @@
 module.exports = function(connect, middlewares) {
 	var items = [];
 	var item_id = 0;
+	var find_index_by_id = function(id) {
+		for(var i in items) {
+			if (items[i].id === id) return i;
+		}
+		return -1;
+	};
+	var find_by_id = function(id) {
+		var i = find_index_by_id(id);
+		return i != -1 ? item[i] : null;
+	};
 	middlewares.push(
 		connect().use('/api/v1/todo', function(req, res, next) {
 			res.setHeader('Contenty-Type','application/json');
+			var id = null;
+			if (req.url.match(/\d+/) != null) {
+				id = parseInt(req.url.replace('/',''));
+			}
 			if (req.method == 'GET') {
-				res.end(JSON.stringify(items));
+				if (id != null) {
+					var item = find_by_id(id);
+					res.end(JSON.stringify(item));
+				}
+				else {
+					res.end(JSON.stringify(items));
+				}
 			}
 			if (req.method == 'POST') {
 				var body = '';
