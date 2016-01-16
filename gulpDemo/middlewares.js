@@ -9,7 +9,7 @@ module.exports = function(connect, middlewares) {
 	};
 	var find_by_id = function(id) {
 		var i = find_index_by_id(id);
-		return i != -1 ? item[i] : null;
+		return i != -1 ? items[i] : null;
 	};
 	middlewares.push(
 		connect().use('/api/v1/todo', function(req, res, next) {
@@ -36,9 +36,21 @@ module.exports = function(connect, middlewares) {
 					item_id++;
 					var obj = JSON.parse(body);
 					obj.id = item_id;
-					items.push(obj);
+					if (id != null) {
+						var item = find_by_id(id);
+						item.text = obj.text;
+					} else {
+						items.push(obj);
+					}
 					res.end(JSON.stringify(items));
 				});
+			}
+			if (req.method == 'DELETE') {
+				if (id != null) {
+					var ind = find_index_by_id(id);
+					items.splice(ind, 1);
+					res.end(JSON.stringify(items));
+				}
 			}
 		})
 	);
