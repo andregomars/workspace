@@ -2,12 +2,12 @@
 curl "http://localhost:9000/api/v1/todo"
 
 * to add item into list
-curl "http://localhost:9000/api/v1/todo" -d "{\"text\":\"andre\"}"
-curl "http://localhost:9000/api/v1/todo" -d "{\"text\":\"go\"}"
-curl "http://localhost:9000/api/v1/todo" -d "{\"text\":\"mars\"}"
+curl "http://localhost:9000/api/v1/todo" -d "{\"text\":\"andre\"}" -H "Content-Type: application/json"
+curl "http://localhost:9000/api/v1/todo" -d "{\"text\":\"go\"}" -H "Content-Type: application/json"
+curl "http://localhost:9000/api/v1/todo" -d "{\"text\":\"mars\"}" -H "Content-Type: application/json"
 
 * to update item in the list
-curl "http://localhost:9000/api/v1/todo/3" -d "{\"text\":\"earth\"}"
+curl "http://localhost:9000/api/v1/todo/3" -d "{\"text\":\"earth\"}" -H "Content-Type: application/json"
 
 * to delete item by id
 curl "http://localhost:9000/api/v1/todo/2" -X DELETE
