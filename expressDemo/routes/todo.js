@@ -16,10 +16,16 @@ var find_by_id = function(id) {
 };
 
 router.use(bodyParser.json());
+router.use(function(req, res, next){
+	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+	res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+	next();
+});
 
 router.get('/v1/todo', function(req, res) {
-	res.json(items);
-	res.end();
+	//items.push('{"text":"defaulOne"}');
+	res.json(items).end();
 });
 
 router.post('/v1/todo*', function(req, res) {

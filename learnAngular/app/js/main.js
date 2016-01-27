@@ -1,4 +1,5 @@
 import angular from 'angular';
+//mport 'angular-resource';
 
 // angular modules
 import constants from './constants';
