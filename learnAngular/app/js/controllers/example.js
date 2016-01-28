@@ -1,4 +1,4 @@
-function ExampleCtrl($http) {
+function ExampleCtrl($http, $resource) {
   'ngInject';
   // ViewModel
   const vm = this;
@@ -8,14 +8,14 @@ function ExampleCtrl($http) {
   vm.todos = [];
   vm.new_todo = '';
 
-  // var task = $resource('http://localhost:9000/api/v1/todo/:taskId', {taskId: '@id'});
+  var task = $resource('http://localhost:9000/api/v1/todo/:taskId', {taskId: '@id'});
   vm.load = function() {
-	  $http.get('http://localhost:9000/api/v1/todo').success(function(data){
-	  	vm.todos = data;
-	  });
-		// task.query(function(data){
-		// 	vm.todos = data;
-		// });
+	  // $http.get('http://localhost:9000/api/v1/todo').success(function(data){
+	  // 	vm.todos = data;
+	  // });
+		task.query(function(data){
+			vm.todos = data;
+		});
 	};
 
   vm.add = function(event){

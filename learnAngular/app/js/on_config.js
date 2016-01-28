@@ -1,4 +1,4 @@
-function OnConfig($stateProvider, $locationProvider, $urlRouterProvider) {
+function OnConfig($stateProvider, $locationProvider, $urlRouterProvider, $resourceProvider) {
   'ngInject';
 
   $locationProvider.html5Mode(true);
