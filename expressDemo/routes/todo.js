@@ -40,10 +40,11 @@ router.post('/v1/todo*', function(req, res) {
 	if (!!id) {
 		var item = find_by_id(id);
 		item.text = obj.text;
+		obj = item;
 	} else {
 		items.push(obj);
 	}
-	res.json(items).end();
+	res.json(obj).end();
 })
 
 router.delete('/v1/todo*', function(req, res) {
@@ -51,11 +52,13 @@ router.delete('/v1/todo*', function(req, res) {
 	if (req.url.match(/\d+/) != null) {
 		id = parseInt(req.url.split('/').slice(-1));
 	}
+	var obj = null;
 	if (!!id) {
 		var ind = find_index_by_id(id);
+		obj = find_by_id(id);
 		items.splice(ind, 1);
 	}
-	res.json(items).end();
+	res.json(obj).end();
 });
 
 module.exports = router;

@@ -8,7 +8,7 @@
 
 <div class="row" ng-init="home.load()">
 	<div class="col-md-12"  ng-repeat="todo in home.todos">
-		<button ng-click="home.done(todo.id)" class="btn btn-xs btn-danger">Done</button>
+		<button ng-click="home.done(todo)" class="btn btn-xs btn-danger">Done</button>
 		<input type="text" ng-model="todo.text" ng-keyup="home.update($event, todo)" />
 	</div>
 </div>
