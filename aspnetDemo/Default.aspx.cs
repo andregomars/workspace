@@ -14,6 +14,11 @@ public partial class _Default : System.Web.UI.Page
         {
             Response.Write("good");
         }
+        else
+        {
+            Response.Write("loaded");
+
+        }
         
     }
 }
