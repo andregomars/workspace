@@ -23,7 +23,7 @@ function array2obj (array) {
 	var obj = {};
 	for (var i = 0; i < array.length; i++) {
 		obj[array[i][0]] = array[i][1];
-	};
+	};c
 	return obj;
 };
 */
@@ -37,7 +37,7 @@ function array2obj (array) {
 function count (string) {
   return string.split('').reduce(function(list,char){
     list[char] = (list[char]||0) + 1;
-    return listr;
+    return list;
   },{});
 }
 
