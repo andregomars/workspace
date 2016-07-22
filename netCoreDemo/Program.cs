@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
+using System;
 using NetCoreDemo.DesignPattern;
 
 namespace NetCoreDemo
@@ -8,10 +9,10 @@ namespace NetCoreDemo
         public static void Main(string[] args)
         {
             //Console.WriteLine("Hello World!");
-            EDI[] ediDocs = new EDI[3];
-            ediDocs[0] = new EDI832();
-            ediDocs[1] = new EDI850();
-            ediDocs[2] = new EDI810();
+            List<EDI> ediDocs = new List<EDI>();
+            ediDocs.Add(new EDI832());
+            ediDocs.Add(new EDI850());
+            ediDocs.Add(new EDI810());
 
             foreach(EDI doc in ediDocs)
             {
