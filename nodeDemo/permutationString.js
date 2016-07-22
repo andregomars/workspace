@@ -4,32 +4,44 @@ given a word like 'abcd', list all the possible permutations
 
 var assert = require('assert');
 
-var permuteString = function(input) {
-	var out = [];
-	var used = [];
+var permArr = [],
+  usedChars = [];
 
-	function permute(input) {
-		
-		//when the last item there in the input, push it into used 
-		if (input.length == 1) {
-			used.push(input[0]);
-		}
-		var cur = null;
+function permute(input) {
+  var i, ch;
+  for (i = 0; i < input.length; i++) {
+    ch = input.splice(i, 1)[0];
+    usedChars.push(ch);
+    if (input.length == 0) {
+      permArr.push(usedChars.slice());
+    }
+    permute(input);
+    input.splice(i, 0, ch);
+    usedChars.pop();
 
-		//start from a, then b, c,d, index incresed one after another
-		for(var i=0; i<input.length;i++) {
-			//pop out current used item
-			cur = input.splice(i,1)[0];
-			used.push(cur);
-			permute(input);
+    console.log(i);
+    console.log(input);
+    console.log(usedChars);
+    console.log(permArr);
 
-		}
-		
-		//permute left items in a new input, less and less, 
-		//till the last item there in the input
-		permute(input, )
-	}
+debugger;
+  }
+  return permArr
 };
+
+console.log(permute(['a','b','c','d']));
+
+/*when i=0
+
+input = 'cd'
+used = [a,b]
+
+
+input = 'd'
+used = [a,b,c]   
+out = ['abcd']
+
+*/
 
 
 //assert.equal(permuteString(input),[...]]);
