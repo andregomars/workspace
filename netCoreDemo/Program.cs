@@ -8,7 +8,14 @@ namespace NetCoreDemo
     {
         public static void Main(string[] args)
         {
-            //Console.WriteLine("Hello World!");
+            //TestFactory();
+            
+
+            Console.ReadLine();
+        }
+
+        public static void TestFactory()
+        {
             List<EDI> ediDocs = new List<EDI>();
             ediDocs.Add(new EDI832());
             ediDocs.Add(new EDI850());
@@ -22,8 +29,9 @@ namespace NetCoreDemo
                     Console.WriteLine(seg.GetType().Name);
                 }
             } 
-
-            Console.ReadLine();
         }
     }
+ 
+
+
 }
