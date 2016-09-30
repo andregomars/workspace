@@ -8,9 +8,9 @@ namespace NetCoreDemo
     {
         public static void Main(string[] args)
         {
-            TestFactory();
+            //TestFactory();
             
-
+            HttpClientSample.Run();
             Console.ReadLine();
         }
 
