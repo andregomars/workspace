@@ -8,7 +8,7 @@ namespace NetCoreDemo
     {
         public static void Main(string[] args)
         {
-            //TestFactory();
+            TestFactory();
             
 
             Console.ReadLine();
