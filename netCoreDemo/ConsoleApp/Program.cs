@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using NetCoreDemo.DesignPattern;
+using Microsoft.Extensions.Logging;
 
 namespace NetCoreDemo
 {
@@ -9,7 +10,11 @@ namespace NetCoreDemo
         public static void Main(string[] args)
         {
             //TestFactory();
-            
+            ILoggerFactory loggerFactory = new LoggerFactory()
+                .AddConsole()
+                .AddDebug();
+            ILogger logger = loggerFactory.CreateLogger<Program>();
+            logger.LogInformation("start to run main!");
             HttpClientSample.Run();
             Console.ReadLine();
         }
