@@ -1,22 +1,32 @@
 ﻿using System.Collections.Generic;
 using System;
 using NetCoreDemo.DesignPattern;
-using Microsoft.Extensions.Logging;
+//using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
+using NLog;
 
 namespace NetCoreDemo
 {
     public class Program
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+        
         public static void Main(string[] args)
         {
+            /*
             //TestFactory();
             ILoggerFactory loggerFactory = new LoggerFactory()
                 .AddConsole()
-                .AddDebug();
-            ILogger logger = loggerFactory.CreateLogger<Program>();
+                .AddDebug()
+                .AddNLog();
+            //ILogger logger = loggerFactory.CreateLogger<Program>();
             logger.LogInformation("start to run main!");
             HttpClientSample.Run();
-            Console.ReadLine();
+
+            */
+            Console.WriteLine("runned");
+            //Console.ReadLine();
+            logger.Info("nlog works");
         }
 
         public static void TestFactory()
