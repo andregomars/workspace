@@ -7,22 +7,43 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Hangfire;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace WebApp
 {
     public class Startup
     {
+        public IConfigurationRoot Configuration { get; set;}
+
+        public Startup(IHostingEnvironment env)
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
+        }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole();
+            //GlobalConfiguration.Configuration.UseSqlServerStorage("<connection string or its name>");
+            app.UseHangfireDashboard();
+            app.UseHangfireServer();
 
+            BackgroundJob.Enqueue(() => Console.WriteLine("Fire-and-forget"));
+            //RecurringJob.AddOrUpdate( () => Console.WriteLine("Recurring!"), Cron.Minutely);
+            RecurringJob.AddOrUpdate( () => Console.WriteLine("Recurring!"), "*/1 * * * *");
+
+            loggerFactory.AddConsole();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -32,6 +53,9 @@ namespace WebApp
             {
                 await context.Response.WriteAsync("Hello World!");
             });
+
+
+
         }
     }
 }
