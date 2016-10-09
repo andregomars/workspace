@@ -28,6 +28,8 @@ namespace NetCoreDemo
 
         static async Task<string> GetProductAsync(string path)
         {
+            Console.WriteLine("start GetProductAsync!");
+            await Task.Delay(5000);
             string productString = null;
             HttpResponseMessage response = await client.GetAsync(path);
             if (response.IsSuccessStatusCode)
@@ -52,7 +54,10 @@ namespace NetCoreDemo
             {
                 // Get the product
                 string path = "v2/57ee053f2600002d0b1110a4";
-                string productString = await GetProductAsync(path);
+                // string productString = await GetProductAsync(path);
+                Task<string> task = GetProductAsync(path);
+                Console.WriteLine("waiting for product...");
+                string productString = await task;
                 Product product = JsonConvert.DeserializeObject<Product>(productString);
                 ShowProduct(product);
             }

@@ -15,6 +15,7 @@ namespace NetCoreDemo
         { 
             //TestFactory();
            HttpClientSample.Run();
+           Console.WriteLine("there");
            KeepLog();
            Console.WriteLine("runned");
         }
