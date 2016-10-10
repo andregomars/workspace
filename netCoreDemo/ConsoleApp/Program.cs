@@ -14,9 +14,11 @@ namespace NetCoreDemo
         public static void Main(string[] args)
         { 
             //TestFactory();
-           HttpClientSample.Run();
-           Console.WriteLine("there");
-           KeepLog();
+
+        //    HttpClientSample.Run();
+        //    SmsSample.Run();
+            JsonSample.Deserialize();
+        //    KeepLog();
            Console.WriteLine("runned");
         }
         

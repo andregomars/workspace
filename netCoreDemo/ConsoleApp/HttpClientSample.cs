@@ -4,6 +4,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text;
 
 namespace NetCoreDemo
 {
@@ -39,6 +40,19 @@ namespace NetCoreDemo
             return productString;
         }
 
+        static async Task<string> PostProductAsync(string path, string payload)
+        {
+            Console.WriteLine("start PostProductAsync!");
+            var content = new StringContent(payload, Encoding.UTF8, "application/json");
+            string productString = null;
+            HttpResponseMessage response = await client.PostAsync(path, content);
+            if (response.IsSuccessStatusCode)
+            {
+                productString = await response.Content.ReadAsStringAsync();
+            }
+            return productString;
+        }
+
         public static void Run()
         {
             RunAsync().Wait();
@@ -54,10 +68,16 @@ namespace NetCoreDemo
             {
                 // Get the product
                 string path = "v2/57ee053f2600002d0b1110a4";
-                // string productString = await GetProductAsync(path);
-                Task<string> task = GetProductAsync(path);
-                Console.WriteLine("waiting for product...");
-                string productString = await task;
+                string payload = @"{""name"":""andre""}";
+                
+                //test POST method
+                string productString = await PostProductAsync(path, payload);
+                
+                //test Get method
+                // Task<string> task = GetProductAsync(path);
+                // Console.WriteLine("waiting for product...");
+                // string productString = await task;
+                
                 Product product = JsonConvert.DeserializeObject<Product>(productString);
                 ShowProduct(product);
             }
