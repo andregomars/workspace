@@ -16,8 +16,8 @@ namespace NetCoreDemo
             //TestFactory();
 
         //    HttpClientSample.Run();
-        //    SmsSample.Run();
-            JsonSample.Deserialize();
+           SmsSample.Run();
+            // JsonSample.Serialize();
         //    KeepLog();
            Console.WriteLine("runned");
         }

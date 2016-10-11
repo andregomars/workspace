@@ -9,7 +9,7 @@ namespace NetCoreDemo
     
     public class OutboundSMSResponseWrapper
     {
-        public OutboundSMSResponse outboundSMSResponse;
+        public OutboundSMSResponse outboundSMSResponse { get; set; }
         
         public override string ToString()
         {
