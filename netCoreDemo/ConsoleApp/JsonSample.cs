@@ -9,14 +9,19 @@ namespace NetCoreDemo
    {
        public static void Serialize()
        {
-        //    OutboundSMSResponse res = new OutboundSMSResponse();
-        //    res.resourceReference = new ResourceReference { resourceURL = "http://test.com" };
-        //    res.messageId = "SMS28ca5569a880c17e";
-        //    OutboundSMSResponseWrapper wrapper = new OutboundSMSResponseWrapper { outboundSMSResponse = res };
+        //  Outbound SMS
+        /*
+           OutboundSMSResponse res = new OutboundSMSResponse();
+           res.resourceReference = new ResourceReference { resourceURL = "http://test.com" };
+           res.messageId = "SMS28ca5569a880c17e";
+           OutboundSMSResponseWrapper wrapper = new OutboundSMSResponseWrapper { outboundSMSResponse = res };
             
-        //    string json = JsonConvert.SerializeObject(wrapper);
-        //    Console.WriteLine("serialized string is: {0}", json);
-
+           string json = JsonConvert.SerializeObject(wrapper);
+           Console.WriteLine("serialized string is: {0}", json);
+           */
+           
+         // Inbound SMS
+         /*
             InboundSmsMessageListWrapper res = new InboundSmsMessageListWrapper();
             res.InboundSmsMessageList = new InboundSmsMessageList();
             res.InboundSmsMessageList.InboundSmsMessage = new List<InboundSmsMessage>();
@@ -29,9 +34,24 @@ namespace NetCoreDemo
             res.InboundSmsMessageList.NumberOfMessagesInThisBatch = "1";
             res.InboundSmsMessageList.ResourceUrl = "http://test.org";
             res.InboundSmsMessageList.TotalNumberOfPendingMessages = "5";
-
             string json = JsonConvert.SerializeObject(res);
             Console.WriteLine("serialized string is: {0}", json);
+
+           */
+
+           // SMS send status
+           var wrapperDelivery = new DeliveryInfoListWrapper();
+           wrapperDelivery.DeliveryInfoList = new DeliveryInfoList();
+           wrapperDelivery.DeliveryInfoList.DeliveryInfo = new List<DeliveryInfo>();
+           wrapperDelivery.DeliveryInfoList.DeliveryInfo.Add(
+               new DeliveryInfo { Id = "msg0", 
+                    Address = "+13500000992",
+                    DeliveryStatus = "DeliveredToTerminal"
+               }
+           );
+           wrapperDelivery.DeliveryInfoList.ResourceUrl = "test.org";
+           string json = JsonConvert.SerializeObject(wrapperDelivery);
+           Console.WriteLine("serialized string is: {0}", json);
        }
        public static void Deserialize()
        {

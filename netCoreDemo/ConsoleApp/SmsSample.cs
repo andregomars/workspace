@@ -26,6 +26,16 @@ namespace NetCoreDemo
             }
             return responseString;
         }
+        static async Task<string> AttApiGetAsync(string path) 
+        {
+            string responseString = null;
+            HttpResponseMessage response = await client.GetAsync(path);
+            if (response.IsSuccessStatusCode)
+            {
+                responseString = await response.Content.ReadAsStringAsync();
+            }
+            return responseString;
+        }
 
         static async Task<string> GetSmsAsync(string path) 
         {
@@ -49,26 +59,35 @@ namespace NetCoreDemo
             client.BaseAddress = new Uri("https://api.att.com/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("Authorization", "Bearer BF-ACSI~4~20161009231906~giC896r7W7fzt6CAJNQuQTEDjOSeAkK8");
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer BF-ACSI~5~20161012063132~AVOtwkVtPPlI00sTXChFJKepLRsws0Lv");
 
             try
             {
                 //outbound test
-                /*
                 var outboundSMSRequest = new OutboundSMSRequestWrapper();
                 outboundSMSRequest.outboundSMSRequest = 
-                    new OutboundSMSRequest { address = "tel:+16262521073", message = "hello !" };
+                    new OutboundSMSRequest { address = "tel:+16262521073", message = "hi, there!" };
                 string payload = JsonConvert.SerializeObject(outboundSMSRequest);
                 string responseString = await SendSmsAsync(url_SmsOutbox, payload);
-                var outboundSMSResponse = JsonConvert.DeserializeObject<OutboundSMSResponseWrapper>(responseString);
-                Console.WriteLine(outboundSMSResponse.ToString());              
-                */
-
+                var wrapperOBSmsResponse = JsonConvert.DeserializeObject<OutboundSMSResponseWrapper>(responseString);
+                Console.WriteLine(wrapperOBSmsResponse.ToString());              
+                
+                string sentMsgId = wrapperOBSmsResponse.outboundSMSResponse.messageId;
+                if (!String.IsNullOrEmpty(sentMsgId))
+                {
+                    string responseSentSmsStatus = await AttApiGetAsync(url_SmsOutbox + "/" + sentMsgId);
+                    var wrapperSentSmsStatusResponse =
+                        JsonConvert.DeserializeObject<DeliveryInfoListWrapper>(responseSentSmsStatus);
+                    Console.WriteLine(wrapperSentSmsStatusResponse.ToString());
+                }
                 //inbound test
+               /* 
                 string responseString = await GetSmsAsync(url_SmsInbox + SMS_ShortCode);
                 var inboxResponse = JsonConvert.DeserializeObject<InboundSmsMessageListWrapper>(responseString);
                 Console.WriteLine(inboxResponse.ToString()); 
                 Console.WriteLine(responseString);
+               */ 
+                
             }
             catch (Exception e)
             {
