@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using NetCoreDemo.DesignPattern;
-//using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using NLog;
 
@@ -12,24 +12,27 @@ namespace NetCoreDemo
         private static Logger logger = LogManager.GetCurrentClassLogger();
         
         public static void Main(string[] args)
-        {
-            /*
+        { 
             //TestFactory();
-            ILoggerFactory loggerFactory = new LoggerFactory()
-                .AddConsole()
-                .AddDebug()
-                .AddNLog();
-            //ILogger logger = loggerFactory.CreateLogger<Program>();
-            logger.LogInformation("start to run main!");
-            HttpClientSample.Run();
 
-            */
-            Console.WriteLine("runned");
-            //Console.ReadLine();
-            logger.Info("nlog works");
+        //    HttpClientSample.Run();
+           SmsSample.Run();
+            // JsonSample.Serialize();
+        //    KeepLog();
+           Console.WriteLine("runned");
+        }
+        
+        private static void KeepLog() 
+        {
+            ILoggerFactory loggerFactory = new LoggerFactory()
+               .AddConsole()
+               .AddDebug()
+               .AddNLog();
+            var logger = loggerFactory.CreateLogger<Program>();
+            logger.LogInformation("nlog works");
         }
 
-        public static void TestFactory()
+        private static void TestFactory()
         {
             List<EDI> ediDocs = new List<EDI>();
             ediDocs.Add(new EDI832());
@@ -45,8 +48,5 @@ namespace NetCoreDemo
                 }
             } 
         }
-    }
- 
-
-
-}
+    } 
+} 
