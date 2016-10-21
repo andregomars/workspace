@@ -25,3 +25,4 @@ const countArara = (n) => {
 assert.equal(countArara(1),"anane");
 assert.equal(countArara(3),"adak anane");
 assert.equal(countArara(8),"adak adak adak adak");
+//assert.fail(21, 42, 'Test Failed', '###');

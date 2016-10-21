@@ -44,15 +44,15 @@ or 0 if it's a cat's game (i.e. a draw).
 
 module.exports = isSolved;
 
-console.log(isSolved([[0,0,1],
-					  [0,1,2],
-					  [2,1,0]]));
-console.log(isSolved([[1,2,1],
-					  [2,1,2],
-					  [2,1,1]]));
-console.log(isSolved([[2,0,1],
-					  [0,1,2],
-					  [1,2,0]]));
-console.log(isSolved([[2,0,1],
-					  [0,2,0],
-					  [1,1,2]]));
+// console.log(isSolved([[0,0,1],
+// 					  [0,1,2],
+// 					  [2,1,0]]));
+// console.log(isSolved([[1,2,1],
+// 					  [2,1,2],
+// 					  [2,1,1]]));
+// console.log(isSolved([[2,0,1],
+// 					  [0,1,2],
+// 					  [1,2,0]]));
+// console.log(isSolved([[2,0,1],
+// 					  [0,2,0],
+// 					  [1,1,2]]));
