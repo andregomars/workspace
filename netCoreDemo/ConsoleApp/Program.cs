@@ -1,37 +1,44 @@
 ﻿using System.Collections.Generic;
 using System;
 using NetCoreDemo.DesignPattern;
-using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
-using NLog;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using System.IO;
 
 namespace NetCoreDemo
 {
     public class Program
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
-        
+        //private static Logger logger = LogManager.GetCurrentClassLogger();
+        public static IConfigurationRoot Configuration { get; private set; }
+
         public static void Main(string[] args)
         { 
-            //TestFactory();
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables();
+            Configuration = builder.Build();
 
+            ILoggerFactory loggerFactory = new LoggerFactory()
+                .AddConsole()
+                .AddDebug()
+                .AddNLog();
+            
+            ILogger logger = loggerFactory.CreateLogger<Program>();
+
+            //TestFactory();
         //    HttpClientSample.Run();
-           SmsSample.Run();
+        //   SmsSample.Run();
             // JsonSample.Serialize();
-        //    KeepLog();
-           Console.WriteLine("runned");
+            
+           //logger.Info("nlog works");
+            string url = Configuration["SMS.AttApi:UrlReceiveSMS"];
+            logger.LogInformation("url is: "+url);
+            logger.LogInformation("complete");
         }
         
-        private static void KeepLog() 
-        {
-            ILoggerFactory loggerFactory = new LoggerFactory()
-               .AddConsole()
-               .AddDebug()
-               .AddNLog();
-            var logger = loggerFactory.CreateLogger<Program>();
-            logger.LogInformation("nlog works");
-        }
-
         private static void TestFactory()
         {
             List<EDI> ediDocs = new List<EDI>();
