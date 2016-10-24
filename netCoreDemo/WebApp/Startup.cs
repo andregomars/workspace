@@ -10,12 +10,15 @@ using Microsoft.Extensions.Logging;
 using Hangfire;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 
 namespace WebApp
 {
     public class Startup
     {
-        public IConfigurationRoot Configuration { get; set;}
+         public IConfigurationRoot Configuration { get; private set; }
+        public IContainer ApplicationContainer { get; private set; }
 
         public Startup(IHostingEnvironment env)
         {
@@ -30,6 +33,13 @@ namespace WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection")));
+
+            var builder = new ContainerBuilder();
+            builder.RegisterType<Mock>().As<IMock>();
+            builder.Populate(services);
+            this.ApplicationContainer = builder.Build();
+
+            new AutofacServiceProvider(this.ApplicationContainer);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,9 +49,10 @@ namespace WebApp
             app.UseHangfireDashboard();
             app.UseHangfireServer();
 
-            BackgroundJob.Enqueue(() => Console.WriteLine("Fire-and-forget"));
+            //BackgroundJob.Enqueue(() => Console.WriteLine("Fire-and-forget"));
             //RecurringJob.AddOrUpdate( () => Console.WriteLine("Recurring!"), Cron.Minutely);
-            RecurringJob.AddOrUpdate( () => Console.WriteLine("Recurring!"), "*/1 * * * *");
+            //RecurringJob.AddOrUpdate( () => Console.WriteLine("Recurring!"), "*/1 * * * *");
+            //BackgroundJob.Enqueue(() => (() => Mock.Run());
 
             loggerFactory.AddConsole();
             if (env.IsDevelopment())
