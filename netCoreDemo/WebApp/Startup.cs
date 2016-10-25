@@ -53,8 +53,8 @@ namespace WebApp
             //RecurringJob.AddOrUpdate( () => Console.WriteLine("Recurring!"), Cron.Minutely);
             //RecurringJob.AddOrUpdate( () => Console.WriteLine("Recurring!"), "*/1 * * * *");
 
-            //BackgroundJob.Enqueue<IMock>(x => x.Run());
-            RecurringJob.AddOrUpdate<IMock>( x => x.Run(), "*/5 * * * *");
+            BackgroundJob.Enqueue<IMock>(x => x.Run());
+            //RecurringJob.AddOrUpdate<IMock>( x => x.Run(), "*/5 * * * *");
 
             loggerFactory.AddConsole();
             if (env.IsDevelopment())
