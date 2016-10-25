@@ -17,29 +17,29 @@ namespace WebApp
 {
     public class Startup
     {
-         public IConfigurationRoot Configuration { get; private set; }
-        public IContainer ApplicationContainer { get; private set; }
+         public IConfigurationRoot configRoot { get; private set; }
+        public IContainer appContainer { get; set; }
 
         public Startup(IHostingEnvironment env)
         {
-            var builder = new ConfigurationBuilder()
+            var configBuilder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            configRoot = configBuilder.Build();
         }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddHangfire(x => x.UseSqlServerStorage(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddHangfire(x => x.UseSqlServerStorage(configRoot.GetConnectionString("DefaultConnection")));
 
-            var builder = new ContainerBuilder();
-            builder.RegisterType<Mock>().As<IMock>();
-            builder.Populate(services);
-            this.ApplicationContainer = builder.Build();
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterType<Mock>().As<IMock>();
+            containerBuilder.Populate(services);
+            this.appContainer = containerBuilder.Build();
 
-            new AutofacServiceProvider(this.ApplicationContainer);
+            return new AutofacServiceProvider(this.appContainer);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +52,9 @@ namespace WebApp
             //BackgroundJob.Enqueue(() => Console.WriteLine("Fire-and-forget"));
             //RecurringJob.AddOrUpdate( () => Console.WriteLine("Recurring!"), Cron.Minutely);
             //RecurringJob.AddOrUpdate( () => Console.WriteLine("Recurring!"), "*/1 * * * *");
-            //BackgroundJob.Enqueue(() => (() => Mock.Run());
+
+            //BackgroundJob.Enqueue<IMock>(x => x.Run());
+            RecurringJob.AddOrUpdate<IMock>( x => x.Run(), "*/5 * * * *");
 
             loggerFactory.AddConsole();
             if (env.IsDevelopment())
@@ -69,4 +71,19 @@ namespace WebApp
 
         }
     }
+
+    // public class ContainerJobActivator : JobActivator
+    // {
+    //     private IContainer _container;
+
+    //     public ContainerJobActivator(IContainer container)
+    //     {
+    //         _container = container;
+    //     }
+
+    //     public override object ActivateJob(Type type)
+    //     {
+    //         return _container.Resolve(type);
+    //     }
+    // }
 }
