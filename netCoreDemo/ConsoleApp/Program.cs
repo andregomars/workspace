@@ -4,22 +4,41 @@ using NetCoreDemo.DesignPattern;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using NLog;
+using Autofac;
 
 namespace NetCoreDemo
 {
     public class Program
     {
         private static Logger logger = LogManager.GetCurrentClassLogger();
+        private static IContainer container { get; set;}
         
         public static void Main(string[] args)
         { 
             //TestFactory();
 
         //    HttpClientSample.Run();
-           SmsSample.Run();
+         //  SmsSample.Run();
             // JsonSample.Serialize();
-        //    KeepLog();
+        //   KeepLog();
+
+            var builder = new ContainerBuilder();
+            builder.RegisterType<TodayWriter>().As<IDateWriter>();
+            builder.RegisterType<ConsoleOutput>().As<IOutput>();
+            container = builder.Build();
+
+            DoAction();
+
            Console.WriteLine("runned");
+        }
+
+        private static void DoAction()
+        {
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var writer = scope.Resolve<IDateWriter>();
+                writer.WriteDate();
+            }
         }
         
         private static void KeepLog() 
@@ -30,6 +49,7 @@ namespace NetCoreDemo
                .AddNLog();
             var logger = loggerFactory.CreateLogger<Program>();
             logger.LogInformation("nlog works");
+            
         }
 
         private static void TestFactory()
