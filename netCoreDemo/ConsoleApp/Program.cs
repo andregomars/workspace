@@ -1,22 +1,40 @@
 ﻿using System.Collections.Generic;
 using System;
 using NetCoreDemo.DesignPattern;
-using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
-using NLog;
+// using NLog;
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using System.IO;
 
 namespace NetCoreDemo
 {
     public class Program
     {
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        // private static Logger logger = LogManager.GetCurrentClassLogger();
         private static IContainer container { get; set;}
         
+        //private static Logger logger = LogManager.GetCurrentClassLogger();
+        public static IConfigurationRoot Configuration { get; private set; }
+
         public static void Main(string[] args)
         { 
-            //TestFactory();
+            // var builder = new ConfigurationBuilder()
+            //     .SetBasePath(Directory.GetCurrentDirectory())
+            //     .AddJsonFile("appsettings.json")
+            //     .AddEnvironmentVariables();
+            // Configuration = builder.Build();
 
+            ILoggerFactory loggerFactory = new LoggerFactory()
+                .AddConsole()
+                .AddDebug()
+                .AddNLog();
+            
+            ILogger logger = loggerFactory.CreateLogger<Program>();
+
+            //TestFactory();
         //    HttpClientSample.Run();
          //  SmsSample.Run();
             // JsonSample.Serialize();
