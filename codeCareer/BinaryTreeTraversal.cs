@@ -1,15 +1,21 @@
 using codeCareer.Models;
 using System.Collections.Generic;
-using System;
 
 namespace codeCareer
 {
     public class BinaryTreeTraversal<T>
     {
-        public List<T> PreOrderTraversal(BinaryTree<T> btree)
+        public List<T> Output { get; set; }
+        public void Init()
         {
-            // throw new NotImplementedException();
-            return null;
+            Output = new List<T>();
+        }
+        public void PreOrderTraversal(BinaryTree<T> root)
+        {
+            if (root == null) return;
+            PreOrderTraversal(root.LeftChild);
+            Output.Add(root.Data);
+            PreOrderTraversal(root.RightChild);
         }
     }
 }
