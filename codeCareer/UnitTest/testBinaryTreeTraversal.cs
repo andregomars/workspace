@@ -13,14 +13,26 @@ namespace codeCareer.UnitTest
         Establish context = () => 
         {
             tester = new BinaryTreeTraversal<int>();
-            tester.Init();
             BuildTree();
         };
 
-        It should_return_null = () =>
+        It should_traversal_preorder = () =>
         {
+            tester.Init();
             tester.PreOrderTraversal(root);
             tester.Output.ShouldContainOnly(new List<int>() {4, 6, 8, 10, 12, 14, 16});
+        };
+        It should_traversal_inorder = () =>
+        {
+            tester.Init();
+            tester.InOrderTraversal(root);
+            tester.Output.ShouldContainOnly(new List<int>() {10, 6, 4, 8, 14, 12, 16});
+        };
+        It should_traversal_postorder = () =>
+        {
+            tester.Init();
+            tester.PostOrderTraversal(root);
+            tester.Output.ShouldContainOnly(new List<int>() {4, 8, 6, 12, 16, 14, 10});
         };
 
         private static void BuildTree()

@@ -17,5 +17,20 @@ namespace codeCareer
             Output.Add(root.Data);
             PreOrderTraversal(root.RightChild);
         }
+        public void InOrderTraversal(BinaryTree<T> root)
+        {
+            if (root == null) return;
+            Output.Add(root.Data);
+            InOrderTraversal(root.LeftChild);
+            InOrderTraversal(root.RightChild);
+        }
+        public void PostOrderTraversal(BinaryTree<T> root)
+        {
+            if (root == null) return;
+            PostOrderTraversal(root.LeftChild);
+            PostOrderTraversal(root.RightChild);
+            Output.Add(root.Data);
+        }
+
     }
 }
