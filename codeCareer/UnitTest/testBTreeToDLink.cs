@@ -4,35 +4,30 @@ using Machine.Specifications;
 
 namespace codeCareer.UnitTest
 {
-    [Subject("teset binary tree traversals")]
-    public class testBinaryTreeTraversal
+    [Subject("test BinaryTree convert to Double linked list")]
+    public class testBTreeToDlinks
     {
-        private static BinaryTreeTraversal<int> tester;
+        private static BTreeToDlink<int> tester;
         private static BinaryTree<int> root;
 
         Establish context = () => 
         {
-            tester = new BinaryTreeTraversal<int>();
+            tester = new BTreeToDlink<int>();
             BuildTree();
         };
 
-        It should_traversal_preorder = () =>
+        It should_convert_to_double_linked_list = () =>
         {
-            tester.Init();
-            tester.PreOrderTraversal(root);
-            tester.Output.ShouldContainOnly(new List<int>() {10, 6, 4, 8, 14, 12, 16});
-        };
-        It should_traversal_inorder = () =>
-        {
-            tester.Init();
-            tester.InOrderTraversal(root);
-            tester.Output.ShouldContainOnly(new List<int>() {4, 6, 8, 10, 12, 14, 16});
-        };
-        It should_traversal_postorder = () =>
-        {
-            tester.Init();
-            tester.PostOrderTraversal(root);
-            tester.Output.ShouldContainOnly(new List<int>() {4, 8, 6, 12, 16, 14, 10});
+            tester.GetConvertedList(root);
+            BinaryTree<int> dLinkList = root;
+            
+            List<int> output = new List<int>();
+            while (root != null && root.RightChild != null)
+            {
+               output.Add(root.Data);
+               root = root.RightChild;
+            }
+            output.ShouldContainOnly(new List<int>() {4, 6, 8, 10, 12, 14, 16});
         };
 
         private static void BuildTree()

@@ -10,19 +10,19 @@ namespace codeCareer
         {
             Output = new List<T>();
         }
-        public void PreOrderTraversal(BinaryTree<T> root)
-        {
-            if (root == null) return;
-            PreOrderTraversal(root.LeftChild);
-            Output.Add(root.Data);
-            PreOrderTraversal(root.RightChild);
-        }
         public void InOrderTraversal(BinaryTree<T> root)
         {
             if (root == null) return;
-            Output.Add(root.Data);
             InOrderTraversal(root.LeftChild);
+            Output.Add(root.Data);
             InOrderTraversal(root.RightChild);
+        }
+        public void PreOrderTraversal(BinaryTree<T> root)
+        {
+            if (root == null) return;
+            Output.Add(root.Data);
+            PreOrderTraversal(root.LeftChild);
+            PreOrderTraversal(root.RightChild);
         }
         public void PostOrderTraversal(BinaryTree<T> root)
         {
