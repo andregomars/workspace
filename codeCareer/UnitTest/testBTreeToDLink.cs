@@ -18,14 +18,13 @@ namespace codeCareer.UnitTest
 
         It should_convert_to_double_linked_list = () =>
         {
-            tester.GetConvertedList(root);
-            BinaryTree<int> dLinkList = root;
-            
+            BinaryTree<int> dLinkList = tester.GetConvertedList(root);
             List<int> output = new List<int>();
-            while (root != null && root.RightChild != null)
+
+            while (dLinkList != null) 
             {
-               output.Add(root.Data);
-               root = root.RightChild;
+               output.Add(dLinkList.Data);
+               dLinkList = dLinkList.RightChild;
             }
             output.ShouldContainOnly(new List<int>() {4, 6, 8, 10, 12, 14, 16});
         };
@@ -53,7 +52,8 @@ namespace codeCareer.UnitTest
    6   14
   / \  / \
   4 8 12 16
-
+convert to
+4 <=> 6 <=> 8 <=> 10 <=> 12 <=> 14 <=> 16 
 */
         }
 
