@@ -1,14 +1,8 @@
 using System.Collections.Generic;
+using LeetCode.Models;
 
 namespace LeetCode
 {
-    public class TreeNode {
-        public int val;
-        public TreeNode left;
-        public TreeNode right;
-        public TreeNode(int x) { val = x; }
-    }
-
     public class BSTIterator {
 
         // private Stack<int> m_values;

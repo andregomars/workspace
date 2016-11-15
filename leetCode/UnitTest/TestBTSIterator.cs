@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using LeetCode;
+using LeetCode.Models;
 using Machine.Specifications;
 
 namespace LeetCode.UnitTest
