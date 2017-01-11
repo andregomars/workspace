@@ -1,5 +1,5 @@
 import React from 'react';
-import {render} from 'react-dom';
+import ReactDOM from 'react-dom';
 
 import AwesomeComponent from './AwesomeComponent.jsx';
 
@@ -20,4 +20,4 @@ class App extends React.Component {
   }
 }
 
-render(<App/>, document.getElementById('container'));
+ReactDOM.render(<App/>, document.getElementById('container'));
