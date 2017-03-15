@@ -1,16 +1,5 @@
-class Student {
-    fullName: string;
-    constructor(public firstName: string,
-     public middleInitial: string, 
-     public lastName: string) {
-        this.fullName = firstName + " " + middleInitial + " " + lastName;
-    }
-}
-
-interface Person {
-    firstName: string;
-    lastName: string;
-}
+import { Person } from './models/person.model';
+import { Student } from './models/student.model';
 
 function greeter(person: Person) {
     return "Hello, " + person.firstName + " " + person.lastName;
@@ -18,4 +7,4 @@ function greeter(person: Person) {
 
 let user = new Student("Andre", "W.", "Shen");
 
-console.log(user);
+console.log(greeter(user));
