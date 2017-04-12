@@ -3,8 +3,13 @@
 </h1>
 <div class="">
   DataFrom: {{(dataFrom$ | async)?.name}}
-
 </div>
 <div *ngFor="let person of dataOf$ | async">
   DataOf: <label>{{person.name}}</label>
+</div>
+<div *ngFor="let fid of restOf$ | async">
+  Unique FID: <label>{{fid}}</label>
+</div>
+<div *ngFor="let v of restFlatMap">
+  Unique FID: <label>{{v.vid}}</label>
 </div>
