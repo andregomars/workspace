@@ -40,9 +40,11 @@ export class AppComponent {
         .refCount();
 
       sub.subscribe(data => this.restFlatMap.push(data));
-      sub.subscribe(data => console.log(data));
+      // sub.subscribe(data => console.log(data));
 
-
+      this.http.get(URL_VehicleIdentities)
+        .map(res => res.json())
+        .subscribe(data => this.vehicles = data);
   }
 }
 
