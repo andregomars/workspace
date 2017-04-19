@@ -1,3 +1,18 @@
-<agm-map [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng" [label]="'M'"></agm-marker>
+<h3>Google Map</h3>
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" 
+  [streetViewControl]=false [zoomControl]=false>
+  <!--<agm-marker [latitude]="lat" [longitude]="lng" [label]="'M'"></agm-marker>-->
+  <agm-marker *ngFor="let m of markers"
+    [latitude]="m.lat" [longitude]="m.lng"
+    [label]="m.label" [title]="m.title" 
+    [markerDraggable]="m.draggable" [iconUrl]="m.icon">
+  </agm-marker>
+</agm-map>
+<br/>
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+  <agm-polyline [polylineDraggable]=false>
+    <agm-polyline-point *ngFor="let m of markers"
+      [latitude]="m.lat" [longitude]="m.lng">
+    </agm-polyline-point>
+  </agm-polyline>
 </agm-map>
