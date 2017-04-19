@@ -7,12 +7,11 @@
     [label]="m.label" [title]="m.title" 
     [markerDraggable]="m.draggable" [iconUrl]="m.icon">
   </agm-marker>
-</agm-map>
-<br/>
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
-  <agm-polyline [polylineDraggable]=false>
+  <agm-polyline [polylineDraggable]=false 
+    [strokeColor]="red" [strokeOpacity]="0.5" [strokeWeight]="5">
     <agm-polyline-point *ngFor="let m of markers"
       [latitude]="m.lat" [longitude]="m.lng">
     </agm-polyline-point>
   </agm-polyline>
 </agm-map>
+
