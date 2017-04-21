@@ -6,25 +6,25 @@ using coreApiDemo.Models;
 namespace coreApiDemo.Controllers
 {
     [Route("api/[controller]")]
-    public class TodoController : Controller
+    public class BlogController : Controller
     {
-        private readonly ITodoRepository _todoRepository;
+        private readonly IBlogRepository _blogRepository;
 
-        public TodoController(ITodoRepository todoRepository)
+        public BlogController(IBlogRepository blogRepository)
         {
-            _todoRepository = todoRepository;
+            _blogRepository = blogRepository;
         }
     
         [HttpGet]
-        public IEnumerable<TodoItem> GetAll()
+        public IEnumerable<Blog> GetAll()
         {
-            return _todoRepository.GetAll();
+            return _blogRepository.GetAll();
         }
 
-        [HttpGet("{id}", Name = "GetTodo")]
+        [HttpGet("{id}", Name = "GetBlog")]
         public IActionResult GetById(long id)
         {
-            var item = _todoRepository.Find(id);
+            var item = _blogRepository.Find(id);
             if (item == null)
             {
                 return NotFound();
@@ -33,49 +33,46 @@ namespace coreApiDemo.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] TodoItem item)
+        public IActionResult Create([FromBody] Blog item)
         {
             if (item == null)
             {
                 return BadRequest();
             }
 
-            _todoRepository.Add(item);
+            _blogRepository.Add(item);
 
-            return CreatedAtRoute("GetTodo", new { id = item.Key }, item);
+            return CreatedAtRoute("GetBlog", new { id = item.BlogId }, item);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(long id, [FromBody] TodoItem item)
+        public IActionResult Update(long id, [FromBody] Blog item)
         {
-            if (item == null || item.Key != id)
+            if (item == null || item.BlogId != id)
             {
                 return BadRequest();
             }
 
-            var todo = _todoRepository.Find(id);
-            if (todo == null)
+            var blog = _blogRepository.Find(id);
+            if (blog == null)
             {
                 return NotFound();
             }
 
-            todo.IsComplete = item.IsComplete;
-            todo.Name = item.Name;
-
-            _todoRepository.Update(todo);
+            _blogRepository.Update(item);
             return new NoContentResult();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            var todo = _todoRepository.Find(id);
-            if (todo == null)
+            var blog = _blogRepository.Find(id);
+            if (blog == null)
             {
                 return NotFound();
             }
 
-            _todoRepository.Remove(id);
+            _blogRepository.Remove(id);
             return new NoContentResult();
         }
     }

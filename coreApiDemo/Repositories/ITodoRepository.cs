@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using TodoApi.Models;
+using coreApiDemo.Models;
 
-namespace TodoApi.Repositories
+namespace coreApiDemo.Repositories
 {
     public interface ITodoRepository
     {

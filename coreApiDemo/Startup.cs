@@ -9,8 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 
-using TodoApi.Models;
-using TodoApi.Repositories;
+using coreApiDemo.Models;
+using coreApiDemo.Repositories;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace coreApiDemo
@@ -33,10 +33,13 @@ namespace coreApiDemo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase());
+            services.AddDbContext<BloggingContext>(opt => 
+                opt.UseSqlServer(Configuration.GetConnectionString("BloggingDatabase")));
             // Add framework services.
             services.AddMvc();
             services.AddLogging();
             services.AddScoped<ITodoRepository, TodoRepository>();
+            services.AddScoped<IBlogRepository, BlogRepository>();
             services.AddSwaggerGen(c => 
             {
                 c.SwaggerDoc("v1", new Info { Title = "Demo API", Version = "V1"});

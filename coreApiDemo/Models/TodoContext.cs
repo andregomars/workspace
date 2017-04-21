@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace TodoApi.Models
+namespace coreApiDemo.Models
 {
     public class TodoContext : DbContext
     {

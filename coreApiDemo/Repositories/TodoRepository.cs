@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TodoApi.Models;
+using coreApiDemo.Models;
 
-namespace TodoApi.Repositories
+namespace coreApiDemo.Repositories
 {
     public class TodoRepository : ITodoRepository
     {
