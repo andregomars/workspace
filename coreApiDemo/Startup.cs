@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 using TodoApi.Models;
 using TodoApi.Repositories;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace coreApiDemo
 {
@@ -34,7 +35,12 @@ namespace coreApiDemo
             services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase());
             // Add framework services.
             services.AddMvc();
+            services.AddLogging();
             services.AddScoped<ITodoRepository, TodoRepository>();
+            services.AddSwaggerGen(c => 
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Demo API", Version = "V1"});
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +50,11 @@ namespace coreApiDemo
             loggerFactory.AddDebug();
 
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Demo API V1");
+            });
         }
     }
 }
