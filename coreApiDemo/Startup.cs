@@ -7,6 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+
+using coreApiDemo.Models;
+using coreApiDemo.Repositories;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace coreApiDemo
 {
@@ -27,8 +32,18 @@ namespace coreApiDemo
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase());
+            services.AddDbContext<BloggingContext>(opt => 
+                opt.UseSqlServer(Configuration.GetConnectionString("BloggingDatabase")));
             // Add framework services.
             services.AddMvc();
+            services.AddLogging();
+            services.AddScoped<ITodoRepository, TodoRepository>();
+            services.AddScoped<IBlogRepository, BlogRepository>();
+            services.AddSwaggerGen(c => 
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Demo API", Version = "V1"});
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +53,11 @@ namespace coreApiDemo
             loggerFactory.AddDebug();
 
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Demo API V1");
+            });
         }
     }
 }
