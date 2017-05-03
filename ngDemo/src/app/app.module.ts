@@ -10,12 +10,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
 import { ReactiveXComponent } from './reactive-x/reactive-x.component';
+import { ExporterComponent } from './exporter/exporter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GoogleMapComponent,
-    ReactiveXComponent
+    ReactiveXComponent,
+    ExporterComponent
   ],
   imports: [
     BrowserModule,
