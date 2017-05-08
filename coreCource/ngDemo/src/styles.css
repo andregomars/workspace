@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  margin-left: 10px;
+}
+
+li {
+  cursor: pointer;
+}
+
+.selectedCharacter {
+  padding: 4px;
+  color: #ccc;
+}
