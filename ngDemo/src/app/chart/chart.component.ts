@@ -1,11 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Inject } from '@angular/core';
+import * as jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.css']
+  styleUrls: ['./chart.component.css'],
+  providers: [
+    { provide: 'Window', useValue: window }
+  ]
 })
 export class ChartComponent implements OnInit {
+  @ViewChild('divChart')
+  divChart: ElementRef;
+  @ViewChild('chartOne')
+  chartOne: ElementRef;
+
   public barChartOptions:any = {
     scaleShowVerticalLines: false,
     responsive: true
@@ -18,10 +27,41 @@ export class ChartComponent implements OnInit {
     {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
     {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
   ];
+
+  constructor(
+    @Inject('Window') private window: Window
+  ) {}
  
   ngOnInit() {
 
   }
+
+  export(): void {
+    var pdf = new jsPDF();
+    const imgUrl = this.chartOne.nativeElement.toDataURL('image/png');
+    pdf.addImage(imgUrl, 'PNG', 10, 10);
+    pdf.save('canvas.pdf');
+  }
+
+  download(): void {
+
+        var pdf = new jsPDF();
+        // var innerElements = this.divChart.nativeElement.getElementsByTagName('canvas');
+        // console.log(innerElements.length);
+        // Array.from(innerElements).forEach(() => {
+          // pdf.addPage();
+        // });
+
+        var pageHeight = pdf.internal.pageSize.height;
+        var divHeight = +this.divChart.nativeElement.offsetHeight;
+
+        console.log('pageHeight: ' + pageHeight);
+        console.log('divHeight: ' + divHeight);
+        if(divHeight > pageHeight) pdf.addPage();
+        pdf.addHTML(this.divChart.nativeElement, 0, 0, null, () => pdf.save('chart.pdf'));
+        // doc.save('Test.pdf');
+    }
+
 
   // events
   public chartClicked(e:any):void {
