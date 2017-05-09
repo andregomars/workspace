@@ -6,7 +6,9 @@ namespace netCoreConsoleDemo
     {
         static void Main(string[] args)
         {
-            TimerMars.Run();
+            // TimerMars.Run();
+            // Reader.PrintPath();
+            Reader.ReadCsv();
         }
     }
 }
