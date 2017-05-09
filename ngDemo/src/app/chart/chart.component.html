@@ -1,36 +1,41 @@
 <div>
   <button (click)="export()">Export</button>
-  <div #divChart>
-    <canvas #chartOne baseChart [style.height]="300" [style.width]="500"
+  <div style="display:block;">
+  <!--<div>-->
+  <canvas #chartOne baseChart 
             [datasets]="barChartData"
             [labels]="barChartLabels"
             [options]="barChartOptions"
             [legend]="barChartLegend"
             [chartType]="barChartType"
+            [width]="barWidth"
             (chartHover)="chartHovered($event)"
             (chartClick)="chartClicked($event)"></canvas>
-  <canvas baseChart
+  <canvas #chartTwo baseChart
             [datasets]="barChartData"
             [labels]="barChartLabels"
             [options]="barChartOptions"
             [legend]="barChartLegend"
             [chartType]="barChartType"
+            [width]="barWidth"
             (chartHover)="chartHovered($event)"
             (chartClick)="chartClicked($event)"></canvas>
-   <canvas baseChart
+   <canvas #chartThree baseChart
             [datasets]="barChartData"
             [labels]="barChartLabels"
             [options]="barChartOptions"
             [legend]="barChartLegend"
             [chartType]="barChartType"
+            [width]="barWidth"
             (chartHover)="chartHovered($event)"
             (chartClick)="chartClicked($event)"></canvas>
-   <canvas baseChart
+   <canvas #chartFour baseChart
             [datasets]="barChartData"
             [labels]="barChartLabels"
             [options]="barChartOptions"
             [legend]="barChartLegend"
             [chartType]="barChartType"
+            [width]="barWidth"
             (chartHover)="chartHovered($event)"
             (chartClick)="chartClicked($event)"></canvas>
   </div>

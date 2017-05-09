@@ -1,19 +1,22 @@
-import { Component, OnInit, ElementRef, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import * as jsPDF from 'jspdf';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.css'],
-  providers: [
-    { provide: 'Window', useValue: window }
-  ]
+  styleUrls: ['./chart.component.css']
 })
 export class ChartComponent implements OnInit {
-  @ViewChild('divChart')
-  divChart: ElementRef;
+
   @ViewChild('chartOne')
   chartOne: ElementRef;
+  @ViewChild('chartTwo')
+  chartTwo: ElementRef;
+  @ViewChild('chartThree')
+  chartThree: ElementRef;
+  @ViewChild('chartFour')
+  chartFour: ElementRef;
 
   public barChartOptions:any = {
     scaleShowVerticalLines: false,
@@ -22,6 +25,7 @@ export class ChartComponent implements OnInit {
   public barChartLabels:string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
   public barChartType:string = 'bar';
   public barChartLegend:boolean = true;
+  public barWidth:number = 1920;
  
   public barChartData:any[] = [
     {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
@@ -29,7 +33,6 @@ export class ChartComponent implements OnInit {
   ];
 
   constructor(
-    @Inject('Window') private window: Window
   ) {}
  
   ngOnInit() {
@@ -37,31 +40,20 @@ export class ChartComponent implements OnInit {
   }
 
   export(): void {
-    var pdf = new jsPDF();
-    const imgUrl = this.chartOne.nativeElement.toDataURL('image/png');
-    pdf.addImage(imgUrl, 'PNG', 10, 10);
+    var pdf = new jsPDF('landscape');
+    const imgUrlOne = this.chartOne.nativeElement.toDataURL('image/png');
+    const imgUrlTwo = this.chartTwo.nativeElement.toDataURL('image/png');
+    const imgUrlThree = this.chartThree.nativeElement.toDataURL('image/png');
+    const imgUrlFour = this.chartFour.nativeElement.toDataURL('image/png');
+    pdf.addImage(imgUrlOne, 'PNG', 10, 10);
+    pdf.addPage();
+    pdf.addImage(imgUrlTwo, 'PNG', 10, 10);
+    pdf.addPage();
+    pdf.addImage(imgUrlThree, 'PNG', 10, 10);
+    pdf.addPage();
+    pdf.addImage(imgUrlFour, 'PNG', 10, 10);
     pdf.save('canvas.pdf');
   }
-
-  download(): void {
-
-        var pdf = new jsPDF();
-        // var innerElements = this.divChart.nativeElement.getElementsByTagName('canvas');
-        // console.log(innerElements.length);
-        // Array.from(innerElements).forEach(() => {
-          // pdf.addPage();
-        // });
-
-        var pageHeight = pdf.internal.pageSize.height;
-        var divHeight = +this.divChart.nativeElement.offsetHeight;
-
-        console.log('pageHeight: ' + pageHeight);
-        console.log('divHeight: ' + divHeight);
-        if(divHeight > pageHeight) pdf.addPage();
-        pdf.addHTML(this.divChart.nativeElement, 0, 0, null, () => pdf.save('chart.pdf'));
-        // doc.save('Test.pdf');
-    }
-
 
   // events
   public chartClicked(e:any):void {
@@ -85,6 +77,7 @@ export class ChartComponent implements OnInit {
     let clone = JSON.parse(JSON.stringify(this.barChartData));
     clone[0].data = data;
     this.barChartData = clone;
+    
     /**
      * (My guess), for Angular to recognize the change in the dataset
      * it has to change the dataset variable directly,
