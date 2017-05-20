@@ -18,15 +18,14 @@ export class ChartComponent implements OnInit {
   ngOnInit() {
     this.options = {
       scales: {
-            yAxes: [{
-                ticks: {
-                    // Create scientific notation labels
-                    callback: function(value, index, values) {
-                        return value+20;
-                    }
+        xAxes: [{
+            ticks: {
+                userCallback: function(value, index, values) {
+                    return value.replace(":", "-");
                 }
-            }]
-        }
+            }
+        }]
+      }
     };
 
     this.data = {
