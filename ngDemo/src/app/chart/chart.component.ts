@@ -20,8 +20,9 @@ export class ChartComponent implements OnInit {
       scales: {
         xAxes: [{
             ticks: {
-                userCallback: function(value, index, values) {
-                    return value.replace(":", "-");
+                callback: function(value, index, values) {
+                    console.log(value);
+                    return value.replace("/:[0-9]{2}", ":00");
                 }
             }
         }]
@@ -29,7 +30,8 @@ export class ChartComponent implements OnInit {
     };
 
     this.data = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            // labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            labels: ['08:25','09:32','10:45','11:33','12:54','13:22','14:05'],
             datasets: [
                 {
                     label: 'My First dataset',
