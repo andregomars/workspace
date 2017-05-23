@@ -13,6 +13,7 @@ import { GoogleMapComponent } from './google-map/google-map.component';
 import { ReactiveXComponent } from './reactive-x/reactive-x.component';
 import { ExporterComponent } from './exporter/exporter.component';
 import { ChartComponent } from './chart/chart.component';
+import { DataLocalService } from './shared/data-local';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,9 @@ import { ChartComponent } from './chart/chart.component';
       apiKey: 'AIzaSyAqZcZ_L6UIsGVHcDqWdu-GrsRSPcpWeqU'
     })
   ],
-  providers: [],
+  providers: [
+    DataLocalService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
