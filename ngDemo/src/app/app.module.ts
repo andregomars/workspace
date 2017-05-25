@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from '@angular/material';
+// import { MaterialModule } from '@angular/material';
 import { ChartModule } from 'primeng/primeng';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -29,7 +29,7 @@ import { DataLocalService } from './shared/data-local';
     HttpModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
+    // MaterialModule,
     ChartModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAqZcZ_L6UIsGVHcDqWdu-GrsRSPcpWeqU'
