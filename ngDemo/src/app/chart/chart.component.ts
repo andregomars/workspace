@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import * as jsPDF from 'jspdf';
+import * as moment from 'moment';
 import { BaseChartDirective } from 'ng2-charts';
 import { DataLocalService } from '../shared/data-local';
 
@@ -20,6 +21,7 @@ export class ChartComponent implements OnInit {
   ngOnInit() {
     var labels = this.dataService.getChartData().map(el => el.time);
     var values = this.dataService.getChartData().map(el => el.value);
+    this.getBalancedData(values);
 
     this.options = {
       responsive: false,
@@ -78,4 +80,24 @@ export class ChartComponent implements OnInit {
         }
       
   }
+  
+  private getBalancedData(data: Snapshot[]): any {
+     console.log("total count: "+ data.length );
+
+     var times = data.map((x,i) => {
+        return { hour: moment(x.time).hour(), idx: i}
+    });
+
+    console.log(times);
+
+     return null; 
+  }
+}
+
+interface Snapshot {
+    code: string,
+    name: string,
+    value: number,
+    unit: string,
+    time: Date
 }
