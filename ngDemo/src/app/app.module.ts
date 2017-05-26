@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { MaterialModule } from '@angular/material';
-import { ChartModule } from 'primeng/primeng';
+import { ChartModule, TieredMenuModule } from 'primeng/primeng';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,7 @@ import { ReactiveXComponent } from './reactive-x/reactive-x.component';
 import { ExporterComponent } from './exporter/exporter.component';
 import { ChartComponent } from './chart/chart.component';
 import { DataLocalService } from './shared/data-local';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { DataLocalService } from './shared/data-local';
     GoogleMapComponent,
     ReactiveXComponent,
     ExporterComponent,
-    ChartComponent
+    ChartComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +33,7 @@ import { DataLocalService } from './shared/data-local';
     BrowserAnimationsModule,
     // MaterialModule,
     ChartModule,
+    TieredMenuModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAqZcZ_L6UIsGVHcDqWdu-GrsRSPcpWeqU'
     })

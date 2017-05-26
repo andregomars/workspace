@@ -21,7 +21,6 @@ export class ChartComponent implements OnInit {
   ngOnInit() {
     var labels = this.dataService.getChartData().map(el => el.time);
     var values = this.dataService.getChartData().map(el => el.value);
-    this.getBalancedData(values);
 
     this.options = {
       responsive: false,
@@ -81,17 +80,6 @@ export class ChartComponent implements OnInit {
       
   }
   
-  private getBalancedData(data: Snapshot[]): any {
-     console.log("total count: "+ data.length );
-
-     var times = data.map((x,i) => {
-        return { hour: moment(x.time).hour(), idx: i}
-    });
-
-    console.log(times);
-
-     return null; 
-  }
 }
 
 interface Snapshot {
