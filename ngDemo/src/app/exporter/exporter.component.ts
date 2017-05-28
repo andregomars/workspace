@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import * as jsPDF from 'jspdf';
+import { ButtonModule } from 'primeng/primeng';
+
 
 @Component({
   selector: 'app-exporter',

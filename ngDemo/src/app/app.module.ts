@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { MaterialModule } from '@angular/material';
-import { ChartModule, TieredMenuModule } from 'primeng/primeng';
+import { ChartModule, TieredMenuModule, ButtonModule } from 'primeng/primeng';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,6 +34,7 @@ import { MenuComponent } from './menu/menu.component';
     // MaterialModule,
     ChartModule,
     TieredMenuModule,
+    ButtonModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAqZcZ_L6UIsGVHcDqWdu-GrsRSPcpWeqU'
     })
