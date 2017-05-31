@@ -14,6 +14,9 @@ export class ChartComponent implements OnInit {
   data: any;
   options: any;
 
+  dataChartist: any;
+  optionsChartist: any;
+
   constructor(
         private dataService: DataLocalService
   ) {}
@@ -77,6 +80,76 @@ export class ChartComponent implements OnInit {
                 }
             ]
         }
+
+        this.dataChartist = {
+            "labels": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+            ],
+            "series": [
+                [
+                    12,
+                    9,
+                    7,
+                    8,
+                    5
+                ],
+                [
+                    2,
+                    1,
+                    3.5,
+                    7,
+                    3
+                ],
+                [
+                    1,
+                    3,
+                    4,
+                    5,
+                    6
+                ]
+             ]
+        }
+    // this.dataChartist = {
+    //     series: [
+    //         {
+    //         name: 'series-1',
+    //         data: [
+    //             {x: moment('2017-05-03T00:15:40'), y: 53},
+    //             {x: moment('2017-05-03T01:15:40'), y: 40},
+    //             {x: moment('2017-05-03T02:15:40'), y: 45},
+    //             {x: moment('2017-05-03T03:15:40'), y: 40},
+    //             {x: moment('2017-05-03T04:15:40'), y: 20},
+    //             {x: moment('2017-05-03T05:15:40'), y: 32},
+    //             {x: moment('2017-05-03T06:15:40'), y: 18},
+    //             {x: moment('2017-05-03T07:15:40'), y: 11}
+    //             ]
+    //         },
+    //         {
+    //         name: 'series-2',
+    //         data: [
+    //             {x: moment('2017-05-03T00:35:40'), y: 53},
+    //             {x: moment('2017-05-03T02:25:40'), y: 35},
+    //             {x: moment('2017-05-03T04:05:40'), y: 30},
+    //             {x: moment('2017-05-03T06:45:40'), y: 30},
+    //             {x: moment('2017-05-03T07:15:40'), y: 10}
+    //         ]
+    //         }
+    //     ]
+    // };
+
+    // this.optionsChartist = {
+    //     axisX: {
+    //         type: Chartist.FixedScaleAxis,
+    //         divisor: 3,
+    //         labelInterpolationFnc: function(value) {
+    //             return moment(value).format('HH:00');
+    //         }
+    //     }
+    // };
       
   }
   
