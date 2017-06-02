@@ -15,6 +15,10 @@ import { ExporterComponent } from './exporter/exporter.component';
 import { ChartComponent } from './chart/chart.component';
 import { DataLocalService } from './shared/data-local';
 import { MenuComponent } from './menu/menu.component';
+import { DataTableComponent } from './data-table/data-table.component';
+import { GaugeComponent } from './gauge/gauge.component';
+import { LinearGaugeComponent, RadialGaugeComponent } from 'ng-canvas-gauges/component';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { MenuComponent } from './menu/menu.component';
     ReactiveXComponent,
     ExporterComponent,
     ChartComponent,
-    MenuComponent
+    MenuComponent,
+    DataTableComponent,
+    GaugeComponent,
+    LinearGaugeComponent,
+    RadialGaugeComponent
   ],
   imports: [
     BrowserModule,

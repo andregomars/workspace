@@ -1,0 +1,63 @@
+<div class="m-2">
+<div class="card-deck">
+  <div class="card m-2">
+    <div class="card-header">Temperature (°F)</div>
+    <div class="card-block text-center">
+      <linear-gauge
+          width="500"
+          height="150"
+          min-value="-50"
+          max-value="50"
+          major-ticks="[-50,-40,-30,-20,-10,0,10,20,30,40,50]"
+          minor-ticks="0"
+          ticks-width="5"
+          tick-side="left"
+          number-side="left"
+          needle-side="left"
+          highlights='[ {"from": -50, "to": 0, "color": "rgba(0,0, 255, .3)"},
+          {"from": 0, "to": 50, "color": "rgba(255, 0, 0, .3)"} ]'
+          border-shadow-width="0"
+          borders="false"
+          border-radius="0"
+          needle-type="arrow"
+          needle-width="10"
+
+          color-needle="#222"
+          color-needle-end=""
+
+          bar-stroke="0"
+          bar-width="0"
+          bar-begin-circle="false"
+          [attr.value]="degree"
+        ></linear-gauge>   
+    </div> 
+  </div>
+  <div class="card m-2">
+    <div class="card-header">Tachometer (mph)</div>
+    <div class="card-block text-center">
+      <radial-gauge
+        width="300"
+        height="300"
+        min-value="0"
+        start-angle="90"
+        ticks-angle="180"
+        value-box="false"
+        max-value="120"
+        major-ticks="0,20,40,60,80,100,120"
+        minor-ticks="0"
+        stroke-ticks="true"
+        highlights='[{"from": 80, "to": 120, "color": "rgba(200, 50, 50, .75)"}]'
+        color-plate="#fff"
+        border-shadow-width="0"
+        borders="false"
+        needle-type="arrow"
+        needle-width="2"
+        needle-circle-size="7"
+        needle-circle-outer="true"
+        needle-circle-inner="false"
+
+      ></radial-gauge>  
+    </div> 
+  </div>
+</div>
+</div>

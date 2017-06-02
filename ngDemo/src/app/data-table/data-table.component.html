@@ -1,0 +1,31 @@
+<div>
+  <table class="table table-responsive table-hover
+    table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Value</th>
+      <th>Unit</th>
+      <th>Time</th>
+      <th>Time Again</th>
+      <th>Time Again</th>
+      <th>Time Again</th>
+    </tr>
+  </thead>
+  <tbody>
+     <tr *ngFor="let row of data">
+      <th scope="row">1</th>
+      <td>{{ row.code }}</td>
+      <td>{{ row.name }}</td>
+      <td>{{ row.value }}</td>
+      <td>{{ row.unit }}</td>
+      <td>{{ row.time }}</td>
+      <td>{{ row.time }}</td>
+      <td>{{ row.time }}</td>
+      <td>{{ row.time }}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
