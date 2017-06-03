@@ -29,3 +29,14 @@
   </tbody>
 </table>
 </div>
+<div>
+  <!--<p-dataTable [value]="data"
+    [scrollable]="true" scrollWidth="1000px"-->
+  <p-dataTable [value]="data"
+    [responsive]="true"
+    class="table table-striped 
+      table-hover">
+    <p-column *ngFor="let col of cols"
+      [field]="col.field" [header]="col.header"></p-column>
+  </p-dataTable>
+</div>

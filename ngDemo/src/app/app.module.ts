@@ -5,7 +5,7 @@ import { HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { MaterialModule } from '@angular/material';
-import { ChartModule, TieredMenuModule, ButtonModule } from 'primeng/primeng';
+import { ChartModule, TieredMenuModule, ButtonModule, DataTableModule } from 'primeng/primeng';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -43,6 +43,7 @@ import { LinearGaugeComponent, RadialGaugeComponent } from 'ng-canvas-gauges/com
     ChartModule,
     TieredMenuModule,
     ButtonModule,
+    DataTableModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAqZcZ_L6UIsGVHcDqWdu-GrsRSPcpWeqU'
     })
