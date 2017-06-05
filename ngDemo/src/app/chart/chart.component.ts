@@ -48,16 +48,23 @@ export class ChartComponent implements OnInit {
                 // }
             }
         }],
-        // yAxes: [{
-        //     ticks: {
-        //         callback: function(value, index, values) {
-        //             // return value.split(":")[0]+":00";
-        //             // return value;
-        //             return value+" new";
-        //         }
-        //     }
-        // }]
-      }
+        yAxes: [{
+            ticks: {
+                callback: function(value, index, values) {
+                    // return value.split(":")[0]+":00";
+                    // return value;
+                    return value+" new";
+                }
+            }
+        }]
+      },
+    //   tooltips: {
+    //       callbacks: {
+    //           label: function(tooltipItems, data) {
+    //               return tooltipItems.yLabel + '$';
+    //           }
+    //       }
+    //   }
     };
 
     this.data = {

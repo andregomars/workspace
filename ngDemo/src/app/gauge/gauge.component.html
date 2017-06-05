@@ -55,8 +55,38 @@
         needle-circle-size="7"
         needle-circle-outer="true"
         needle-circle-inner="false"
-
       ></radial-gauge>  
+    </div> 
+  </div>
+  <div class="card m-2">
+    <div class="card-header">Temperature (°F)</div>
+    <div class="card-block text-center ui-rtl" dir="rtl">
+      <p-progressBar [value]="20"></p-progressBar>
+    </div> 
+  </div>
+  <div class="card m-2">
+    <div class="card-header">Temperature (°F)</div>
+    <div class="card-block text-center">
+      <div class="progress progress-success" dir="rtl">
+        <div class="progress-bar" style="width:35%"></div>
+      </div>
+    </div> 
+  </div>
+  <div class="card m-2">
+    <div class="card-header">Temperature (°F)</div>
+    <div class="card-block text-center">
+      <div class="progress">
+        <!--<div class="progress-bar" style="width: 15%"></div>-->
+        <div class="progress-bar" style="width: 50%"></div>
+        <div class="progress-bar bg-success" style="width: 50%"></div>
+      </div>
+    </div> 
+  </div>
+  <div class="card m-2">
+    <div class="card-header">Tachometer (mph) via PieChart</div>
+    <div class="card-block text-center w-25">
+      <p-chart type="doughnut" 
+        [data]="dataPieChart" [options]="optionsPieChart"></p-chart>
     </div> 
   </div>
 </div>
