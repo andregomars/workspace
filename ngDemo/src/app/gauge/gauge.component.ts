@@ -7,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GaugeComponent implements OnInit {
 
-  degree: number;
   speed: number;
   dataPieChart: any;
   optionsPieChart: any;
@@ -15,9 +14,9 @@ export class GaugeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.degree = 25;
+
     this.speed = 45;
-    
+
     this.dataPieChart = {
         labels: ['A','B','C'],
         datasets: [{

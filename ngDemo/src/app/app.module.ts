@@ -19,6 +19,7 @@ import { MenuComponent } from './menu/menu.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { GaugeComponent } from './gauge/gauge.component';
 import { LinearGaugeComponent, RadialGaugeComponent } from 'ng-canvas-gauges/component';
+import { ProgressMeterComponent } from './progress-meter/progress-meter.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { LinearGaugeComponent, RadialGaugeComponent } from 'ng-canvas-gauges/com
     DataTableComponent,
     GaugeComponent,
     LinearGaugeComponent,
-    RadialGaugeComponent
+    RadialGaugeComponent,
+    ProgressMeterComponent
   ],
   imports: [
     BrowserModule,

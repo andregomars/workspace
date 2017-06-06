@@ -67,9 +67,7 @@
   <div class="card m-2">
     <div class="card-header">Temperature (°F)</div>
     <div class="card-block text-center">
-      <div class="progress progress-success" dir="rtl">
-        <div class="progress-bar" style="width:35%"></div>
-      </div>
+      <app-progress-meter degree=-200 minDegree=-400 maxDegree=400></app-progress-meter>
     </div> 
   </div>
   <div class="card m-2">
@@ -77,8 +75,9 @@
     <div class="card-block text-center">
       <div class="progress">
         <!--<div class="progress-bar" style="width: 15%"></div>-->
-        <div class="progress-bar" style="width: 50%"></div>
-        <div class="progress-bar bg-success" style="width: 50%"></div>
+        <div class="progress-bar" style="width:30%;background-color:#f7f7f7"></div>
+        <div class="progress-bar" style="width:20%;background-color:#0275d8"></div>
+        <div class="progress-bar" style="width:50%;background-color:#f0ad4e"></div>
       </div>
     </div> 
   </div>
