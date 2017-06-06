@@ -67,7 +67,8 @@
   <div class="card m-2">
     <div class="card-header">Temperature (°F)</div>
     <div class="card-block text-center">
-      <app-progress-meter degree=-200 minDegree=-400 maxDegree=400></app-progress-meter>
+      <app-progress-meter [meterType]="temperature" degree=-5 
+        minDegree=-20 maxDegree=220 ></app-progress-meter>
     </div> 
   </div>
   <div class="card m-2">
