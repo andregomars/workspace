@@ -20,7 +20,9 @@ import { DataTableComponent } from './data-table/data-table.component';
 import { GaugeComponent } from './gauge/gauge.component';
 import { LinearGaugeComponent, RadialGaugeComponent } from 'ng-canvas-gauges/component';
 import { ProgressMeterComponent } from './progress-meter/progress-meter.component';
-
+import { JustGaugeComponent } from './just-gauge/just-gauge.component';
+import { GaugeModule } from 'ng-gauge';
+import { GaugeJsComponent } from './gauge-js/gauge-js.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { ProgressMeterComponent } from './progress-meter/progress-meter.componen
     GaugeComponent,
     LinearGaugeComponent,
     RadialGaugeComponent,
-    ProgressMeterComponent
+    ProgressMeterComponent,
+    JustGaugeComponent,
+    GaugeJsComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +52,7 @@ import { ProgressMeterComponent } from './progress-meter/progress-meter.componen
     ButtonModule,
     DataTableModule,
     ProgressBarModule,
+    GaugeModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAqZcZ_L6UIsGVHcDqWdu-GrsRSPcpWeqU'
     })

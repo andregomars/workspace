@@ -1,6 +1,12 @@
 <div class="m-2">
 <div class="card-deck">
   <div class="card m-2">
+    <div class="card-header">JustGage</div>
+    <div class="card-block text-center">
+      <app-gauge-js [options]="optGuageJs" [value]=1250 [max]=3000 [min]=0></app-gauge-js>
+    </div> 
+  </div>
+  <div class="card m-2">
     <div class="card-header">Temperature (°F)</div>
     <div class="card-block text-center">
       <linear-gauge
@@ -67,10 +73,10 @@
   <div class="card m-2">
     <div class="card-header">Temperature (°F)</div>
     <div class="card-block text-center">
-      <app-progress-meter degree=85 
+      <app-progress-meter degree=-15 
         minDegree=-20 maxDegree=220 
-        meterNegativeClass="col-2"
-        meterPositiveClass="col-10" ></app-progress-meter>
+        meterNegativeClass="col-3"
+        meterPositiveClass="col-9" ></app-progress-meter>
     </div> 
   </div>
   <div class="card m-2">
