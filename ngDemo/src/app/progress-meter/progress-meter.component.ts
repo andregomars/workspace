@@ -10,13 +10,13 @@ export class ProgressMeterComponent implements OnInit, OnChanges {
   Math = Math;
   degreeNegative: string;
   degreePositive: string;
-  meterNegativeStyle: string;
-  meterPositiveStyle: string;
+  @Input() meterNegativeClass: string;
+  @Input() meterPositiveClass: string;
     
   @Input() degree: number = 0;
   @Input() minDegree: number = -100;
   @Input() maxDegree: number = 100;
-  @Input() meterType: string = "current";
+  @Input() meterType: string;
 
   constructor() { }
 
@@ -29,19 +29,21 @@ export class ProgressMeterComponent implements OnInit, OnChanges {
   }
 
   private build(): void {
-    console.log(this.meterType);
-   switch (this.meterType) {
-      case "current":
-        this.meterNegativeStyle = "col-6 text-right";
-        this.meterPositiveStyle = "col-6 text-left";
-      case "temperature":
-      console.log('touch');
-        this.meterNegativeStyle = "col-3 text-right";
-        this.meterPositiveStyle = "col-9 text-left";
-      default:
-        this.meterNegativeStyle = "col-6 text-right";
-        this.meterPositiveStyle = "col-6 text-left";
-    }
+  //   console.log(this.meterType);
+
+  //  switch (this.meterType) {
+  //     case "current":
+  //       this.meterNegativeClass = "'col-6 text-right'";
+  //       this.meterPositiveClass = "'col-6 text-left'";
+  //     case "temperature":
+  //     console.log('touch');
+  //       this.meterNegativeClass = "col-3 text-right";
+  //       this.meterPositiveClass = "'col-9 text-left'";
+  //     console.log(this.meterNegativeClass);
+  //     default:
+  //       this.meterNegativeClass = "col-6 text-right";
+  //       this.meterPositiveClass = "col-6 text-left";
+  //   }
 
     this.degreeNegative =
       this.degree < 0 ? (Math.abs(this.degree * 100) / Math.abs(this.minDegree)).toFixed(0) + '%' : '0%';
