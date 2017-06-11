@@ -15,26 +15,26 @@ export class GoogleMapComponent implements OnInit {
 	  {
 		  lat: 51.673858,
 		  lng: 7.815982,
-		  label: 'A',
+		  label: '1073',
       title: 'A001',
 		  draggable: true,
-      icon: 'https://maps.google.com/mapfiles/kml/shapes/parking_lot_maps.png'
+      icon: 'https://maps.google.com/mapfiles/kml/paddle/wht-blank.png'
 	  },
     {
 		  lat: 51.723858,
 		  lng: 7.895982,
-		  label: 'C',
+		  label: '5866',
       title: 'C333',
 		  draggable: true,
-      icon: 'https://maps.google.com/mapfiles/kml/shapes/bus_maps.png' 
+      icon: 'https://maps.google.com/mapfiles/kml/pal4/icon52.png' 
 	  },
 	  {
 		  lat: 51.573858,
 		  lng: 7.215982,
-		  label: 'B',
+		  label: '7500',
       title: '2079',
 		  draggable: false,
-      icon: 'https://maps.google.com/mapfiles/kml/shapes/library_maps.png' 
+      icon: '#' 
 	  }
 	]
 

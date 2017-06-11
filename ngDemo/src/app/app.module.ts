@@ -15,6 +15,7 @@ import { ReactiveXComponent } from './reactive-x/reactive-x.component';
 import { ExporterComponent } from './exporter/exporter.component';
 import { ChartComponent } from './chart/chart.component';
 import { DataLocalService } from './shared/data-local';
+import { DataRemoteService } from './shared/data-remote';
 import { MenuComponent } from './menu/menu.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { GaugeComponent } from './gauge/gauge.component';
@@ -58,7 +59,8 @@ import { GaugeJsComponent } from './gauge-js/gauge-js.component';
     })
   ],
   providers: [
-    DataLocalService
+    DataLocalService,
+    DataRemoteService
   ],
   bootstrap: [AppComponent]
 })
