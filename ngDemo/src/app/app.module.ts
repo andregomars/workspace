@@ -24,6 +24,7 @@ import { ProgressMeterComponent } from './progress-meter/progress-meter.componen
 import { JustGaugeComponent } from './just-gauge/just-gauge.component';
 import { GaugeModule } from 'ng-gauge';
 import { GaugeJsComponent } from './gauge-js/gauge-js.component';
+import { DataCardsComponent } from './data-cards/data-cards.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { GaugeJsComponent } from './gauge-js/gauge-js.component';
     RadialGaugeComponent,
     ProgressMeterComponent,
     JustGaugeComponent,
-    GaugeJsComponent
+    GaugeJsComponent,
+    DataCardsComponent
   ],
   imports: [
     BrowserModule,
