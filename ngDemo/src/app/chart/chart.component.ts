@@ -20,6 +20,9 @@ import { VehicleSnapshot } from './../models/vehicle-snapshot';
 export class ChartComponent implements OnInit {
 
   options: any;
+  yesterday: Date;
+  min: any;
+  max: any;
 
   @ViewChild("demoChart")
   demoChart: UIChart;
@@ -30,15 +33,14 @@ export class ChartComponent implements OnInit {
   ) {}
  
   ngOnInit() {
-    // var labels = this.dataLocal.getChartData().map(el => el.time);
-    // var values = this.dataLocal.getChartData().map(el => el.value);
-    this.setOptions();
-
     var vname = "3470";
-    var yesterday =  moment().subtract(1, 'day').startOf('day').toDate();
-    console.log(vname);
-    console.log(yesterday);
-    this.dataRemote.getWholeDayVehicleSnapshot$(vname, yesterday)
+    var backDays = 3;
+    this.yesterday =  moment().subtract(backDays, 'day').startOf('day').toDate();
+    this.min = moment(this.yesterday).startOf('day');
+    this.max = moment(this.yesterday).add(1,'day').startOf('day');
+
+    this.setOptions();
+    this.dataRemote.getWholeDayVehicleSnapshot$(vname, this.yesterday)
         .subscribe((list: VehicleSnapshot[]) => {
             this.setData(list);
             this.demoChart.reinit();
@@ -50,22 +52,38 @@ export class ChartComponent implements OnInit {
     this.options = {
         responsive: false,
         scales: {
-            xAxes: [{
-                type: 'time',
-                time: {
-                    unit: 'minute',
-                    // round: true,
-                    // max: moment().subtract(1, 'day').endOf('day').toDate(), 
-                    tooltipFormat: 'HH:mm',
-                    displayFormats: {
-                        minute: 'HH:00'
-                    }
-                },
-                ticks: {
-                    autoSkip: true,
-                    maxTicksLimit: 23
+          xAxes: [{
+            type: 'time',
+            time: {
+                unit: 'hour',
+                // unitStepSize: 2,
+                // round: true,
+                // max: moment().subtract(1, 'day').endOf('day').toDate(), 
+                tooltipFormat: 'HH:mm',
+                min: this.min, 
+                max: this.max, 
+                displayFormats: {
+                  //minute: 'HH:mm',
+                  hour: 'HH:mm'
                 }
-            }]
+            },
+            ticks: {
+              // beginAtZero: true
+              // autoSkip: false,
+              // maxTicksLimit: 24
+            },
+            gridLines: {
+              // display: false,
+              // drawTicks: true,
+              // offsetGridLines: true,
+            }
+          }],
+          yAxes: [{
+            gridLines: {
+              // display: true,
+              // drawTicks: true,
+            }
+          }]
         },
     };
   }
@@ -84,9 +102,12 @@ export class ChartComponent implements OnInit {
           label: 'SOC',
           data: dataSOC,
         //   yAxisID: 'ySOC',
-          fill: false,
           pointRadius: 1,
-          borderColor: '#4286f4'
+          borderColor: '#4286f4',
+          fill: false,
+          // showLine: false,
+          // spanGaps: false,
+          setppedLine: true
         }, 
         // {
         //   label: 'kWh',

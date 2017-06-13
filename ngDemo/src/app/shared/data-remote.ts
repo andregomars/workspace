@@ -19,7 +19,9 @@ export class DataRemoteService {
 
   getWholeDayVehicleSnapshot$(vname: string, date: Date): Observable<Array<VehicleSnapshot>> {
     var dateOnly: string = moment(date).format('YYYY-MM-DD');
-    return this.http.get(`${this.URL_WholeDayVehicleSnapshot}/${vname}/${dateOnly}`)
+    var url = `${this.URL_WholeDayVehicleSnapshot}/${vname}/${dateOnly}`;
+    console.log(url);
+    return this.http.get(url)
       .map(res => res.json())
       .catch(this.handleError);
   }
