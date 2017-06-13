@@ -48,6 +48,14 @@ export class ChartComponent implements OnInit {
       
   }
 
+  onClick(): void {
+    console.log('hit');
+
+    this.demoChart.options.scales.xAxes[0].time.tooltipFormat = "HH";
+    this.demoChart.options.scales.xAxes[0].time.min = this.min.add(2,'hour');
+    this.demoChart.reinit();
+  }
+
   private setOptions(): void {
     this.options = {
         responsive: false,

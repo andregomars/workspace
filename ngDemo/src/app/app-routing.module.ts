@@ -8,7 +8,7 @@ import { ExporterComponent } from './exporter/exporter.component';
 import { ChartComponent } from './chart/chart.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { GaugeComponent } from './gauge/gauge.component';
-// import { DataCardsComponent } from './data-cards/data-cards.component';
+import { DataCardsComponent } from './data-cards/data-cards.component';
 
 
 const routes: Routes = [
@@ -18,7 +18,7 @@ const routes: Routes = [
     { path: 'chart', component: ChartComponent },
     { path: 'table', component: DataTableComponent },
     { path: 'gauge', component: GaugeComponent },
-    // { path: 'cards', component: DataCardsComponent },
+    { path: 'cards', component: DataCardsComponent },
 ];
 
 @NgModule({
