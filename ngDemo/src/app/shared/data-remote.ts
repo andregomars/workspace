@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Http, Response, ResponseContentType } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -12,6 +12,8 @@ import { VehicleSnapshot } from './../models/vehicle-snapshot';
 export class DataRemoteService {
   URL_WholeDayVehicleSnapshot: string 
     = 'http://52.35.12.17/api/VehicleSnapshot/GetWholeDayByVehicleName';
+  URL_CsvFile: string 
+    = 'http://52.33.60.220/api/VehicleDailyFile/GetFileStream';
 
   constructor(
     private http: Http
@@ -23,6 +25,15 @@ export class DataRemoteService {
     console.log(url);
     return this.http.get(url)
       .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+  getFile$(csvId: number): Observable<Response> {
+    var url = `${this.URL_CsvFile}/${csvId}`;
+    // return this.http.get(url, { responseType: ResponseContentType.Blob })
+      // .map(res => new Blob([res.blob()], { type: 'text/csv' }))
+    return this.http.get(url)
+      // .map(res => res.url)
       .catch(this.handleError);
   }
   

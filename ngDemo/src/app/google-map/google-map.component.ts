@@ -18,7 +18,7 @@ export class GoogleMapComponent implements OnInit {
 		  label: '1073',
       title: 'A001',
 		  draggable: true,
-      icon: 'https://maps.google.com/mapfiles/kml/paddle/wht-blank.png'
+      icon: 'http://cloud.iocontrols.com/online2017/hams/images/mapicon/oi_map_marker.green.72px.png' 
 	  },
     {
 		  lat: 51.723858,
@@ -26,7 +26,15 @@ export class GoogleMapComponent implements OnInit {
 		  label: '5866',
       title: 'C333',
 		  draggable: true,
-      icon: 'https://maps.google.com/mapfiles/kml/pal4/icon52.png' 
+      icon: 'http://cloud.iocontrols.com/online2017/hams/images/mapicon/oi_map_marker.lightblue.46px.png' 
+	  },
+	  {
+		  lat: 51.994876,
+		  lng: 7.355982,
+		  label: '5866',
+      title: 'C333',
+		  draggable: true,
+      icon: 'http://cloud.iocontrols.com/online2017/hams/images/mapicon/oi_map_marker.lightred.46px.png' 
 	  },
 	  {
 		  lat: 51.573858,
@@ -34,7 +42,7 @@ export class GoogleMapComponent implements OnInit {
 		  label: '7500',
       title: '2079',
 		  draggable: false,
-      icon: '#' 
+      icon: 'http://cloud.iocontrols.com/online2017/hams/images/mapicon/oi_map_marker.yellow.46px.png' 
 	  }
 	]
 
