@@ -4,9 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Session;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.EntityFrameworkCore;
+
+using WebApp.Models;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace WebApp
 {
@@ -28,7 +35,15 @@ namespace WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddDbContext<ECommContext>(options => 
+                options.UseSqlServer(Configuration.GetConnectionString("ECommConnection")));
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
+            services.AddAuthorization(options => {
+                options.AddPolicy("AdminsOnly", policy => 
+                    policy.RequireClaim(ClaimTypes.Role, "Admin"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,6 +52,7 @@ namespace WebApp
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            app.UseStatusCodePagesWithReExecute("/error/{0}");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -49,6 +65,13 @@ namespace WebApp
 
             app.UseStaticFiles();
 
+            app.UseSession();
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+                LoginPath = new PathString("/Auth/Login"),
+                AccessDeniedPath = new PathString("/Auth/Forbidden"),
+                AutomaticChallenge = true
+            });
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
