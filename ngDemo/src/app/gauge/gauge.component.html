@@ -92,9 +92,21 @@
   </div>
   <div class="card m-2">
     <div class="card-header">Tachometer (mph) via PieChart</div>
-    <div class="card-block text-center w-25">
-      <p-chart type="doughnut" 
-        [data]="dataPieChart" [options]="optionsPieChart"></p-chart>
+    <div class="card-block text-center" style="height:300px">
+      <!--<p-chart type="doughnut" [width]="'220px'" [height]="'220px'" 
+        [data]="dataPieChart" [options]="optionsPieChart" style="display:inline"></p-chart>-->
+          <!--<canvas baseChart width="220" height="220"
+                      [data]="dataPieChart.datasets[0].data"
+                      [options]="optionsPieChart"
+                      [chartType]="'doughnut'" style="display:inline"></canvas>
+      <div style="margin-top:-100px;font-size:37px;font-weight:bold">80</div>
+      <div>
+        <div class="row">
+          <div class="col text-center">0</div>
+          <div class="col text-center">100</div>
+        </div>
+      </div>-->
+      <app-chart-gauge [value]="35" [max]="100" title="SOC (%)"></app-chart-gauge>
     </div> 
   </div>
 </div>

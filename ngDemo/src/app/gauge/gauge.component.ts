@@ -60,6 +60,12 @@ export class GaugeComponent implements OnInit {
         circumference: 1 * Math.PI,
         legend: false,
         tooltips: false,
+        responsive: false,
+        title: {
+            display: true,
+            padding: 0,
+            text: 'SOC (%)'
+        }
     }
   }
 

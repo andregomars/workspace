@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { MaterialModule } from '@angular/material';
 import { ChartModule, TieredMenuModule, ButtonModule, DataTableModule,
   ProgressBarModule } from 'primeng/primeng';
+import { ChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +27,7 @@ import { GaugeModule } from 'ng-gauge';
 import { GaugeJsComponent } from './gauge-js/gauge-js.component';
 import { DataCardsComponent } from './data-cards/data-cards.component';
 import { JustgageModule } from 'angular2-justgage';
+import { ChartGaugeComponent } from './chart-gauge/chart-gauge.component';
 
 
 @NgModule({
@@ -43,7 +45,8 @@ import { JustgageModule } from 'angular2-justgage';
     ProgressMeterComponent,
     JustGaugeComponent,
     GaugeJsComponent,
-    DataCardsComponent
+    DataCardsComponent,
+    ChartGaugeComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +62,7 @@ import { JustgageModule } from 'angular2-justgage';
     ProgressBarModule,
     GaugeModule,
     JustgageModule,
+    ChartsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAqZcZ_L6UIsGVHcDqWdu-GrsRSPcpWeqU'
     })
