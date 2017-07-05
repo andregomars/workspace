@@ -25,6 +25,8 @@ import { JustGaugeComponent } from './just-gauge/just-gauge.component';
 import { GaugeModule } from 'ng-gauge';
 import { GaugeJsComponent } from './gauge-js/gauge-js.component';
 import { DataCardsComponent } from './data-cards/data-cards.component';
+import { JustgageModule } from 'angular2-justgage';
+
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import { DataCardsComponent } from './data-cards/data-cards.component';
     DataTableModule,
     ProgressBarModule,
     GaugeModule,
+    JustgageModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAqZcZ_L6UIsGVHcDqWdu-GrsRSPcpWeqU'
     })
