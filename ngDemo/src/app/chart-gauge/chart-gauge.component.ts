@@ -9,6 +9,7 @@ export class ChartGaugeComponent implements OnInit {
 
   datasets: any;
   options: any;
+  colors: any[]; 
   @Input() value: number;
   @Input() max: number;
   @Input() title: string;
@@ -16,6 +17,8 @@ export class ChartGaugeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.colors = [{}];
+
     this.options = {
         rotation: 1 * Math.PI,
         circumference: 1 * Math.PI,
@@ -25,17 +28,23 @@ export class ChartGaugeComponent implements OnInit {
         title: {
             display: true,
             padding: 0,
+            fontSize: 24,
             text: this.title 
+        },
+        animation: {
+          duration: 0
         }
     }
 
     this.datasets = [{
       data: this.getData(this.value, this.max),
       backgroundColor: [
-        "#000000",
-        "#36A2EB"
-      ],
+        "greenyellow",
+        "lightgrey"
+      ]
     }];
+
+    console.log(this.datasets);
   }
 
   private getData(value: number, max: number): number[] {
