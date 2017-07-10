@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
+import { AgmClustererModule } from '@agm/clusterer/clusterer.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // import { MaterialModule } from '@angular/material';
 import { ChartModule, TieredMenuModule, ButtonModule, DataTableModule,
@@ -65,7 +66,8 @@ import { ChartGaugeComponent } from './chart-gauge/chart-gauge.component';
     ChartsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAqZcZ_L6UIsGVHcDqWdu-GrsRSPcpWeqU'
-    })
+    }),
+    AgmClustererModule
   ],
   providers: [
     DataLocalService,

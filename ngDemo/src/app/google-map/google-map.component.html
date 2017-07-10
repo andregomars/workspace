@@ -6,13 +6,14 @@
       </div>
       <div class="card-block">
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" 
-          [streetViewControl]=false [zoomControl]=false>
-          <!--<agm-marker [latitude]="lat" [longitude]="lng" [label]="'M'"></agm-marker>-->
-          <agm-marker *ngFor="let m of markers"
-            [latitude]="m.lat" [longitude]="m.lng"
-            [label]="m.label" [title]="m.title" 
-            [markerDraggable]="m.draggable" [iconUrl]="m.icon">
-          </agm-marker>
+          [streetViewControl]=false [zoomControl]=true>
+          <agm-cluster [imagePath]="clusterIcon"> 
+            <agm-marker *ngFor="let m of markers"
+              [latitude]="m.lat" [longitude]="m.lng"
+              [label]="m.label" [title]="m.title" 
+              [markerDraggable]="m.draggable" [iconUrl]="m.icon">
+            </agm-marker>
+          </agm-cluster>
           <agm-polyline [polylineDraggable]=false 
             [strokeColor]="red" [strokeOpacity]="0.5" [strokeWeight]="5">
             <agm-polyline-point *ngFor="let m of markers"

@@ -10,6 +10,8 @@ export class GoogleMapComponent implements OnInit {
   lat: number = 51.678418;
   lng: number = 7.809007;
   zoom: number = 10;
+	
+	clusterIcon: string = "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m";
 
   markers: Marker[] = [
 	  {
