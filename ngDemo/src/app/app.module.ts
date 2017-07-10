@@ -24,7 +24,6 @@ import { GaugeComponent } from './gauge/gauge.component';
 import { LinearGaugeComponent, RadialGaugeComponent } from 'ng-canvas-gauges/component';
 import { ProgressMeterComponent } from './progress-meter/progress-meter.component';
 import { JustGaugeComponent } from './just-gauge/just-gauge.component';
-import { GaugeModule } from 'ng-gauge';
 import { GaugeJsComponent } from './gauge-js/gauge-js.component';
 import { DataCardsComponent } from './data-cards/data-cards.component';
 import { JustgageModule } from 'angular2-justgage';
@@ -61,7 +60,6 @@ import { ChartGaugeComponent } from './chart-gauge/chart-gauge.component';
     ButtonModule,
     DataTableModule,
     ProgressBarModule,
-    GaugeModule,
     JustgageModule,
     ChartsModule,
     AgmCoreModule.forRoot({
