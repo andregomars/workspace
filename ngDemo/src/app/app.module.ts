@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
 import { AgmClustererModule } from '@agm/clusterer/clusterer.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { MaterialModule } from '@angular/material';
 import { ChartModule, TieredMenuModule, ButtonModule, DataTableModule,
   ProgressBarModule } from 'primeng/primeng';
 import { ChartsModule } from 'ng2-charts';
@@ -54,7 +53,6 @@ import { ChartGaugeComponent } from './chart-gauge/chart-gauge.component';
     HttpModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    // MaterialModule,
     ChartModule,
     TieredMenuModule,
     ButtonModule,
