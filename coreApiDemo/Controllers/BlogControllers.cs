@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using coreApiDemo.Repositories;
 using coreApiDemo.Models;
+using System.Threading.Tasks;
 
 namespace coreApiDemo.Controllers
 {
@@ -20,6 +21,13 @@ namespace coreApiDemo.Controllers
         {
             return _blogRepository.GetAll();
         }
+
+        [HttpGet("GetAllAsync")]
+        public async Task<IEnumerable<Blog>> GetAllAsync()
+        {
+            return await _blogRepository.GetAllAsync();
+        }
+
 
         [HttpGet("{id}", Name = "GetBlog")]
         public IActionResult GetById(long id)

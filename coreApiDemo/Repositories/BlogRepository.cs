@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using coreApiDemo.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace coreApiDemo.Repositories
 {
@@ -18,6 +20,12 @@ namespace coreApiDemo.Repositories
         {
             return _context.Blog.ToList();
         }
+        
+        public async Task<IEnumerable<Blog>> GetAllAsync()
+        {
+            return await _context.Blog.ToListAsync();
+        }
+
 
         public void Add(Blog item)
         {
