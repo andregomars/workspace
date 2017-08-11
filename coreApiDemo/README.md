@@ -1,52 +1,33 @@
-# [RESTful API Best Practices and Common Pitfalls](https://medium.com/@schneidenbach/restful-api-best-practices-and-common-pitfalls-7a83ba3763b)
+# [RESTful API Best Practices and Common Pitfalls](https://medium.com/@schneidenbach/restful-api-best-practices-and-common-pitfalls-7a83ba3763b5)
 
-A small validation library for .NET that uses a fluent interface 
-and lambda expressions for building validation rules.
-Written by Jeremy Skinner (http://www.jeremyskinner.co.uk) and licensed under [Apache 2](http://www.apache.org/licenses/LICENSE-2.0.html).
 
 ### Semantic Best Practices 
 
-```
-Install-Package FluentValidation
-```
+1. Think nouns, not verbs.
+1. Respect the change management process. Avoid introducing break changes to existing endpoints that people are using.
+1. Be consistent. That means with HTTP status codes, general API structure, accepted best practices, etc.
+1. Consider versioning.
+1. KISS
+1. Document, document, document.
 
-For ASP.NET MVC integration:
+### Technical best practices
+1. Use DTOs to move data back and forth.
+1. Validate everything.
+1. Keep your controllers as thin as possible. Enforce separation of concerns. Separation of concerns means things are testable.
+1. Use async/await if at all possible.
+* CPU Bound applications
+* I/O Bound applications
+* Cancellable applications
 
-```
-Install-Package FluentValidation.MVC5
-```
-For ASP.NET Core:
 
-```
-Install-Package FluentValidation.AspNetCore
-```
 
-### Example
-```csharp
-using FluentValidation;
 
-public class CustomerValidator: AbstractValidator<Customer> {
-  public CustomerValidator() {
-    RuleFor(customer => customer.Surname).NotEmpty();
-    RuleFor(customer => customer.Forename).NotEmpty().WithMessage("Please specify a first name");
-    RuleFor(customer => customer.Discount).NotEqual(0).When(customer => customer.HasDiscount);
-    RuleFor(customer => customer.Address).Length(20, 250);
-    RuleFor(customer => customer.Postcode).Must(BeAValidPostcode).WithMessage("Please specify a valid postcode");
-  }
 
-  private bool BeAValidPostcode(string postcode) {
-    // custom postcode validating logic goes here
-  }
-}
+### References
 
-Customer customer = new Customer();
-CustomerValidator validator = new CustomerValidator();
-ValidationResult results = validator.Validate(customer);
 
-bool validationSucceeded = results.IsValid;
-IList<ValidationFailure> failures = results.Errors;
-```
+[How Raygun increased throughput by 2,000% with .NET Core (over Node.js)](https://raygun.com/blog/increased-throughput-net-core/)
 
-### Further Documentation
+[.NET Core MVC Thread Pool: Sequential vs Async Performance](https://caleblloyd.com/software/net-core-mvc-thread-pool-vs-async/)
 
-[Documentation can be found here.](https://github.com/JeremySkinner/FluentValidation/wiki) 
+[Async Programming : Introduction to Async/Await on ASP.NET](https://msdn.microsoft.com/en-us/magazine/dn802603.aspx)
