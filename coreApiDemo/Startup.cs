@@ -40,10 +40,10 @@ namespace coreApiDemo
             services.AddLogging();
             services.AddScoped<ITodoRepository, TodoRepository>();
             services.AddScoped<IBlogRepository, BlogRepository>();
-            services.AddSwaggerGen(c => 
-            {
-                c.SwaggerDoc("v1", new Info { Title = "Demo API", Version = "V1"});
-            });
+            // services.AddSwaggerGen(c => 
+            // {
+            //     c.SwaggerDoc("v1", new Info { Title = "Demo API", Version = "V1"});
+            // });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,11 +53,11 @@ namespace coreApiDemo
             loggerFactory.AddDebug();
 
             app.UseMvc();
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Demo API V1");
-            });
+            // app.UseSwagger();
+            // app.UseSwaggerUI(c =>
+            // {
+            //     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Demo API V1");
+            // });
         }
     }
 }
