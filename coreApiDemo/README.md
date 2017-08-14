@@ -15,18 +15,10 @@
 1. Validate everything.
 1. Keep your controllers as thin as possible. Enforce separation of concerns. Separation of concerns means things are testable.
 1. Use async/await if at all possible.
-* CPU Bound applications
 * I/O Bound applications
 * Cancellable applications
 
-
-
-
-
 ### References
-
-
-[How Raygun increased throughput by 2,000% with .NET Core (over Node.js)](https://raygun.com/blog/increased-throughput-net-core/)
 
 [.NET Core MVC Thread Pool: Sequential vs Async Performance](https://caleblloyd.com/software/net-core-mvc-thread-pool-vs-async/)
 
