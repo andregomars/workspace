@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using coreApiDemo.Models;
 using coreApiDemo.Repositories;
 using Swashbuckle.AspNetCore.Swagger;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 
 namespace coreApiDemo
@@ -38,11 +39,11 @@ namespace coreApiDemo
                 opt.UseSqlServer(Configuration.GetConnectionString("BloggingDatabase")));
             // Add framework services.
             services.AddMvc();
-                // .AddFluentValidation(fv => 
-                    // fv.RegisterValidatorsFromAssemblyContaining<BlogValidator>());
+                // .AddFluentValidation();
             services.AddLogging();
             services.AddScoped<ITodoRepository, TodoRepository>();
             services.AddScoped<IBlogRepository, BlogRepository>();
+            // services.AddSingleton<IValidator<Blog>, BlogValidator>();
             services.AddSwaggerGen(c => 
             {
                 c.SwaggerDoc("v1", new Info { Title = "Demo API", Version = "V1"});

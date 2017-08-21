@@ -13,10 +13,11 @@ namespace coreApiDemo.Models
       
       RuleFor(blog => blog.Url)
         .NotEmpty()
-        .EmailAddress()
-        .When(blog => blog.Url.Contains("@"))
+        .Matches("newegg.com")
+        // .EmailAddress()
+        // .When(blog => blog.Url.Contains("@"))
         .WithErrorCode("E1002")
-        .WithMessage("Url can not be empty");
+        .WithMessage("Url can not be empty and gotta have newegg.com");
     }
   }
 }
