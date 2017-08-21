@@ -56,9 +56,9 @@ namespace coreApiDemo.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(long id, [FromBody] Blog item)
         {
-            if (item == null || item.BlogId != id)
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
 
             var blog = _blogRepository.Find(id);
@@ -68,7 +68,7 @@ namespace coreApiDemo.Controllers
             }
 
             _blogRepository.Update(item);
-            return new NoContentResult();
+            return new ObjectResult(item);
         }
 
         [HttpDelete("{id}")]

@@ -10,6 +10,9 @@ namespace coreApiDemo.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int BlogId { get; set; }
+
+        [Required]
+        [Url]
         public string Url { get; set; }
     }
 }
