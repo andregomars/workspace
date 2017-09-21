@@ -14,7 +14,7 @@ namespace EComm.Data
 
         public ECommContext(DbContextOptions options) 
             : base(options) { }
-            
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>(entity =>

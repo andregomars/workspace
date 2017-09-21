@@ -21,11 +21,11 @@ namespace EComm.Web.Controllers
         // public List<Product> Index()
         public IActionResult Index()
         {
-            // return View();
+            return View();
             // return Content($"Number of products: {_dataContext.Product.Count()}");
             // return _dataContext.Product.ToList();
-            var model = _dataContext.Product.ToList();
-            return View(model);
+            // var model = _dataContext.Product.ToList();
+            // return View(model);
 
         }
 

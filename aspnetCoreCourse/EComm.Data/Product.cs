@@ -28,5 +28,13 @@ namespace EComm.Data
         public Supplier Supplier { get; set; }
         [InverseProperty("Product")]
         public ICollection<OrderItem> OrderItem { get; set; }
+
+        public string FormattedUnitPrice
+        {
+            get 
+            {
+                return String.Format("{0:C}", UnitPrice); 
+            }
+        }
     }
 }
