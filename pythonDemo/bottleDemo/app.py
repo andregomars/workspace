@@ -1,37 +1,22 @@
-from bottle import run, route, request, error
+from bottle import Bottle
+from bottle.ext.mongo import MongoPlugin
 
-@error(404)
-def error404(error):
-  return "page not found!"
+app = Bottle()
 
-@error(405)
-def error405(error):
-  return "method is not allowed!!"
+db_name = 'mdb'
+db_uri = 'mongodb://andre:Pa20090508@ds119355.mlab.com:19355/mdb'
+db_plugin = MongoPlugin(uri=db_uri, db=db_name)
 
+app.install(db_plugin)
 
+@app.route('/getall')
+def getAll(mongodb):
+  query = mongodb['myCollection'].find()
+  results = []
 
-@route('/')
-def index():
-  return "hi there do we!"
+  for q in query:
+    results.append(q['name'])
+  
+  return {'list': results}
 
-@route('/login')
-def login():
-  return "you logged in"
-
-@route('/vendors/<vid>')
-def getVendor(vid):
-  return "vendor " + vid
-
-@route('/vendors')
-def loginQuery():
-  vid = request.query.vid
-  # return "vendor " + vid
-  return {"vid": vid, "name": "ingram"}
-
-@route('/addnewvendor', method='POST')
-def addVendor():
-  return "add new vendor" 
-
-
-
-run(debug=False, reloader=True)
+app.run(debug=True, reloader=True)
