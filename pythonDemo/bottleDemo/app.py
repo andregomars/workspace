@@ -19,7 +19,7 @@ def login():
   return "you logged in"
 
 @route('/vendors/<vid>')
-def login(vid):
+def getVendor(vid):
   return "vendor " + vid
 
 @route('/vendors')
