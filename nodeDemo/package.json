@@ -9,6 +9,7 @@
   "author": "Andre",
   "license": "ISC",
   "dependencies": {
+    "clivas": "^0.2.0",
     "csv": "^0.4.5"
   }
 }
