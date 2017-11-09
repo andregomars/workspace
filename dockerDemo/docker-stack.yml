@@ -1,0 +1,14 @@
+version: '3'
+services:
+  web:
+    image: nginx.demo
+    volumes:
+      - ./www/:/var/www/html
+    ports:
+      - "80:80"
+  php:
+    image: php:7.1.11-fpm-alpine
+    volumes:
+      - ./www/:/var/www/html
+    ports:
+      - "9000:9000"
