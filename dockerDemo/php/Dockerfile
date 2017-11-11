@@ -3,6 +3,7 @@ MAINTAINER Andre Shen
 
 # RUN docker-php-ext-install -j$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) \
 # iconv gd mbstring fileinfo curl xmlreader xmlwriter spl ftp mysqli
+RUN docker-php-ext-install mysqli
 
 # VOLUME /var/www/html
 # RUN chown -R www-data:www-data /var/www/html
