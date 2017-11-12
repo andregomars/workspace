@@ -3,16 +3,16 @@ services:
   web:
     image: nginx.demo
     volumes:
-      - ./www/:/var/www/html
+      - ~/workspace/dockerDemo/www:/var/www/html
     ports:
       - "80:80"
     depends_on:
       - php
       - db
   php:
-    image: php:7.1.11-fpm-alpine
+    image: php.demo 
     volumes:
-      - ./www/:/var/www/html
+      - ~/workspace/dockerDemo/www:/var/www/html
     ports:
       - "9000:9000"
     depends_on:
@@ -20,7 +20,7 @@ services:
   db:
     image: mariadb:10.2.10
     volumes:
-      - ./data:/var/lib/mysql
+      - ~/workspace/dockerDemo/data:/var/lib/mysql
     ports:
       - "3306:3306"
     environment:
