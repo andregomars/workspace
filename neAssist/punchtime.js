@@ -3,7 +3,7 @@ const moment = require('moment');
 /*
 params: 09:00, 12:00, 13:00, 
 */
-const punchtime = (amIn, amOut, pmIn, pmOut) => {
+const punchtime = (amIn, amOut, pmIn, pmOut, hours) => {
     const y = moment().get('year');
     const m = moment().get('month');
     const d = moment().get('date');
@@ -17,10 +17,17 @@ const punchtime = (amIn, amOut, pmIn, pmOut) => {
     const m_pmIn = new moment([y,m,d, pmInHour, pmInMinute]);
 
     debugger;
-    const m_pmOut = m_pmIn.add(8 * 60 - m_amOut.diff(m_amIn, 'm'), 'm');
-    const pmOutHour = m_pmOut.get('hour').toString().padStart(2, '0');
-    const pmOutMinute = m_pmOut.get('minute').toString().padStart(2, '0');
-    pmOut = pmOutHour + ':' + pmOutMinute;
+    const hoursLeft = hours * 60 - m_amOut.diff(m_amIn, 'm');
+    if (hoursLeft <= hours) {
+        pmIn = '';
+        pmOut = '';
+    }
+    else {
+        const m_pmOut = m_pmIn.add(hoursLeft, 'm');
+        const pmOutHour = m_pmOut.get('hour').toString().padStart(2, '0');
+        const pmOutMinute = m_pmOut.get('minute').toString().padStart(2, '0');
+        pmOut = pmOutHour + ':' + pmOutMinute;
+    }
 
     return  [amIn, amOut, pmIn, pmOut];
 };
