@@ -16,10 +16,11 @@ const punchtime = (amIn, amOut, pmIn, pmOut) => {
     const m_amOut = new moment([y,m,d, amOutHour, amOutMinute]);
     const m_pmIn = new moment([y,m,d, pmInHour, pmInMinute]);
 
+    debugger;
     const m_pmOut = m_pmIn.add(8 * 60 - m_amOut.diff(m_amIn, 'm'), 'm');
-    const pmOutHour = m_pmOut.get('h');
-    const pmOutMinute = m_pmOut.get('m');
-    pmOut = pmOutHour + ':' + pmInMinute;
+    const pmOutHour = m_pmOut.get('hour').toString().padStart(2, '0');
+    const pmOutMinute = m_pmOut.get('minute').toString().padStart(2, '0');
+    pmOut = pmOutHour + ':' + pmOutMinute;
 
     return  [amIn, amOut, pmIn, pmOut];
 };
