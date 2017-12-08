@@ -1,4 +1,4 @@
-var punchtime = require('./punchtime');
+const { punchTime } = require('./punchtime');
 
 if (process.argv.length < 3) {
     console.log('Please provide punch times');
@@ -11,7 +11,7 @@ if (process.argv.length === 4) {
 }
  
 const [amIn, amOut, pmIn, pmOut] = process.argv[2].split(',').map(e=>e.trim());
-const output = punchtime(amIn, amOut, pmIn, pmOut, hours);
+const output = punchTime(amIn, amOut, pmIn, pmOut, hours);
 
 console.log(output);
 
