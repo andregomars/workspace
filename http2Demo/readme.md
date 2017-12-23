@@ -11,7 +11,7 @@ docker run -it -p 80:80 -p 443:443 -v ~/workspace/http2Demo/:/var/www/html/ h2de
 ```
 #### 3. Verify HTTP/2
 ```bash
-docker run -t --rm badouralix/curl-http2 -LI <host> --insucure 
+docker run -t --rm badouralix/curl-http2 -LI <host> --insecure 
 ```
 ## How to generate SSL certificates
 #### Using OpenSSL
