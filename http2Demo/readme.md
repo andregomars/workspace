@@ -7,12 +7,19 @@ docker build -t h2demo .
 ```
 #### 2. Run
 ```bash
-docker run -it -p 80:80 -p 443:443 -v ~/workspace/http2Demo/:/var/www/html/ h2demo
+docker run -d -p 80:80 -p 443:443 -v ~/workspace/http2Demo/:/var/www/html/ h2demo
 ```
 #### 3. Verify HTTP/2
 ```bash
-docker run -t --rm badouralix/curl-http2 -LI <host> --insecure 
+docker run --rm badouralix/curl-http2 -LI <host> --insecure 
 ```
+
+#### 4. Test HTTP/2 Performance (HPACK)
+```bash
+docker run --rm svagi/nghttp2 h2load https://blog.cloudflare.com -n 15 | tail -6 | head -1
+```
+
+
 ## How to generate SSL certificates
 #### Using OpenSSL
 ```bash
