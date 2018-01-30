@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
-import { AgmClustererModule } from '@agm/clusterer/clusterer.module';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartModule, TieredMenuModule, ButtonModule, DataTableModule,
   ProgressBarModule } from 'primeng/primeng';
@@ -20,7 +20,7 @@ import { DataRemoteService } from './shared/data-remote';
 import { MenuComponent } from './menu/menu.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { GaugeComponent } from './gauge/gauge.component';
-import { LinearGaugeComponent, RadialGaugeComponent } from 'ng-canvas-gauges/component';
+import { GaugesModule } from 'ng-canvas-gauges/lib';
 import { ProgressMeterComponent } from './progress-meter/progress-meter.component';
 import { JustGaugeComponent } from './just-gauge/just-gauge.component';
 import { GaugeJsComponent } from './gauge-js/gauge-js.component';
@@ -39,8 +39,6 @@ import { ChartGaugeComponent } from './chart-gauge/chart-gauge.component';
     MenuComponent,
     DataTableComponent,
     GaugeComponent,
-    LinearGaugeComponent,
-    RadialGaugeComponent,
     ProgressMeterComponent,
     JustGaugeComponent,
     GaugeJsComponent,
@@ -58,12 +56,13 @@ import { ChartGaugeComponent } from './chart-gauge/chart-gauge.component';
     ButtonModule,
     DataTableModule,
     ProgressBarModule,
+    GaugesModule,
     JustgageModule,
     ChartsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAqZcZ_L6UIsGVHcDqWdu-GrsRSPcpWeqU'
     }),
-    AgmClustererModule
+    AgmJsMarkerClustererModule
   ],
   providers: [
     DataLocalService,
