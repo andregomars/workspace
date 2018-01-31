@@ -49,6 +49,7 @@ import { ChartGaugeComponent } from './chart-gauge/chart-gauge.component';
     BrowserModule,
     FormsModule,
     HttpModule,
+    // GaugesModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ChartModule,
@@ -56,7 +57,6 @@ import { ChartGaugeComponent } from './chart-gauge/chart-gauge.component';
     ButtonModule,
     DataTableModule,
     ProgressBarModule,
-    GaugesModule,
     JustgageModule,
     ChartsModule,
     AgmCoreModule.forRoot({
