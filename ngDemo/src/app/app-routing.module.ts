@@ -10,6 +10,7 @@ import { DataTableComponent } from './data-table/data-table.component';
 import { GaugeComponent } from './gauge/gauge.component';
 import { DataCardsComponent } from './data-cards/data-cards.component';
 import { AuthGuardService } from './auth-guard.service';
+import { FireComponent } from './fire/fire.component';
 
 const routes: Routes = [
     { path: 'reactivex', component: ReactiveXComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
     { path: 'table', component: DataTableComponent },
     { path: 'gauge', component: GaugeComponent },
     { path: 'cards', component: DataCardsComponent },
+    { path: 'firebase', component: FireComponent },
 ];
 
 @NgModule({

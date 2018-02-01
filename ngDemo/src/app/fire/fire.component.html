@@ -1,0 +1,12 @@
+<div class="table">
+  <div class="row">
+    <div class="col">
+      <ul>
+        <div *ngFor="let vendor of vendors$ | async">
+          <h3>Name: {{vendor.name}}</h3>
+          <h3>Type: {{vendor.type}}</h3>
+        </div>
+      </ul>
+    </div>
+  </div>
+</div>

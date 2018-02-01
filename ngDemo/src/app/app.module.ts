@@ -28,6 +28,11 @@ import { DataCardsComponent } from './data-cards/data-cards.component';
 import { JustgageModule } from 'angular2-justgage';
 import { ChartGaugeComponent } from './chart-gauge/chart-gauge.component';
 
+import { AngularFireModule }  from 'angularfire2';
+import { AngularFireDatabaseModule }  from 'angularfire2/database';
+import { AngularFireAuthModule }  from 'angularfire2/auth';
+import { environment } from 'environments/environment';
+import { FireComponent } from './fire/fire.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +48,8 @@ import { ChartGaugeComponent } from './chart-gauge/chart-gauge.component';
     JustGaugeComponent,
     GaugeJsComponent,
     DataCardsComponent,
-    ChartGaugeComponent
+    ChartGaugeComponent,
+    FireComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +68,10 @@ import { ChartGaugeComponent } from './chart-gauge/chart-gauge.component';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAqZcZ_L6UIsGVHcDqWdu-GrsRSPcpWeqU'
     }),
-    AgmJsMarkerClustererModule
+    AgmJsMarkerClustererModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
   providers: [
     DataLocalService,
