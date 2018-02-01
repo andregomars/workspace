@@ -12,5 +12,8 @@ export const environment = {
     projectId: "fir-demo-20726",
     storageBucket: "fir-demo-20726.appspot.com",
     messagingSenderId: "141433573652"
+  },
+  agm: {
+    apiKey: "xxxxx" 
   }
 };

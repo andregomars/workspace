@@ -65,9 +65,7 @@ import { FireComponent } from './fire/fire.component';
     ProgressBarModule,
     JustgageModule,
     ChartsModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAqZcZ_L6UIsGVHcDqWdu-GrsRSPcpWeqU'
-    }),
+    AgmCoreModule.forRoot(environment.agm),
     AgmJsMarkerClustererModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
