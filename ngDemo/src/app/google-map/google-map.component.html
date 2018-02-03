@@ -8,20 +8,26 @@
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" 
           [streetViewControl]=false [zoomControl]=true>
           <agm-marker-cluster [imagePath]="clusterIcon"> 
+            <agm-marker *ngFor="let v of rows"
+              [latitude]="convert(v.gps_location[0].latitude)" 
+              [longitude]="convert(v.gps_location[0].longitude)">
+            </agm-marker>
+         </agm-marker-cluster>
+          <!-- <agm-marker-cluster [imagePath]="clusterIcon"> 
             <agm-marker *ngFor="let m of markers"
               [latitude]="m.lat" [longitude]="m.lng"
               [label]="m.label" [title]="m.title" 
               [markerDraggable]="m.draggable" [iconUrl]="m.icon">
             </agm-marker>
-          </agm-marker-cluster>
-          <agm-polyline [polylineDraggable]=false 
+          </agm-marker-cluster> -->
+          <!-- <agm-polyline [polylineDraggable]=false 
             [strokeColor]="red" [strokeOpacity]="0.5" [strokeWeight]="5">
             <agm-polyline-point *ngFor="let m of markers"
               [latitude]="m.lat" [longitude]="m.lng">
             </agm-polyline-point>
-          </agm-polyline>
+          </agm-polyline> -->
         </agm-map>
-      </div>
+     </div>
     </div>
   </div>
 </div>

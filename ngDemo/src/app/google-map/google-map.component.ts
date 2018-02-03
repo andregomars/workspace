@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http/src/module';
+import { Observable } from 'rxjs/Observable';
+import * as Rx from 'rxjs/Rx';
+
+import { ToNumberPipe } from '../shared/to-number.pipe';
 
 @Component({
   selector: 'app-google-map',
@@ -6,9 +12,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./google-map.component.css']
 })
 export class GoogleMapComponent implements OnInit {
+	rows = [];
+  temp = [];
+	lat: number = 33.934353;
+	lng: number = -117.934343;
+  data$: Observable<any>;
+  dataLocalUrl = `assets/data/fleet/AVTA.json`;
+  dataRemoteUrl = `https://ioccatsdemo.firebaseio.com/fleet/AVTA.json`;
 
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+  constructor(
+    private http: HttpClient
+  ) { }
+
+  ngOnInit(): void {
+    // this.data$ = this.http.get<any>(this.dataRemoteUrl)
+    //   .map(x => x.vehicles);
+    this.http.get<any>(this.dataRemoteUrl).subscribe(data => {
+      this.rows = data.vehicles;
+    });
+	}
+	
+	private convert(value: string): number {
+		return +value;
+}
+
+  // lat: number = 51.678418;
+  // lng: number = 7.809007;
   zoom: number = 10;
 	
 	clusterIcon: string = "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m";
@@ -47,11 +76,6 @@ export class GoogleMapComponent implements OnInit {
       icon: 'http://cloud.iocontrols.com/online2017/hams/images/mapicon/oi_map_marker.yellow.46px.png' 
 	  }
 	]
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
 }
 
