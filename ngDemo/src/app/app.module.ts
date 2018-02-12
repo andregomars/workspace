@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
@@ -29,11 +29,13 @@ import { DataCardsComponent } from './data-cards/data-cards.component';
 import { JustgageModule } from 'angular2-justgage';
 import { ChartGaugeComponent } from './chart-gauge/chart-gauge.component';
 
-import { AngularFireModule }  from 'angularfire2';
-import { AngularFireDatabaseModule }  from 'angularfire2/database';
-import { AngularFireAuthModule }  from 'angularfire2/auth';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from 'environments/environment';
 import { FireComponent } from './fire/fire.component';
+import { SignupFormComponent } from './signup-form/signup-form.component';
+import { SignupFormReactiveComponent } from './signup-form-reactive/signup-form-reactive.component';
 
 @NgModule({
   declarations: [
@@ -50,11 +52,14 @@ import { FireComponent } from './fire/fire.component';
     GaugeJsComponent,
     DataCardsComponent,
     ChartGaugeComponent,
-    FireComponent
+    FireComponent,
+    SignupFormComponent,
+    SignupFormReactiveComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
     // GaugesModule,

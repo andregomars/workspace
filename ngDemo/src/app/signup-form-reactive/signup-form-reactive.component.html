@@ -1,0 +1,103 @@
+<div class="row custom-row">
+  <div class= "col-sm-5 custom-container jumbotron">
+    <form class="form-horizontal" [formGroup]="signupForm" (ngSubmit)="onFormSubmit()">
+      <fieldset>
+        <legend>SignUp - Reactive</legend>
+          <!-- Email Block -->
+          <div class="form-group">
+            <label for="inputEmail">Email</label>
+            <input type="text"
+              formControlName="email"
+              id="inputEmail"
+              placeholder="Email">
+          </div>
+          <div class="alert alert-danger" *ngIf="email.invalid && email.touched">
+            <div *ngIf="email.errors?.required">
+              Email is required
+            </div>
+            <div *ngIf="email.errors?.pattern">
+              Invalid Email format 
+            </div>
+          </div>
+
+          <!-- Password Block -->
+
+          <div class="form-group" formGroupName="password">
+            <div class="form-group">
+              <label for="inputPassword">Password</label>
+              <input type="password"
+                formControlName="pwd"
+                id="inputPassword"
+                placeholder="Password">
+              <!-- <div class="alert alert-danger"
+                *ngIf="pwd.invalid && pwd.touched">
+                Password is too short
+              </div> -->
+            </div>
+            
+            <div class="form-group">
+              <label for="confirmPassword" >Confirm Password</label>
+              <input type="password"
+                formControlName="confirmPwd"
+                id="confirmPassword"
+                placeholder="Password">
+              <!-- <div class="alert alert-danger"
+                *ngIf="(confirmPwd.invalid || pwd?.value !== confirmPwd?.value) && 
+                  confirmPwd.touched">
+                Please confirm the password
+              </div> -->
+              <div class="alert alert-danger"
+                *ngIf="password.invalid && password.touched">
+                <ng-container *ngIf="password.errors?.mismatch; 
+                  then mismatch else other">
+                </ng-container>           
+                <ng-template #mismatch>Password not match</ng-template>
+                <ng-template #other>Password is too short</ng-template>
+              </div>
+            </div>
+          </div>
+          <!-- Select gender Block -->
+          <div class="form-group">
+            <label for="select">Gender</label>
+              <select id="select"
+                formControlName="gender"
+              >
+                <option *ngFor="let g of genderList" 
+                  [value]="g">
+                  {{g}}
+                </option>
+              </select>
+          </div>
+            
+          <!-- Terms and conditions Block -->
+            <div class="form-group checkbox">
+            <label>
+              <input type="checkbox"
+                formControlName="terms" >
+                Confirm that you've read the Terms and Conditions
+            </label>
+          </div>
+          
+          <!-- Buttons Block -->
+          <div class="form-group">
+              <button type="reset" class="btn btn-default">Cancel</button>
+              <button type="submit" 
+                [disabled]="!signupForm.valid"
+                class="btn btn-primary">
+                Submit
+              </button>
+          </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+<div class="row">
+  <p>Form Status: {{signupForm.status | json}}</p>
+</div>
+<div class="row">
+  <p>Password Satus: {{password.errors?.mismatch | json}}</p>
+</div>
+<div class="row">
+  <pre>{{signupForm.value | json}}</pre>
+  <pre>{{user | json}}</pre>
+</div>

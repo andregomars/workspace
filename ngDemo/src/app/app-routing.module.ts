@@ -1,4 +1,4 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -11,6 +11,8 @@ import { GaugeComponent } from './gauge/gauge.component';
 import { DataCardsComponent } from './data-cards/data-cards.component';
 import { AuthGuardService } from './auth-guard.service';
 import { FireComponent } from './fire/fire.component';
+import { SignupFormComponent } from './signup-form/signup-form.component';
+import { SignupFormReactiveComponent } from './signup-form-reactive/signup-form-reactive.component';
 
 const routes: Routes = [
     { path: 'reactivex', component: ReactiveXComponent },
@@ -21,6 +23,8 @@ const routes: Routes = [
     { path: 'gauge', component: GaugeComponent },
     { path: 'cards', component: DataCardsComponent },
     { path: 'firebase', component: FireComponent },
+    { path: 'signup', component: SignupFormComponent },
+    { path: 'signup-reactive', component: SignupFormReactiveComponent },
 ];
 
 @NgModule({
