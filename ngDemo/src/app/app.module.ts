@@ -28,6 +28,7 @@ import { GaugeJsComponent } from './gauge-js/gauge-js.component';
 import { DataCardsComponent } from './data-cards/data-cards.component';
 import { JustgageModule } from 'angular2-justgage';
 import { ChartGaugeComponent } from './chart-gauge/chart-gauge.component';
+import { MyDateRangePickerModule } from 'mydaterangepicker';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -76,7 +77,8 @@ import { SignupFormReactiveComponent } from './signup-form-reactive/signup-form-
     AgmJsMarkerClustererModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    MyDateRangePickerModule
   ],
   providers: [
     DataLocalService,

@@ -1,3 +1,19 @@
+<div class="row">
+  <div class="col">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmitReactiveForms()" novalidate>
+      <my-date-range-picker name="reactiveFormsDateRange" [options]="myDateRangePickerOptions" formControlName="myDateRange"></my-date-range-picker>
+      <div>
+          <button class="button" type="submit">Submit</button>
+          <button class="button" type="button" (click)="setDateRange()">Set Range (today)</button>
+          <button class="button" type="button" (click)="resetDateRange()">Reset Range (today)</button>
+          <button class="button" type="button" (click)="clearDateRange()">Set Empty</button>
+          <p class="error" *ngIf="myForm.controls.myDateRange.errors">Date range is required!</p>
+      </div>
+      <div>Begin Date: {{beginDate | date:'MM/dd/yyyy'}}</div>
+      <div>End Date: {{endDate | date:'MM/dd/yyyy'}}</div>
+    </form>
+  </div>
+</div>
 <div class="row custom-row">
   <div class= "col-sm-5 custom-container jumbotron">
     <form class="form-horizontal" [formGroup]="signupForm" (ngSubmit)="onFormSubmit()">
