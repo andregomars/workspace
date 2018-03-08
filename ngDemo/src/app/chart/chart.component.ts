@@ -11,6 +11,8 @@ import { UIChart } from 'primeng/primeng';
 import { DataLocalService } from '../shared/data-local';
 import { DataRemoteService } from '../shared/data-remote';
 import { VehicleSnapshot } from './../models/vehicle-snapshot';
+import { VehicleStatus } from './../models/vehicle-status';
+import { YAxis } from './../models/yAxis.model';
 
 @Component({
   selector: 'app-chart',
@@ -24,111 +26,127 @@ export class ChartComponent implements OnInit {
   min: any;
   max: any;
 
-  @ViewChild("demoChart")
+  @ViewChild('demoChart')
   demoChart: UIChart;
 
   constructor(
         private dataLocal: DataLocalService,
         private dataRemote: DataRemoteService
   ) {}
- 
+
   ngOnInit() {
-    var vname = "3470";
-    var backDays = 3;
+    const vname = '1601';
+    const backDays = 3;
     this.yesterday =  moment().subtract(backDays, 'day').startOf('day').toDate();
-    this.min = moment(this.yesterday).startOf('day');
-    this.max = moment(this.yesterday).add(1,'day').startOf('day');
+    this.min = moment('2018-03-02');
+    this.max = this.min;
+    // this.min = moment(this.yesterday).startOf('day');
+    // this.max = moment(this.min).add(1, 'day').startOf('day');
 
     this.setOptions();
-    this.dataRemote.getWholeDayVehicleSnapshot$(vname, this.yesterday)
-        .subscribe((list: VehicleSnapshot[]) => {
+    this.dataRemote.getWholeDayVehicleStatus$(vname, this.min)
+        .subscribe((list: VehicleStatus[]) => {
             this.setData(list);
             this.demoChart.reinit();
         });
-      
   }
 
   onClick(): void {
     console.log('hit');
 
-    this.demoChart.options.scales.xAxes[0].time.tooltipFormat = "HH";
-    this.demoChart.options.scales.xAxes[0].time.min = this.min.add(2,'hour');
+    this.demoChart.options.scales.xAxes[0].time.tooltipFormat = 'HH';
+    this.demoChart.options.scales.xAxes[0].time.min = this.min.add(2, 'hour');
     this.demoChart.reinit();
   }
 
   private setOptions(): void {
-    this.options = {
-        responsive: false,
-        scales: {
-          xAxes: [{
-            type: 'time',
-            time: {
-                unit: 'hour',
-                // unitStepSize: 2,
-                // round: true,
-                // max: moment().subtract(1, 'day').endOf('day').toDate(), 
-                tooltipFormat: 'HH:mm',
-                min: this.min, 
-                max: this.max, 
-                displayFormats: {
-                  //minute: 'HH:mm',
-                  hour: 'HH:mm'
-                }
-            },
-            ticks: {
-              // beginAtZero: true
-              // autoSkip: false,
-              // maxTicksLimit: 24
-            },
-            gridLines: {
-              // display: false,
-              // drawTicks: true,
-              // offsetGridLines: true,
+    const leftY = new YAxis('SOC', '#4286f4', 0, 200);
+    const rightY = new YAxis('kWh', '#565656', 0, 600);
+    this.options = this.getChartOptions(leftY, rightY)
+  }
+
+  getChartOptions(leftY: YAxis, rightY: YAxis): any {
+    return {
+      responsive: false,
+      animation: {
+        duration: 0
+      },
+      hover: {
+        animationDuration: 0
+      },
+      scales: {
+        xAxes: [{
+          type: 'time',
+          time: {
+            unit: 'hour',
+            tooltipFormat: 'HH:mm',
+            min: moment(this.min).startOf('day'),
+            max: moment(this.max).add(1, 'day').startOf('day'),
+            displayFormats: {
+              hour: 'HH:mm'
             }
-          }],
-          yAxes: [{
-            gridLines: {
-              // display: true,
-              // drawTicks: true,
-            }
-          }]
-        },
+          },
+       }],
+        yAxes: [{
+          id: 'y' + leftY.label,
+          scaleLabel: {
+            display: true,
+            labelString: leftY.label,
+            fontColor: leftY.color
+          },
+          position: 'left',
+          ticks: {
+            fontColor: leftY.color,
+            stepSize: leftY.stepSize,
+            max: leftY.max,
+            beginAtZero: true
+          }
+        }, {
+          id: 'y' + rightY.label,
+          scaleLabel: {
+            display: true,
+            labelString: rightY.label,
+            fontColor: rightY.color
+          },
+          position: 'right',
+          ticks: {
+            fontColor: rightY.color,
+            stepSize: rightY.stepSize,
+            max: rightY.max,
+            beginAtZero: true
+          }
+        }]
+      }
     };
   }
 
   private setData(list: any): void {
-    var filtered_A = list.filter(e => e.code === '2A');
-    var filtered_B = list.filter(e => e.code === '2B');
-    var labels = filtered_A.map(el => el.time);
-    var dataSOC = filtered_A.map(el => el.value.toFixed(2));
-    var dataEnergy = filtered_B.map(el => el.value.toFixed(2));
+    const labels = list.map(x => x.updated);
+    const dataSoc = list.map(x => x.soc === 0 ? null : x.soc.toFixed(1))
+    const dataEnergy = list.map(x => x.remainingenergy === 0 ? null : x.remainingenergy.toFixed(1));
+    // const dataSoc = list.map(x => x.soc.toFixed(1));
+    // const dataEnergy = list.map(x => x.remainingenergy.toFixed(1));
 
     this.demoChart.data = {
       labels: labels,
       datasets: [
         {
           label: 'SOC',
-          data: dataSOC,
-        //   yAxisID: 'ySOC',
-          pointRadius: 1,
-          borderColor: '#4286f4',
+          data: dataSoc,
+          yAxisID: 'ySOC',
           fill: false,
-          // showLine: false,
-          // spanGaps: false,
-          setppedLine: true
-        }, 
-        // {
-        //   label: 'kWh',
-        //   data: dataEnergy,
-        // //   yAxisID: 'ykWh',
-        //   fill: false,
-        //   pointRadius: 1,
-        //   borderColor: '#565656',
-        // }
+          pointRadius: 1,
+          borderColor: '#4286f4'
+        }, {
+          label: 'kWh',
+          data: dataEnergy,
+          yAxisID: 'ykWh',
+          fill: false,
+          pointRadius: 1,
+          borderColor: '#565656',
+        }
       ]
     }
-
   }
-  
 }
 
