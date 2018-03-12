@@ -4,8 +4,9 @@ import * as Rx from 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import { Http, Response } from '@angular/http';
 import { Store } from '@ngrx/store';
-import { GreetingActionType } from '../core/store/greeting/index';
-
+import { GreetingActionType } from '../core/store/greeting';
+import { Post } from '../models/post.model';
+import * as PostActions from '../core/store/post/post.actions';
 
 @Component({
   selector: 'app-reactive-x',
@@ -15,12 +16,31 @@ import { GreetingActionType } from '../core/store/greeting/index';
 export class ReactiveXComponent implements OnInit {
   title = 'Redux | NgRx';
   message$: Observable<string>;
+  post$: Observable<Post>;
+  text = '';
 
   constructor(
     private http: Http,
     private store: Store<AppState>
   ) {
-    this.message$ = this.store.select('message');
+    this.message$ = this.store.select('greeting');
+    this.post$ = this.store.select('post');
+  }
+
+  editText() {
+    this.store.dispatch(new PostActions.EditText(this.text));
+  }
+
+  resetPost() {
+    this.store.dispatch(new PostActions.Reset());
+  }
+
+  upvote() {
+    this.store.dispatch(new PostActions.Upvote());
+  }
+
+  downvote() {
+    this.store.dispatch(new PostActions.Downvote());
   }
 
   chineseMessage() {
@@ -36,5 +56,6 @@ export class ReactiveXComponent implements OnInit {
 }
 
 interface AppState {
-  message: string;
+  greeting: string;
+  post: Post;
 }

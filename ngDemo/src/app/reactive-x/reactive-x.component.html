@@ -17,4 +17,22 @@
     </div>
   </div>
 </div>
+<div class="row mt-2">
+  <div class="col col-md-4">
+    <div class="card">
+      <div class="card-header">Vote</div>
+      <div class="card-body p-2">
+        <div *ngIf="post$ | async as p">
+          <h2>{{ p.text }}</h2>
+          <h4>Votes: {{ p.likes }}</h4>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="upvote()">Upvote</button>
+        <button type="button" class="btn btn-success" (click)="downvote()">Downvote</button>
+        <button type="button" class="btn btn-info" (click)="reset()">Reset</button>
+        <input [(ngModel)] = "text">
+        <button type="button" class="btn btn-primary" (click)="editText()">Change Title</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="row"></div>

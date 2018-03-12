@@ -13,6 +13,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { GreetingReducer } from './core/store/greeting';
+import { PostReducer } from './core/store/post';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
@@ -82,7 +83,10 @@ import { SignupFormReactiveComponent } from './signup-form-reactive/signup-form-
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     MyDateRangePickerModule,
-    StoreModule.forRoot({message: GreetingReducer}),
+    StoreModule.forRoot({
+      greeting: GreetingReducer,
+      post: PostReducer
+    }),
     StoreDevtoolsModule.instrument({maxAge: 25})
   ],
   providers: [
