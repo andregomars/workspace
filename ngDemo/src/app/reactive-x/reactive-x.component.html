@@ -1,34 +1,20 @@
-
-<h1>
-  {{title}}
-</h1>
-<input #btn type="button" (click)="btnClick()" value="click me">
-<div>
-  <label>Fleet: </label>
-  <select #fSelector>
-    <option *ngFor="let f of fList" [value]="f">{{f}}</option>
-  </select>
+<div class="row">
+  <h2>
+    {{title}}
+  </h2>
 </div>
-<div>
-  <label>Vehicle: </label>
-  <select #vSelector>
-    <option *ngFor="let v of vList" [value]="v">{{v}}</option>
-  </select>
+<div class="row mt-2">
+  <div class="col col-md-4">
+    <div class="card">
+      <div class="card-header">Translate</div>
+      <div class="card-body p-2">
+        <h3 class="card-title">
+          {{message$ | async}}
+        </h3>
+        <button type="button" class="btn btn-primary" (click)="englishMessage()">English</button>
+        <button type="button" class="btn btn-success" (click)="chineseMessage()">Chinese</button>
+      </div>
+    </div>
+  </div>
 </div>
-<br />
-<div class="">
-  DataFrom: {{(dataFrom$ | async)?.name}}
-</div>
-<div *ngFor="let person of dataOf$ | async">
-  DataOf: <label>{{person.name}}</label>
-</div>
-<div *ngFor="let fid of restOf$ | async">
-  Unique FID: <label>{{fid}}</label>
-</div>
-<div *ngFor="let v of restFlatMap">
-  Unique FID: <label>{{v.vid}}</label>
-</div>
-
-<div *ngFor="let v of vehicles">
-  vehicle: <label>{{v.vid}}</label>
-</div>
+<div class="row"></div>

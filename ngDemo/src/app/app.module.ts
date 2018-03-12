@@ -9,7 +9,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartModule, TieredMenuModule, ButtonModule, DataTableModule,
   ProgressBarModule } from 'primeng/primeng';
 import { ChartsModule } from 'ng2-charts';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { GreetingReducer } from './core/store/greeting';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
@@ -78,7 +81,9 @@ import { SignupFormReactiveComponent } from './signup-form-reactive/signup-form-
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    MyDateRangePickerModule
+    MyDateRangePickerModule,
+    StoreModule.forRoot({message: GreetingReducer}),
+    StoreDevtoolsModule.instrument({maxAge: 25})
   ],
   providers: [
     DataLocalService,
