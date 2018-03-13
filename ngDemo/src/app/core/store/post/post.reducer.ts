@@ -4,12 +4,12 @@ import { Post } from '../../../models/post.model';
 export type Action = PostActions.All;
 
 const defaultState: Post = {
-    text: 'Hello, I am the default post',
+    text: 'Default vote',
     likes: 0
 }
 
 const newState = (state, newData) => {
-    return Object.assign({}, state, newState);
+    return Object.assign({}, state, newData);
 }
 
 export function PostReducer(state: Post = defaultState, action: Action) {

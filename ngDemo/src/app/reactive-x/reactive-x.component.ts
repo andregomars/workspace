@@ -10,8 +10,7 @@ import * as PostActions from '../core/store/post/post.actions';
 
 @Component({
   selector: 'app-reactive-x',
-  templateUrl: './reactive-x.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './reactive-x.component.html'
 })
 export class ReactiveXComponent implements OnInit {
   title = 'Redux | NgRx';

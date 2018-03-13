@@ -26,11 +26,15 @@
           <h2>{{ p.text }}</h2>
           <h4>Votes: {{ p.likes }}</h4>
         </div>
-        <button type="button" class="btn btn-primary" (click)="upvote()">Upvote</button>
-        <button type="button" class="btn btn-success" (click)="downvote()">Downvote</button>
-        <button type="button" class="btn btn-info" (click)="reset()">Reset</button>
-        <input [(ngModel)] = "text">
-        <button type="button" class="btn btn-primary" (click)="editText()">Change Title</button>
+        <div class="input-group">
+          <button type="button" class="btn btn-primary m-1" (click)="upvote()">Upvote</button>
+          <button type="button" class="btn btn-success m-1" (click)="downvote()">Downvote</button>
+          <button type="button" class="btn btn-info m-1" (click)="resetPost()">Reset</button>
+        </div>
+        <div class="input-group">
+          <input [(ngModel)]="text" class="m-1">
+          <button type="button" class="btn btn-primary m-1" (click)="editText()">Change Title</button>
+        </div>
       </div>
     </div>
   </div>
