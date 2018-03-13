@@ -13,8 +13,6 @@ const newState = (state, newData) => {
 }
 
 export function PostReducer(state: Post = defaultState, action: Action) {
-    console.log(action.type, state);
-
     switch (action.type) {
         case PostActions.EDIT_TEXT:
             return newState(state, { text: action.payload });

@@ -87,7 +87,7 @@ import { SignupFormReactiveComponent } from './signup-form-reactive/signup-form-
       greeting: GreetingReducer,
       post: PostReducer
     }),
-    StoreDevtoolsModule.instrument({maxAge: 25})
+    StoreDevtoolsModule.instrument({maxAge: 10})
   ],
   providers: [
     DataLocalService,
