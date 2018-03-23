@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NetCoreDemo
+namespace ConsoleApp
 {
     public class Product
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace NetCoreDemo.DesignPattern
+namespace ConsoleApp.DesignPattern
 {
     public abstract class Segment
     {

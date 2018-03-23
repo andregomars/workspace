@@ -1,6 +1,6 @@
 using System;
 
-namespace NetCoreDemo
+namespace ConsoleApp
 {
     public interface IOutput
     {

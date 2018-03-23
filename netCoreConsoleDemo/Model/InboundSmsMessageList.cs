@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace NetCoreDemo
+namespace ConsoleApp
 {
     public class InboundSmsMessageList
     {

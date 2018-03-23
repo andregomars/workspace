@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using Chilkat;
 
-namespace netCoreConsoleDemo
+namespace ConsoleApp
 {
   public class Reader
   {
