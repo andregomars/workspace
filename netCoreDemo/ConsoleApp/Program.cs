@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
-using NetCoreDemo.DesignPattern;
+using ConsoleApp.DesignPattern;
 using NLog.Extensions.Logging;
 // using NLog;
 using Autofac;
@@ -9,82 +9,75 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.IO;
 
-namespace NetCoreDemo
+namespace ConsoleApp
 {
-    public class Program
+  public class Program
+  {
+    // private static Logger logger = LogManager.GetCurrentClassLogger();
+    private static IContainer container { get; set; }
+
+    //private static Logger logger = LogManager.GetCurrentClassLogger();
+    public static IConfigurationRoot Configuration { get; private set; }
+
+    static void Main(string[] args)
     {
-        // private static Logger logger = LogManager.GetCurrentClassLogger();
-        private static IContainer container { get; set;}
-        
-        //private static Logger logger = LogManager.GetCurrentClassLogger();
-        public static IConfigurationRoot Configuration { get; private set; }
+      // TimerMars.Run();
+      // Reader.PrintPath();
+      Reader.ReadCsv();
 
-        public static void Main(string[] args)
-        { 
-            // var builder = new ConfigurationBuilder()
-            //     .SetBasePath(Directory.GetCurrentDirectory())
-            //     .AddJsonFile("appsettings.json")
-            //     .AddEnvironmentVariables();
-            // Configuration = builder.Build();
+      ILoggerFactory loggerFactory = new LoggerFactory()
+          .AddConsole()
+          .AddDebug()
+          .AddNLog();
 
-            ILoggerFactory loggerFactory = new LoggerFactory()
-                .AddConsole()
-                .AddDebug()
-                .AddNLog();
-            
-            ILogger logger = loggerFactory.CreateLogger<Program>();
+      ILogger logger = loggerFactory.CreateLogger<Program>();
 
-            //TestFactory();
-        //    HttpClientSample.Run();
-         //  SmsSample.Run();
-            // JsonSample.Serialize();
-        //   KeepLog();
+      var builder = new ContainerBuilder();
+      builder.RegisterType<TodayWriter>().As<IDateWriter>();
+      builder.RegisterType<ConsoleOutput>().As<IOutput>();
+      container = builder.Build();
 
-            var builder = new ContainerBuilder();
-            builder.RegisterType<TodayWriter>().As<IDateWriter>();
-            builder.RegisterType<ConsoleOutput>().As<IOutput>();
-            container = builder.Build();
+      DoAction();
 
-            DoAction();
+      Console.WriteLine("runned");
 
-           Console.WriteLine("runned");
-        }
 
-        private static void DoAction()
+      void DoAction()
+      {
+        using (var scope = container.BeginLifetimeScope())
         {
-            using (var scope = container.BeginLifetimeScope())
-            {
-                var writer = scope.Resolve<IDateWriter>();
-                writer.WriteDate();
-            }
+          var writer = scope.Resolve<IDateWriter>();
+          writer.WriteDate();
         }
-        
-        private static void KeepLog() 
-        {
-            ILoggerFactory loggerFactory = new LoggerFactory()
-               .AddConsole()
-               .AddDebug()
-               .AddNLog();
-            var logger = loggerFactory.CreateLogger<Program>();
-            logger.LogInformation("nlog works");
-            
-        }
+      }
+    }
 
-        private static void TestFactory()
-        {
-            List<EDI> ediDocs = new List<EDI>();
-            ediDocs.Add(new EDI832());
-            ediDocs.Add(new EDI850());
-            ediDocs.Add(new EDI810());
+    private static void KeepLog()
+    {
+      ILoggerFactory loggerFactory = new LoggerFactory()
+         .AddConsole()
+         .AddDebug()
+         .AddNLog();
+      var logger = loggerFactory.CreateLogger<Program>();
+      logger.LogInformation("nlog works");
 
-            foreach(EDI doc in ediDocs)
-            {
-                Console.WriteLine(doc.GetType().Name);
-                foreach(Segment seg in doc.Segments)
-                {
-                    Console.WriteLine(seg.GetType().Name);
-                }
-            } 
+    }
+
+    private static void TestFactory()
+    {
+      List<EDI> ediDocs = new List<EDI>();
+      ediDocs.Add(new EDI832());
+      ediDocs.Add(new EDI850());
+      ediDocs.Add(new EDI810());
+
+      foreach (EDI doc in ediDocs)
+      {
+        Console.WriteLine(doc.GetType().Name);
+        foreach (Segment seg in doc.Segments)
+        {
+          Console.WriteLine(seg.GetType().Name);
         }
-    } 
-} 
+      }
+    }
+  }
+}

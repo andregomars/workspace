@@ -1,4 +1,4 @@
-namespace NetCoreDemo
+namespace ConsoleApp
 {
     public class OutboundSMSRequest
     {
