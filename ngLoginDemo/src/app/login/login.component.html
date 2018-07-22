@@ -1,0 +1,17 @@
+<div class="card mt-5" style="margin:auto; width:600px;">
+  <div class="card-body">
+    <h5 class="card-title">Login</h5>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="text" id="email" class="form-control"
+        placeholder="email address" [(ngModel)]='email'>
+    </div>
+    <div class="form-group">
+      <label for="email">Password</label>
+      <input type="password" id="password" class="form-control"
+        placeholder="password" [(ngModel)]='password'>
+    </div>
+    <button class="btn btn-primary" 
+      type="submit" (click)="tryLogin()">Login</button>
+  </div>
+</div>
