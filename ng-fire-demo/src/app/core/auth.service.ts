@@ -11,29 +11,38 @@ import { switchMap} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  user: Observable<User>;
+  user: Observable<firebase.User>;
 
   constructor(
+    private router: Router,
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore
   ) {
-    this.user = this.afAuth.authState.pipe(
-        switchMap(user => {
-          if (user) {
-            return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-          } else {
-            return of(null);
-          }
-        })
-      );
+    this.user = this.afAuth.authState;
+    // this.user = this.afAuth.authState.pipe(
+    //     switchMap(user => {
+    //       if (user) {
+    //         this.user = user;
+    //       } else {
+    //         return this.user = of(null);
+    //       }
+    //     })
+    //   );
   }
 
-  login(email: string, password: string) {
+  signIn(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then((credential) => {
-        // this.updateUserData(credential.user);
+      .then(() => {
+        this.router.navigate(['/dashboard']);
       });
   }
+
+  signOut() {
+    this.afAuth.auth.signOut();
+    this.router.navigate(['/']);
+  }
+
+
 }
 
 
