@@ -3,6 +3,12 @@
     <h1>Dashboard</h1>
   </div>
   <div class="row">
+    <h4 *ngIf="authService.canRead(user)">Can View</h4>
+  </div>
+  <div class="row">
+    <h4 *ngIf="authService.canEdit(user)">Can Edit</h4>
+  </div>
+  <div class="row">
     <input type="submit" class="btn btn-primary"
       value="Sign Out" (click)="signOut()">
   </div>
