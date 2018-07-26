@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  users: Observable<any[]>;
+  // users: Observable<any[]>;
 
   constructor(
     private dataService: DataService
   ) {
-    this.users = this.dataService.getUsers();
+    // this.users = this.dataService.getUsers();
   }
 }

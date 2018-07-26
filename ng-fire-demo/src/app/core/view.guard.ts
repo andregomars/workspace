@@ -19,9 +19,7 @@ export class ViewGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       return this.auth.user.pipe(
-        tap(user => { console.log(user); } ),
         take(1),
-        tap(user => { console.log(this.auth.canRead(user)); } ),
         map(user => !!(user && this.auth.canRead(user)) ),
         tap(isViewer => {
           if (!isViewer) {

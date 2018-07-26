@@ -19,6 +19,10 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore
   ) {
+   this.initUserStream();
+  }
+
+  initUserStream() {
     this.user = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
@@ -33,13 +37,18 @@ export class AuthService {
   signIn(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then(() => {
+        this.initUserStream();
         this.router.navigate(['/dashboard']);
+      }).catch(err => {
+        console.error(err);
       });
   }
 
   signOut() {
-    this.afAuth.auth.signOut();
-    this.router.navigate(['/']);
+    this.afAuth.auth.signOut()
+      .then(() => {
+        this.router.navigate(['/login']);
+      });
   }
 
   canRead(user: User): boolean {
