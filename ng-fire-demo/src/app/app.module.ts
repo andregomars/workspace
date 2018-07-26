@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { DashboardComponent } from './view/dashboard/dashboard.component';
 import { LoginComponent } from './view/login/login.component';
+import { AdminComponent } from './view/admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    AdminComponent
   ],
   imports: [
     CommonModule,

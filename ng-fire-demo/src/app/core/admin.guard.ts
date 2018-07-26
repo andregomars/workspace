@@ -9,10 +9,10 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
   constructor(
-    private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {}
 
   canActivate(
@@ -20,12 +20,15 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       return this.auth.user.pipe(
         take(1),
-        map(user => !!user),
-        tap(isSignedIn => {
-          if (!isSignedIn) {
+        map(user => !!(user && user.roles.admin)),
+        tap(isAdmin => {
+          if (!isAdmin) {
+            console.error('only admin is allowed!');
             this.router.navigate(['/login']);
           }
         })
       );
+
+
   }
 }

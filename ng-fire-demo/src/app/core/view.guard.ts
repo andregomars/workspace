@@ -9,23 +9,28 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class ViewGuard implements CanActivate {
   constructor(
-    private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       return this.auth.user.pipe(
+        tap(user => { console.log(user); } ),
         take(1),
-        map(user => !!user),
-        tap(isSignedIn => {
-          if (!isSignedIn) {
+        tap(user => { console.log(this.auth.canRead(user)); } ),
+        map(user => !!(user && this.auth.canRead(user)) ),
+        tap(isViewer => {
+          if (!isViewer) {
+            console.error('need view permission!');
             this.router.navigate(['/login']);
           }
         })
       );
+
+
   }
 }
