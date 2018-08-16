@@ -7,9 +7,11 @@ import { AdminComponent } from './view/admin/admin.component';
 import { AuthGuard } from './core/auth.guard';
 import { ViewGuard } from './core/view.guard';
 import { AdminGuard } from './core/admin.guard';
+import { RegisterComponent } from './view/register/register.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'dashboard', component: DashboardComponent,
       canActivate: [ViewGuard] },
   { path: 'admin', component: AdminComponent,

@@ -12,6 +12,11 @@
     <input type="password" class="form-control" [(ngModel)]="password" placeholder="password">
   </div>
   <div class="row">
-    <input class="btn btn-primary" type="submit" value="Sign In" (click)="signIn()">
+    <span>
+      <input class="btn btn-primary" type="submit" value="Sign In" (click)="signIn()">
+    </span>
+    <span class="m-2 ">
+      <a href="" [routerLink]="['/register']">Sign Up</a>
+    </span>
   </div>
 </div>
