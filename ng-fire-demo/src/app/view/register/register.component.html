@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <h1>Sign Up</h1>
+  </div>
+  <div class="form-group row">
+    <label>User Name: </label>
+    <input type="text" class="form-control" 
+      [(ngModel)]="username" placeholder="User Name">
+  </div>
+  <div class="form-group row">
+    <label>Email: </label>
+    <input type="email" class="form-control" 
+      [(ngModel)]="email" placeholder="Email">
+  </div>
+  <div class="form-group row">
+    <label>Password: </label>
+    <input type="password" class="form-control" 
+      [(ngModel)]="password" placeholder="Password">
+  </div>
+  <div class="form-group row">
+    <label>Repeat Password: </label>
+    <input type="password" class="form-control" 
+      [(ngModel)]="passwordrepeat" placeholder="Repeat password">
+  </div>
+  <div class="row">
+    <span>
+      <input class="btn btn-danger" type="submit" 
+        value="Sign Up" (click)="signUp()">
+    </span>
+    <span class="m-2 ">
+      <a href="" [routerLink]="['/login']">Back to Sign In</a>
+    </span>
+  </div>
+</div>

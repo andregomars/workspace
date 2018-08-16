@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
@@ -32,6 +32,30 @@ export class AuthService {
         }
       })
     );
+  }
+
+  signUp(email: string, username: string, password: string) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        this.setUserDoc(userCredential, username);
+        this.initUserStream();
+        this.router.navigate(['/dashboard']);
+      }).catch(err => {
+        console.error(err);
+      });
+  }
+
+  private setUserDoc(userCredential: firebase.auth.UserCredential, username: string) {
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${userCredential.user.uid}`);
+
+    const data: User = {
+      uid: userCredential.user.uid,
+      displayName: username ,
+      email: userCredential.user.email || null,
+      roles: { viewer: true }
+    };
+
+    return userRef.set(data);
   }
 
   signIn(email: string, password: string) {

@@ -9,13 +9,15 @@ import { CoreModule } from './core/core.module';
 import { DashboardComponent } from './view/dashboard/dashboard.component';
 import { LoginComponent } from './view/login/login.component';
 import { AdminComponent } from './view/admin/admin.component';
+import { RegisterComponent } from './view/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     LoginComponent,
-    AdminComponent
+    AdminComponent,
+    RegisterComponent
   ],
   imports: [
     CommonModule,
