@@ -1,0 +1,10 @@
+<ul *ngIf="items && items.length > 0" class="nav flex-column">
+  <li *ngFor="let item of items" class="nav-item">
+    <a [routerLink]="[item.url]">
+      <i [class]="item.icon"></i>&nbsp;{{ item.name }}
+    </a>
+  </li>
+  <li class="nav-item">
+    <a href="" (click)="false;">Link</a>
+  </li>
+</ul>

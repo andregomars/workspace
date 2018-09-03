@@ -27,9 +27,8 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/bootstrap/scss/bootstrap",
+              "node_modules/font-awesome/css/font-awesome.css",
               "src/styles.scss"
-
             ],
             "scripts": []
           },

@@ -3,12 +3,14 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PopupComponent } from './popup/popup.component';
+import { DefaultTemplateComponent } from './containers/default-template/default-template.component';
+import { SidebarComponent } from './containers/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PopupComponent
+    DefaultTemplateComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
