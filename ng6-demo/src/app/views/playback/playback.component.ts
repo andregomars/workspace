@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject, interval, timer } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 @Component({
@@ -9,30 +9,28 @@ import { map, tap } from 'rxjs/operators';
   styleUrls: ['./playback.component.scss']
 })
 export class PlaybackComponent implements OnInit {
-  // lineChartData: any[];
   lineChartData$: Observable<any>;
+  // lineChartData$: Subject<any>;
 
   constructor(
     private dataService: DataService
   ) { }
 
   ngOnInit() {
+    // setInterval(this.loadData, 5000);
     this.loadData();
+
   }
 
   private loadData() {
-    this.lineChartData$ = this.dataService.getChartDataA().pipe(
-        map(dataA => { return [
-              {data: dataA, label: 'Series A'}
-            ];
-        }),
-    );
-    // this.dataService.getChartDataA().subscribe(dataA => {
-    //   this.lineChartData = [
-    //     {data: dataA, label: 'Series A'}
-    //   ]
-    // });
-    
+    console.log('loaddata()');
+    // this.lineChartData$ = this.dataService.getChartData().pipe(
+    //   map(data => { return [
+    //         {data: data, label: 'Series A'}
+    //       ];
+    //   }),
+    // );
+
   }
 
  // lineChart
