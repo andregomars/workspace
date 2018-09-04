@@ -1,22 +1,43 @@
-<div class="row">
-  <div class="col-md-6">
-    <div style="display: block;">
-      <canvas baseChart width="400" height="400" [datasets]="lineChartData$ | async" [labels]="lineChartLabels" [options]="lineChartOptions"
-        [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
-        (chartClick)="chartClicked($event)"></canvas>
+<ng-container *ngIf="source$ | async as source">
+  <div class="row mt-2">
+    <div class="col-6">
+      <div class="row">
+        <div class="col d-block">
+          <canvas baseChart width="400" height="400" [data]="source.chartData" [labels]="labels" [options]="lineChartOptions" [colors]="lineChartColors"
+            [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+        </div>
+      </div>
+      <div class="row m-4">
+        <div class="col d-flex justify-content-around">
+          <button type="button" class="btn btn-primary shadow-sm" (click)="reload()">
+            <i class="fa fa-refresh"></i>
+          </button>
+          <ng-container *ngIf="isPlaying; then pauseBtn; else playBtn">
+          </ng-container>
+          <ng-template #pauseBtn>
+            <button type="button" class="btn btn-primary shadow-sm" (click)="pause()">
+              <i class="fa fa-pause"></i>
+            </button>
+          </ng-template>
+          <ng-template #playBtn>
+            <button type="button" class="btn btn-primary shadow-sm" (click)="play()">
+              <i class="fa fa-play"></i>
+            </button>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 table-responsive">
+      <table class="table table-condensed">
+        <tr>
+          <th>Time</th>
+          <th>Value</th>
+        </tr>
+        <tr *ngFor="let d of source.tableData">
+          <td>{{ d.time }}</td>
+          <td>{{ d.num }}</td>
+        </tr>
+      </table>
     </div>
   </div>
-  <div class="col-md-6" style="margin-bottom: 10px">
-    <!-- <table *ngIf="lineChartData && lineChartData.length > 0" -->
-    <table
-      class="table table-responsive table-condensed">
-      <tr>
-        <th *ngFor="let label of lineChartLabels">{{label}}</th>
-      </tr>
-      <tr *ngFor="let d of lineChartData$ | async">
-        <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
-      </tr>
-    </table>
-    <button (click)="randomize()">CLICK</button>
-  </div>
-</div>
+</ng-container>

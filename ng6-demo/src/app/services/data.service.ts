@@ -14,17 +14,28 @@ export class DataService {
   }
 
   getChartData() {
-    return of(this.randomize());
-
-    // const store = new Subject<any>();
-    // store.next(this.randomize());
-    // store.next(this.randomize());
-    // store.next(this.randomize());
-    // return store;
-
+    return of(this.randomArray());
   }
 
-  private randomize(): any[] {
-    return Array.from(new Array(7), () => Math.floor(Math.random()*100+1));
+  getCurrentData() {
+    return of(this.randomObject());
+  }
+
+  private randomArray(): any[] {
+    return Array.from(new Array(7), () => this.randomNumber());
+  }
+
+  private randomObject(): any {
+    // const time = new Date().getSeconds().toString();
+    const time = new Date();
+    const num = this.randomNumber();
+    return {
+      time: time,
+      num: num
+    };
+  }
+
+  private randomNumber(): number {
+    return Math.floor(Math.random() * 100 + 1);
   }
 }
