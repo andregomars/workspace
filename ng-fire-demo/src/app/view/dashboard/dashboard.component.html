@@ -2,14 +2,15 @@
   <div class="row">
     <h1>Dashboard</h1>
   </div>
+  <ng-container *ngIf="user$ | async as user">
+    <div class="row">
+      <h4 *ngIf="isCapableOf(user, 'View')">Can View</h4>
+    </div>
+    <div class="row">
+      <h4 *ngIf="isCapableOf(user, 'Edit')">Can Edit</h4>
+    </div>
+  </ng-container>
   <div class="row">
-    <h4 *ngIf="authService.canRead(user)">Can View</h4>
-  </div>
-  <div class="row">
-    <h4 *ngIf="authService.canEdit(user)">Can Edit</h4>
-  </div>
-  <div class="row">
-    <input type="submit" class="btn btn-primary"
-      value="Sign Out" (click)="signOut()">
+    <input type="submit" class="btn btn-primary" value="Sign Out" (click)="signOut()">
   </div>
 </div>
