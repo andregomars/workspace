@@ -12,8 +12,8 @@ import * as moment from 'moment';
 export class PlaybackComponent implements OnInit, OnDestroy {
   isPlaying: boolean;
   itv: any;
-  len = 11;
-  intSec = 3;
+  len = 21;
+  intSec = 2;
   source$: Observable<any>;
   queue: any[];
   labels: string[];
@@ -21,7 +21,23 @@ export class PlaybackComponent implements OnInit, OnDestroy {
   lineChartLegend = false;
   lineChartType = 'line';
   lineChartOptions: any = {
-    responsive: true
+    responsive: true,
+    animation: {
+      duration: 4000
+    },
+    scales: {
+      xAxes: [{
+        gridLines: {
+          display: false
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          max: 100,
+          beginAtZero: true
+        }
+      }]
+    }
   };
   lineChartColors: Array<any> = [
     { // grey
@@ -75,7 +91,6 @@ export class PlaybackComponent implements OnInit, OnDestroy {
 
   private initData() {
     this.isPlaying = true;
-    // this.queue = Array.from(new Array(this.len), () => '');
     this.queue = Array.from(new Array(this.len), () => {
       return { time: '', num: '' };
     });
@@ -113,7 +128,7 @@ export class PlaybackComponent implements OnInit, OnDestroy {
 
   private sortTableData(rows: any[]) {
     const filteredRows = rows.filter(row => row.time !== '');
-    return filteredRows.sort(this.sortByTimeDesc).reverse();
+    return filteredRows.sort(this.sortByTimeDesc).reverse().slice(0, 10);
   }
 
   private sortByTimeDesc(prev, next): number {

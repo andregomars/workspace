@@ -26,9 +26,9 @@ export class DataService {
   }
 
   private randomObject(): any {
-    // const time = new Date().getSeconds().toString();
     const time = new Date();
-    const num = this.randomNumber();
+    // const num = this.randomNumber();
+    const num = this.randomNumberRange(45, 80);
     return {
       time: time,
       num: num
@@ -37,5 +37,9 @@ export class DataService {
 
   private randomNumber(): number {
     return Math.floor(Math.random() * 100 + 1);
+  }
+
+  private randomNumberRange(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min) + min);
   }
 }
