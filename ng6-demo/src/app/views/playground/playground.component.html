@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col">
+    <app-play-chart #playchart [labels]="chartLabels" [data$]="data$" [interval]="refreshInterval"></app-play-chart>
+    <div class="d-flex justify-content-around">
+      <button type="button" class="btn btn-primary shadow-sm" (click)="reload()">
+        <i class="fa fa-refresh"></i>
+      </button>
+      <ng-container *ngIf="isPlaying; then pauseBtn; else playBtn">
+      </ng-container>
+      <ng-template #pauseBtn>
+        <button type="button" class="btn btn-primary shadow-sm" (click)="pause()">
+          <i class="fa fa-pause"></i>
+        </button>
+      </ng-template>
+      <ng-template #playBtn>
+        <button type="button" class="btn btn-primary shadow-sm" (click)="play()">
+          <i class="fa fa-play"></i>
+        </button>
+      </ng-template>
+    </div>
+  </div>
+  <div class="col">
+
+  </div>
+</div>
