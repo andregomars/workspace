@@ -1,12 +1,13 @@
-<ng-container *ngIf="source$ | async as source">
+<!-- <ng-container *ngIf="source$ | async as source"> -->
   <div class="row mt-2">
     <div class="col-6">
       <div class="row">
         <div class="col d-block">
-          <canvas baseChart [data]="source" [labels]="labels" [options]="lineChartOptions" [colors]="lineChartColors"
-            [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+          <canvas #chart baseChart [data]="queue" [labels]="labels" 
+            [options]="options" [colors]="colors"
+            [legend]="legend" [chartType]="chartType"></canvas>
         </div>
       </div>
     </div>
   </div>
-</ng-container>
+<!-- </ng-container> -->

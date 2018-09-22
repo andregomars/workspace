@@ -16,7 +16,42 @@ export class PlaygroundComponent implements OnInit {
   chartLabels: string[];
   ticks = 21;
   refreshInterval = 2000;
+  isPlaying = true;
   @ViewChild('playchart') playchart: PlayChartComponent;
+
+  lineChartLegend = false;
+  lineChartType = 'line';
+
+  lineChartOptions: any = {
+    responsive: true,
+    animation: {
+      duration: 1000
+    },
+    scales: {
+      xAxes: [{
+        gridLines: {
+          display: false
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          max: 100,
+          beginAtZero: true
+        }
+      }]
+    }
+  };
+
+  lineChartColors: Array<any> = [
+    { // grey
+      backgroundColor: 'rgba(148,159,177,0.2)',
+      borderColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    },
+  ];
 
   constructor(
     private dataService: DataService
@@ -32,14 +67,17 @@ export class PlaygroundComponent implements OnInit {
   }
 
   reload() {
+    this.isPlaying = true;
     this.playchart.reload();
   }
 
   play() {
+    this.isPlaying = !this.isPlaying;
     this.playchart.play();
   }
 
   pause() {
+    this.isPlaying = !this.isPlaying;
     this.playchart.pause();
   }
 }

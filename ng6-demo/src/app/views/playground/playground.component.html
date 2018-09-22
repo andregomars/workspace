@@ -1,6 +1,9 @@
 <div class="row">
   <div class="col">
-    <app-play-chart #playchart [labels]="chartLabels" [data$]="data$" [interval]="refreshInterval"></app-play-chart>
+    <app-play-chart #playchart [labels]="chartLabels" 
+      [data]="data$ | async" [interval]="refreshInterval" 
+      [options]="lineChartOptions" [colors]="lineChartColors" 
+      [legend]="lineChartLegend" [chartType]="lineChartType"></app-play-chart>
     <div class="d-flex justify-content-around">
       <button type="button" class="btn btn-primary shadow-sm" (click)="reload()">
         <i class="fa fa-refresh"></i>
