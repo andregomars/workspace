@@ -1,6 +1,5 @@
-import { Component, OnInit, Input, OnDestroy, OnChanges, Output } from '@angular/core';
-import { Observable, of, from, BehaviorSubject } from 'rxjs';
-import { EventEmitter } from 'events';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Observable } from 'rxjs';
 import { DataService } from '../../services/data.service';
 import { map } from 'rxjs/operators';
 
