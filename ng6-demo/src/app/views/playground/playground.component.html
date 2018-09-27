@@ -1,26 +1,13 @@
 <div class="row">
   <div class="col">
-    <app-play-chart #playchart [labels]="chartLabels" 
-      [data]="data$ | async" [interval]="refreshInterval" 
-      [options]="lineChartOptions" [colors]="lineChartColors" 
-      [legend]="lineChartLegend" [chartType]="lineChartType"></app-play-chart>
-    <div class="d-flex justify-content-around">
-      <button type="button" class="btn btn-primary shadow-sm" (click)="reload()">
-        <i class="fa fa-refresh"></i>
-      </button>
-      <ng-container *ngIf="isPlaying; then pauseBtn; else playBtn">
-      </ng-container>
-      <ng-template #pauseBtn>
-        <button type="button" class="btn btn-primary shadow-sm" (click)="pause()">
-          <i class="fa fa-pause"></i>
-        </button>
-      </ng-template>
-      <ng-template #playBtn>
-        <button type="button" class="btn btn-primary shadow-sm" (click)="play()">
-          <i class="fa fa-play"></i>
-        </button>
-      </ng-template>
-    </div>
+    <ng-container *ngIf="playerbar.data | async as playData">
+      <p>{{ playData }}</p>
+      <canvas baseChart [labels]="chartLabels" [data]="playData" 
+        [options]="lineChartOptions" [colors]="lineChartColors" 
+        [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+    </ng-container>
+    <app-player-bar #playerbar [ticks]="ticks" [interval]="refreshInterval"
+      ></app-player-bar>
   </div>
   <div class="col">
 

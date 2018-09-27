@@ -17,6 +17,10 @@ export class DataService {
     return of(this.randomArray());
   }
 
+  getChartNumber() {
+    return of(this.randomNumber());
+  }
+
   getCurrentData() {
     return of(this.randomObject());
   }
