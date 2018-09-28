@@ -1,16 +1,18 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, Input, OnDestroy, Output } from '@angular/core';
+import { Observable, interval, timer } from 'rxjs';
 import { DataService } from '../../services/data.service';
-import { map } from 'rxjs/operators';
+import { map, switchMap, withLatestFrom, tap } from 'rxjs/operators';
+import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-player-bar',
   templateUrl: './player-bar.component.html',
   styleUrls: ['./player-bar.component.scss']
 })
-export class PlayerBarComponent implements OnInit, OnDestroy {
+export class PlayerBarComponent implements OnInit {
   @Input() ticks: number;
   @Input() interval: number;
+  @Output() change = new EventEmitter();
 
   private data$: Observable<any>;
   private intervalRef: any;
@@ -27,34 +29,21 @@ export class PlayerBarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.initData();
-    this.loadDataPeriodically();
-  }
-
-  ngOnDestroy() {
-    this.clear();
+    this.loadData();
   }
 
   reload() {
-    this.clear();
     this.initData();
-    this.loadDataPeriodically();
+    this.loadData();
   }
 
   pause() {
     this.isPlaying = !this.isPlaying;
-    this.clear();
   }
 
   play() {
     this.isPlaying = !this.isPlaying;
-    this.loadDataPeriodically();
-  }
-
-  private clear() {
-    if (this.intervalRef) {
-      clearInterval(this.intervalRef);
-    }
-
+    this.loadData();
   }
 
   private initData() {
@@ -62,17 +51,14 @@ export class PlayerBarComponent implements OnInit, OnDestroy {
     this.queue = Array.from(new Array(this.ticks), () => 0);
   }
 
-  private loadDataPeriodically() {
-    this.intervalRef = setInterval(() => {
-      this.loadData();
-    }, this.interval);
-  }
-
   private loadData() {
-    this.data$ = this.dataService.getChartNumber().pipe(
+    this.data$ = timer(0, this.interval).pipe(
+      switchMap(() => this.dataService.getChartNumber()),
       map(data => {
-        this.queue.shift();
-        this.queue.push(data);
+        if (this.isPlaying) {
+          this.queue.shift();
+          this.queue.push(data);
+        }
         const queueCopy = [...this.queue];
         return queueCopy;
       })

@@ -56,7 +56,5 @@ export class PlaygroundComponent implements OnInit {
     this.chartLabels = Array.from(new Array(this.ticks), (v, i) =>
       `${((this.ticks - i - 1) * this.refreshInterval / 1000)}s`
     );
-
   }
-
 }
