@@ -1,6 +1,6 @@
 export class AddPlayData {
     static readonly type = '[player] add data';
-    constructor(public payload: any) {}
+    constructor(public payload: number) {}
 }
 
 export class Pause {
@@ -13,9 +13,5 @@ export class Stop {
 
 export class Play {
     static readonly type = '[player] play';
-}
-
-export class Resume {
-    static readonly type = '[player] resume';
-    constructor(public payload: any) {}
+    constructor(public interval: number) {}
 }

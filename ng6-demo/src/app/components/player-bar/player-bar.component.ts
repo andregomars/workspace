@@ -1,8 +1,6 @@
-import { Component, OnInit, Input, OnDestroy, Output } from '@angular/core';
-import { Observable, interval, timer } from 'rxjs';
-import { DataService } from '../../services/data.service';
-import { map, switchMap, withLatestFrom, tap } from 'rxjs/operators';
-import { EventEmitter } from 'events';
+import { Component, OnInit, Input } from '@angular/core';
+import { Play, Stop, Pause } from './player-bar.actions';
+import { Store, Select } from '@ngxs/store';
 
 @Component({
   selector: 'app-player-bar',
@@ -12,57 +10,33 @@ import { EventEmitter } from 'events';
 export class PlayerBarComponent implements OnInit {
   @Input() ticks: number;
   @Input() interval: number;
-  @Output() change = new EventEmitter();
-
-  private data$: Observable<any>;
-  private intervalRef: any;
-  private isPlaying: boolean;
-  private queue: any[];
-
-  get data(): Observable<any> {
-    return this.data$;
-  }
+  @Select(state => state.player.playing) playing$;
 
   constructor(
-    private dataService: DataService
+    private store: Store,
   ) { }
 
   ngOnInit() {
-    this.initData();
-    this.loadData();
   }
 
   reload() {
-    this.initData();
-    this.loadData();
+    this.stop();
+    this.play();
   }
 
   pause() {
-    this.isPlaying = !this.isPlaying;
+    this.store.dispatch(new Pause());
   }
 
   play() {
-    this.isPlaying = !this.isPlaying;
-    this.loadData();
+    this.store.dispatch(new Play(this.interval));
   }
 
-  private initData() {
-    this.isPlaying = true;
-    this.queue = Array.from(new Array(this.ticks), () => 0);
+  stop() {
+    this.store.dispatch(new Stop());
   }
 
-  private loadData() {
-    this.data$ = timer(0, this.interval).pipe(
-      switchMap(() => this.dataService.getChartNumber()),
-      map(data => {
-        if (this.isPlaying) {
-          this.queue.shift();
-          this.queue.push(data);
-        }
-        const queueCopy = [...this.queue];
-        return queueCopy;
-      })
-    );
-  }
+
+
 
 }

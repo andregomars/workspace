@@ -1,6 +1,8 @@
-import { State, Action, StateContext, Selector, actionMatcher } from '@ngxs/store';
-import { AddPlayData, Play, Stop, Resume, Pause } from './player-bar.actions';
-import { resetApplicationState } from '@angular/core/src/render3/instructions';
+import { State, Action, StateContext, Selector, actionMatcher, createSelector } from '@ngxs/store';
+import { AddPlayData, Play, Stop, Pause } from './player-bar.actions';
+import { DataService } from '../../services/data.service';
+import { tap, switchMap, takeWhile } from 'rxjs/operators';
+import { timer, Subscription } from 'rxjs';
 
 export interface PlayerBarStateModel {
     playing: boolean;
@@ -17,53 +19,54 @@ const defaults: PlayerBarStateModel = {
     defaults
 })
 export class PlayerBarState {
-    @Selector()
-    static getPlayingData(state: PlayerBarStateModel) {
-        return state.data;
-    }
+    timer$: Subscription;
 
-    @Action(AddPlayData)
-    addPlayData(context: StateContext<PlayerBarStateModel>, action: AddPlayData) {
-        const current = context.getState();
-        const data = [...current.data, action.payload];
-        context.patchState({
-            data: data
-        });
-    }
+    constructor(
+        private dataService: DataService
+    ) {}
+
 
     @Action(Pause)
-    pausePlaying(context: StateContext<PlayerBarStateModel>, action: Play) {
+    pausePlaying(context: StateContext<PlayerBarStateModel>) {
         context.patchState({
             playing: false
         });
     }
 
     @Action(Stop)
-    stopPlaying(context: StateContext<PlayerBarStateModel>, action: Play) {
+    stopPlaying(context: StateContext<PlayerBarStateModel>) {
+        if (this.timer$) {
+            this.timer$.unsubscribe();
+        }
         context.patchState({
             playing: false,
             data: defaults.data
         });
     }
-    // stopPlaying({ setState }: StateContext<PlayerBarStateModel>) {
-    //     setState({ ...defaults });
-    // }
 
     @Action(Play)
     play(context: StateContext<PlayerBarStateModel>, action: Play) {
         context.patchState({
             playing: true,
-            data: defaults.data
+        });
+
+        this.timer$ = timer(0, action.interval).pipe(
+            switchMap(() => this.dataService.getChartNumber()),
+            takeWhile(() => context.getState().playing)
+        ).subscribe(data => {
+            context.dispatch(new AddPlayData(data));
         });
     }
 
-    @Action(Resume)
-    resume(context: StateContext<PlayerBarStateModel>, action: Resume) {
-        const current = context.getState();
-        const data = [...current.data, action.payload];
+    @Action(AddPlayData)
+    AddPlayData(context: StateContext<PlayerBarStateModel>, action: AddPlayData) {
+        const copy = [...context.getState().data];
+        copy.shift();
+        copy.push(action.payload);
+
         context.patchState({
-            playing: true,
-            data: data
+            data: copy
         });
     }
+
 }

@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { PlayerBarComponent } from '../../components/player-bar/player-bar.component';
+import { Observable } from 'rxjs';
+import { Select, Store } from '@ngxs/store';
+import { PlayerBarState, PlayerBarStateModel } from '../../components/player-bar/player-bar.state';
 
 @Component({
   selector: 'app-playground',
@@ -10,10 +13,10 @@ import { PlayerBarComponent } from '../../components/player-bar/player-bar.compo
 export class PlaygroundComponent implements OnInit {
   chartTitle = 'the play chart';
   chartLabels: string[];
-  ticks = 21;
+  ticks = 12;
   refreshInterval = 2000;
-  isPlaying = true;
   @ViewChild('playerbar') playerbar: PlayerBarComponent;
+  @Select(state => state.player.data) playData$;
 
   lineChartLegend = false;
   lineChartType = 'line';
@@ -50,7 +53,8 @@ export class PlaygroundComponent implements OnInit {
   ];
 
   constructor(
-  ) { }
+    ) {
+   }
 
   ngOnInit() {
     this.chartLabels = Array.from(new Array(this.ticks), (v, i) =>

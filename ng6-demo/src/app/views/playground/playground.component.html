@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col">
-    <ng-container *ngIf="playerbar.data | async as playData">
+    <ng-container *ngIf="playData$ | async as playData">
       <p>{{ playData }}</p>
       <canvas baseChart [labels]="chartLabels" [data]="playData" 
         [options]="lineChartOptions" [colors]="lineChartColors" 
