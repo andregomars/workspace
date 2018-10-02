@@ -16,7 +16,8 @@ export class PlaygroundComponent implements OnInit {
   ticks = 12;
   refreshInterval = 2000;
   @ViewChild('playerbar') playerbar: PlayerBarComponent;
-  @Select(state => state.player.data) playData$;
+  // @Select(state => state.player.data) playData$: Observable<number[]>;
+  @Select(PlayerBarState.data) playData$: Observable<number[]>;
 
   lineChartLegend = false;
   lineChartType = 'line';

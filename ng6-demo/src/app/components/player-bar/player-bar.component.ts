@@ -12,7 +12,6 @@ import { Observable } from 'rxjs';
 export class PlayerBarComponent implements OnInit {
   @Input() ticks: number;
   @Input() interval: number;
-  // @Select(state => state.player.playing) playing$;
   @Select(PlayerBarState.playing) playing$: Observable<boolean>;
 
   constructor(

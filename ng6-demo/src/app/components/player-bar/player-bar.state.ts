@@ -26,8 +26,13 @@ export class PlayerBarState {
     ) {}
 
     @Selector()
-    static playing(state: PlayerBarStateModel) {
+    static playing(state: PlayerBarStateModel): boolean {
         return state.playing;
+    }
+
+    @Selector()
+    static data(state: PlayerBarStateModel): number[] {
+        return state.data;
     }
 
     @Action(Pause)
