@@ -1,14 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxsModule } from '@ngxs/store';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DefaultTemplateComponent } from './containers/default-template/default-template.component';
 import { SidebarComponent } from './containers/sidebar/sidebar.component';
-import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
-import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
-import { NgxsModule } from '@ngxs/store';
 import { PlayerBarState } from './components/player-bar/player-bar.state';
+import { AuthState } from './states/auth.state';
 
 @NgModule({
   declarations: [
@@ -18,10 +22,18 @@ import { PlayerBarState } from './components/player-bar/player-bar.state';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     AppRoutingModule,
-    NgxsModule.forRoot([PlayerBarState])
+    NgxsModule.forRoot([
+      PlayerBarState,
+      AuthState
+    ]),
+    NgxsRouterPluginModule.forRoot(),
+    NgxsStoragePluginModule.forRoot({
+      key: ['auth.token', 'auth.email']
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,10 @@
 export const navItems: NavItem[] = [
     {
+        name: 'Login',
+        url: '/login',
+        icon: 'fa fa-sign-in'
+    },
+    {
         name: 'Dashboard',
         url: '/dashboard',
         icon: 'fa fa-dashboard'

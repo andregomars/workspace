@@ -1,0 +1,22 @@
+<div class="row mt-2">
+  <div class="col-6">
+    <div class="card p-2">
+      <div class="card-title">
+        Please input email and password to login
+      </div>
+      <div class="card-body">
+        <div>
+          <label>Email:</label>
+          <input type="text" [(ngModel)]="email" class="form-control">
+        </div>
+        <div>
+          <label>Password:</label>
+          <input type="text" [(ngModel)]="password" class="form-control">
+        </div>
+        <div class="mt-2">
+          <input type="submit" (click)="login()" class="form-control w-25 btn btn-primary pull-right">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

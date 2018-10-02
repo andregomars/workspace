@@ -6,11 +6,11 @@ import { DemoComponent } from './demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent
+    component: DashboardComponent,
   },
   {
     path: 'demo',
-    component: DemoComponent
+    component: DemoComponent,
   }
 ];
 

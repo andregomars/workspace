@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { AuthState } from '../../states/auth.state';
+import { Logout } from '../../actions/auth.actions';
+import { Navigate } from '@ngxs/router-plugin';
 
 @Component({
   selector: 'app-default-template',
@@ -6,10 +11,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./default-template.component.scss']
 })
 export class DefaultTemplateComponent implements OnInit {
+  @Select(AuthState.email) email$: Observable<string>;
 
-  constructor() { }
+  constructor(
+    private store: Store,
+  ) { }
 
   ngOnInit() {
   }
 
+  logout() {
+    this.store.dispatch(new Logout());
+  }
 }
