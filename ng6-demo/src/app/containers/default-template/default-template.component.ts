@@ -3,7 +3,6 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { AuthState } from '../../states/auth.state';
 import { Logout } from '../../actions/auth.actions';
-import { Navigate } from '@ngxs/router-plugin';
 
 @Component({
   selector: 'app-default-template',

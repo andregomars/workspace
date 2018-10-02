@@ -1,14 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Select } from '@ngxs/store';
 
 import { PlayerBarComponent } from '../../components/player-bar/player-bar.component';
-import { Observable } from 'rxjs';
-import { Select, Store } from '@ngxs/store';
-import { PlayerBarState, PlayerBarStateModel } from '../../components/player-bar/player-bar.state';
+import { PlayerBarState } from '../../components/player-bar/player-bar.state';
 
 @Component({
   selector: 'app-playground',
   templateUrl: './playground.component.html',
-  styleUrls: ['./playground.component.scss']
+  styleUrls: ['./playground.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaygroundComponent implements OnInit {
   chartTitle = 'the play chart';
@@ -16,7 +17,6 @@ export class PlaygroundComponent implements OnInit {
   ticks = 12;
   refreshInterval = 2000;
   @ViewChild('playerbar') playerbar: PlayerBarComponent;
-  // @Select(state => state.player.data) playData$: Observable<number[]>;
   @Select(PlayerBarState.data) playData$: Observable<number[]>;
 
   lineChartLegend = false;

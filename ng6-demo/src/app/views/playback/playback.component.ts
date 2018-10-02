@@ -1,13 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { DataService } from '../../services/data.service';
-import { Observable, Subject, interval, timer } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Component({
   selector: 'app-playback',
   templateUrl: './playback.component.html',
-  styleUrls: ['./playback.component.scss']
+  styleUrls: ['./playback.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlaybackComponent implements OnInit, OnDestroy {
   isPlaying: boolean;
