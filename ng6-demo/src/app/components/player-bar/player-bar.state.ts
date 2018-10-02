@@ -25,6 +25,10 @@ export class PlayerBarState {
         private dataService: DataService
     ) {}
 
+    @Selector()
+    static playing(state: PlayerBarStateModel) {
+        return state.playing;
+    }
 
     @Action(Pause)
     pausePlaying(context: StateContext<PlayerBarStateModel>) {
@@ -33,29 +37,25 @@ export class PlayerBarState {
         });
     }
 
-    @Action(Stop)
+    @Action(Stop, { cancelUncompleted: true })
     stopPlaying(context: StateContext<PlayerBarStateModel>) {
-        if (this.timer$) {
-            this.timer$.unsubscribe();
-        }
         context.patchState({
             playing: false,
             data: defaults.data
         });
     }
 
-    @Action(Play)
+    @Action(Play, { cancelUncompleted: true })
     play(context: StateContext<PlayerBarStateModel>, action: Play) {
         context.patchState({
             playing: true,
         });
 
-        this.timer$ = timer(0, action.interval).pipe(
+        return timer(0, action.interval).pipe(
+            takeWhile(() => context.getState().playing),
             switchMap(() => this.dataService.getChartNumber()),
-            takeWhile(() => context.getState().playing)
-        ).subscribe(data => {
-            context.dispatch(new AddPlayData(data));
-        });
+            tap(data => context.dispatch(new AddPlayData(data)))
+        );
     }
 
     @Action(AddPlayData)
