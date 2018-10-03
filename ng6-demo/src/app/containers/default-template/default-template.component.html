@@ -1,8 +1,20 @@
 <div class="container m-0">
   <div class="row bg-dark text-white pt-1 px-2">
-    <h4 class="font-italic text-monospace">NG6-Demo</h4>
-    <button class="btn btn-link btn" (click)="logout()"><i class="fa fa-sign-out"></i></button>
-    <label>{{ email$ | async }}</label>
+    <div class="col-2">
+      <h4 class="font-italic text-monospace">NG6-Demo</h4>
+    </div>
+    <div class="col-2">
+      <label>{{ (route$ | async)?.url  }}</label>
+    </div>
+    <div class="col-2">
+      <label>{{ (route$ | async)?.params['id']  }}</label>
+    </div>
+    <div class="col-6 text-right">
+      <label>{{ email$ | async }}</label>
+      <button class="btn btn-link btn" (click)="logout()">
+        <i class="fa fa-sign-out"></i>
+      </button>
+    </div>
   </div>
   <div class="row">
     <div class="col-2 bg-dark">

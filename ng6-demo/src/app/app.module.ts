@@ -5,7 +5,7 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
-import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
+import { NgxsRouterPluginModule, RouterStateSerializer } from '@ngxs/router-plugin';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +13,7 @@ import { DefaultTemplateComponent } from './containers/default-template/default-
 import { SidebarComponent } from './containers/sidebar/sidebar.component';
 import { PlayerBarState } from './components/player-bar/player-bar.state';
 import { AuthState } from './states/auth.state';
+import { AppRouterStateSerializer } from './shared';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,9 @@ import { AuthState } from './states/auth.state';
       key: ['auth.token', 'auth.email']
     })
   ],
-  providers: [],
+  providers: [
+    { provide: RouterStateSerializer, useClass: AppRouterStateSerializer }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

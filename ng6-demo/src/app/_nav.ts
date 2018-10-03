@@ -5,6 +5,11 @@ export const navItems: NavItem[] = [
         icon: 'fa fa-sign-in'
     },
     {
+        name: 'Vendor',
+        url: '/vendor',
+        icon: 'fa fa-dashboard'
+    },
+    {
         name: 'Dashboard',
         url: '/dashboard',
         icon: 'fa fa-dashboard'

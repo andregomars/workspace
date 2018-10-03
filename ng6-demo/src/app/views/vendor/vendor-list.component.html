@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="col">
+    <ul>
+      <li *ngFor="let vcode of vendors">
+        <a [routerLink]="['/vendor', vcode]">{{ vcode }}</a>
+      </li>
+    </ul>
+  </div>
+</div>

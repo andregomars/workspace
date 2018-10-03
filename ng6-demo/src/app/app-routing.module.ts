@@ -15,6 +15,11 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
+        path: 'vendor',
+        loadChildren: './views/vendor/vendor.module#VendorModule',
+        canActivate: [AuthGuard]
+      },
+      {
         path: 'playback',
         loadChildren: './views/playback/playback.module#PlaybackModule',
         canActivate: [AuthGuard]
