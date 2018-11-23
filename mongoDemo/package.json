@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "assert": "^1.4.1",
+    "mongodb": "^3.1.10"
+  },
+  "name": "mongodemo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT"
+}
