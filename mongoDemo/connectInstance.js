@@ -5,7 +5,7 @@ const url = 'mongodb://localhost:27017';
 const client = new MongoClient(url, { useNewUrlParser: true });
 
 try {
-    assert.fail('test failure!');
+    // assert.fail('test failure!');
     // throw new Error('test error');
 
     client.connect(function (err) {
