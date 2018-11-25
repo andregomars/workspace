@@ -1,7 +1,8 @@
 const MongoClient = require('mongodb').MongoClient,
     assert = require('assert');
 
-const url = 'mongodb://localhost:27017';
+// const url = 'mongodb://localhost:27017';
+const url = 'mongodb://127.0.0.1:27017';
 const client = new MongoClient(url, { useNewUrlParser: true });
 
 try {
