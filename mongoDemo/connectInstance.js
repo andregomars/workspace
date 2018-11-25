@@ -4,9 +4,16 @@ const MongoClient = require('mongodb').MongoClient,
 const url = 'mongodb://localhost:27017';
 const client = new MongoClient(url, { useNewUrlParser: true });
 
-client.connect(function(err) {
-    assert.equal(null, err);
-    console.log('connected to mongodb instance');
+try {
+    assert.fail('test failure!');
+    // throw new Error('test error');
 
-    client.close();
-});
+    client.connect(function (err) {
+        assert.equal(null, err);
+        console.log('connected to mongodb instance');
+
+        client.close();
+    });
+} catch (error) {
+    console.log(error)
+}
