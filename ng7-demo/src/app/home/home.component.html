@@ -1,3 +1,18 @@
-<p>
-  home works!
-</p>
+<div class="row">
+  <h1>Home</h1>
+</div>
+<div class="row my-2">
+  <div class="col">
+    <button class="btn btn-primary" (click)="subscribe()">Subscribe MQTT</button>
+  </div>
+</div>
+<div class="row my-2">
+  <div class="col">
+    <button class="btn btn-primary" (click)="publish()">Publish MQTT</button>
+  </div>
+</div>
+<div class="row my-2">
+  <div class="col">
+    <p>Message: {{ message }}</p>
+  </div>
+</div>
