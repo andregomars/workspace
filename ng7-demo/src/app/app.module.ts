@@ -9,9 +9,9 @@ import { MqttModule, IMqttServiceOptions } from 'ngx-mqtt';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   connectOnCreate: false,
-  protocol: 'ws',
+  protocol: 'wss',
   hostname: 'test.mosquitto.org',
-  port: 8080
+  port: 8081
 };
 
 @NgModule({
