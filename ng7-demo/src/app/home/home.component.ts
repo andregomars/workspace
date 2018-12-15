@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MqttService, IMqttMessage } from 'ngx-mqtt';
 import { Subscription } from 'rxjs';
+import { format } from 'date-fns';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,7 @@ import { Subscription } from 'rxjs';
 export class HomeComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   private topic = 'mytopic';
-  message: string;
+  messages: string[] = [];
 
   constructor(private mqttService: MqttService) {
   }
@@ -36,7 +37,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription =
       this.mqttService.observe(this.topic).subscribe(
         (message: IMqttMessage) => {
-          this.message = message.payload.toString();
+          this.messages.push(`${message.payload.toString()} @${format(new Date(), 'hh:mm:ss')}`);
       });
   }
 

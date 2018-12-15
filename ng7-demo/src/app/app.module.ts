@@ -7,11 +7,25 @@ import { HomeComponent } from './home/home.component';
 
 import { MqttModule, IMqttServiceOptions } from 'ngx-mqtt';
 
-export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
+export const MQTT_PUBLIC_OPTIONS: IMqttServiceOptions = {
+  connectOnCreate: false,
+  protocol: 'ws',
+  hostname: 'test.mosquitto.org',
+  port: 8080
+};
+
+export const MQTT_PUBLIC_SSL_OPTIONS: IMqttServiceOptions = {
   connectOnCreate: false,
   protocol: 'wss',
   hostname: 'test.mosquitto.org',
   port: 8081
+};
+
+export const MQTT_LOCAL_OPTIONS: IMqttServiceOptions = {
+  connectOnCreate: false,
+  protocol: 'ws',
+  hostname: 'localhost',
+  port: 9001
 };
 
 @NgModule({
@@ -22,7 +36,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MqttModule.forRoot(MQTT_SERVICE_OPTIONS)
+    MqttModule.forRoot(MQTT_LOCAL_OPTIONS)
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -13,6 +13,11 @@
 </div>
 <div class="row my-2">
   <div class="col">
-    <p>Message: {{ message }}</p>
+    <p>Messages: </p>
+    <ul>
+      <li *ngFor="let message of messages">
+        {{ message }}
+      </li>
+    </ul>
   </div>
 </div>

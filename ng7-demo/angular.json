@@ -63,7 +63,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "ng7-demo:build",
-            "ssl": true,
+            "ssl": false,
             "sslKey": "ssl/server.key",
             "sslCert": "ssl/server.crt"
           },
