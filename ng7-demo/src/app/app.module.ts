@@ -28,6 +28,13 @@ export const MQTT_LOCAL_OPTIONS: IMqttServiceOptions = {
   port: 9001
 };
 
+export const MQTT_LOCAL_SSL_OPTIONS: IMqttServiceOptions = {
+  connectOnCreate: false,
+  protocol: 'wss',
+  hostname: 'localhost',
+  port: 9001
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +43,7 @@ export const MQTT_LOCAL_OPTIONS: IMqttServiceOptions = {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MqttModule.forRoot(MQTT_PUBLIC_SSL_OPTIONS)
+    MqttModule.forRoot(MQTT_LOCAL_SSL_OPTIONS)
   ],
   providers: [],
   bootstrap: [AppComponent]
