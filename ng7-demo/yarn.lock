@@ -6167,6 +6167,11 @@ run-queue@^1.0.0, run-queue@^1.0.3:
   dependencies:
     aproba "^1.1.1"
 
+rx-queue@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/rx-queue/-/rx-queue-0.6.2.tgz#c8c4c01769a4884548f004d2e66f5a56dd955d8b"
+  integrity sha512-zdMdLUQzP5G0l1kuYLT5eJC8y/XGbz8oW7bHdmlj90y8wtklmE9cH+6nAA9FM7FJ5Z2UAaUl+8WQmHHoisiDZQ==
+
 rxjs@6.3.3, rxjs@^6.1.0, rxjs@~6.3.3:
   version "6.3.3"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.3.3.tgz#3c6a7fa420e844a81390fb1158a9ec614f4bad55"

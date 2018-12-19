@@ -15,7 +15,11 @@
   <div class="col">
     <p>Messages: </p>
     <ul>
-      <li *ngFor="let message of messages">
+      <!-- <li *ngFor="let message of messages">
+        {{ message }}
+      </li> -->
+      <!-- <li *ngIf="messages$ | async as messages">{{ messages }}</li> -->
+      <li *ngFor="let message of messages$ | async">
         {{ message }}
       </li>
     </ul>
