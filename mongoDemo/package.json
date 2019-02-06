@@ -1,13 +1,21 @@
 {
   "scripts": {
-    "start": "node app.js"
+    "start": "rimraf dist && npx tsc && node ./dist/app.js"
   },
   "dependencies": {
     "assert": "^1.4.1",
-    "mongodb": "^3.1.10"
+    "lodash": "^4.17.11",
+    "mongodb": "^3.1.10",
+    "mongojs": "^2.6.0",
+    "mongoskin": "^2.1.0"
   },
   "name": "mongodemo",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/mongodb": "^3.1.19",
+    "rimraf": "^2.6.3",
+    "typescript": "^3.3.1"
+  }
 }
