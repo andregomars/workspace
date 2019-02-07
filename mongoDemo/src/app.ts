@@ -1,16 +1,15 @@
-import { MongoClient } from 'mongodb';
-// import * as mongoskin from 'mongoskin';
-const mongoskin = require('mongoskin');
-const mongojs = require('mongojs');
-
-const urlDbConn = 'mongodb://admin:fccdbo123!@127.0.0.1:27017/?authMechanism=DEFAULT';
-var conn = mongoskin.db(urlDbConn, { useNewUrlParser: true });
-// var conn = mongojs(urlDbConn, { useNewUrlParser: true });
+import { MongoLayer } from './app/mongo-layer';
 
 (async () => {
-    // var conn = await MongoClient.connect(urlDbConn, { useNewUrlParser: true });
+    await MongoLayer.getInstance().Connect();
+    const conn = MongoLayer.getInstance().Client;
 
-    await conn.collection('mycoll').insertOne({ name: 'andre' });
-    console.log('inserted into mydb.mycoll')
+    try {
+        await conn.db('mydb').collection('mycoll').insertOne({ name: 'andre' });
+        console.log('inserted into mydb.mycoll')
+    } catch (err) {
+        console.log(err.stack);
+    }
+
     conn.close();
 })();
