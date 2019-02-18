@@ -17,6 +17,7 @@ export class MongoLayer {
 
     private constructor() {
         const url = 'mongodb://admin:fccdbo123!@127.0.0.1:27017/?authMechanism=DEFAULT';
+        // const url = 'mongodb+srv://admin:fccdbo123!@cluster0-pwbs7.mongodb.net';
         this.client = new MongoClient(url, { useNewUrlParser: true });
     }
 
