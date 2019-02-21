@@ -2,6 +2,7 @@ version: '3'
 services:
   nginx:
     image: nginx:1.15-alpine
+    container_name: front
     ports:
       - "80:80"
       - "443:443"
@@ -25,9 +26,9 @@ services:
   
   api: 
     image: nginx:1.15-alpine
-    ports:
-      - "8080:80"
-    # command: "/bin/sh -c 'nginx -s reload;' "
+    container_name: api
+    volumes:
+      - ./data/nginx:/etc/nginx/conf.d
     networks:
       - backend
 
