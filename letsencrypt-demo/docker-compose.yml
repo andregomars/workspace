@@ -32,6 +32,17 @@ services:
     networks:
       - backend
 
+  mqtt:
+    image: eclipse-mosquitto
+    container_name: mqtt
+    ports:
+      - '1883:1883'
+      - '9001:9001'
+    volumes:
+      - '$PWD/mosquitto.conf:/mosquitto/config/mosquitto.conf'
+    networks:
+      - backend
+
 networks:
   frontend:
   backend:
