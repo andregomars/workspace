@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Person } from '../person';
-import { Observable, from, of, timer } from 'rxjs';
-import { switchMap, tap, map, share } from 'rxjs/operators';
+import { Observable, never, from, of, timer, Subject, BehaviorSubject, NEVER } from 'rxjs';
+import { switchMap, tap, map, share, takeUntil, takeWhile, skipWhile, repeatWhen } from 'rxjs/operators';
 import { DataService } from '../data.service';
 import * as _ from 'lodash';
 
@@ -13,45 +13,51 @@ import * as _ from 'lodash';
     {{ (luckyMan$ | async)?.last_name }}</p>
     <img src="{{ (luckyMan$ | async)?.avatar }}" />
     <p>Lucky time: {{ (luckyMan$ | async)?.editTime }}
-    <app-employee [customers]="persons$ | async"></app-employee>
+    <div><button (click)="toggle()">{{ pauser.value ? 'Play' : 'Pause' }}</button></div>
+    <app-employee [customers]="pausable$ | async"></app-employee>
     <a routerLink="/home">Back Home</a>
   `,
   styles: []
 })
-export class AboutComponent implements OnInit {
+export class AboutComponent implements OnInit, OnDestroy {
   data$: Observable<Person[]>;
   persons$: Observable<Person[]>;
   luckyMan$: Observable<Person>;
-  interval = 5000;
+  interval = 3000;
+  pauser = new BehaviorSubject<boolean>(false);
+  pausable$: Observable<Person[]>;
 
   constructor(
     private dataService: DataService
   ) { }
 
   ngOnInit() {
-    this.data$ = this.loadPersons();
-
     this.persons$ = timer(0, this.interval).pipe(
-      switchMap(() => this.data$),
+      switchMap(() => this.dataService.getPersons()),
       share()
     );
 
-    this.luckyMan$ = this.persons$.pipe(
+    this.pausable$ = this.pauser.pipe(
+      switchMap(paused => paused ? NEVER : this.persons$),
+    );
+
+    this.luckyMan$ = this.pausable$.pipe(
       map(persons => persons[_.random(0, 2)])
     );
   }
 
-  private loadPersonsLocal(): Person[] {
-    return [{
-      id: 1,
-      first_name: 'andre',
-      last_name: 'shen',
-      avatar: 'https://avatar.png',
-      editTime: new Date()
-    }];
+  ngOnDestroy() {
+    this.unSub();
   }
 
-  private loadPersons(): Observable<Person[]> {
-    return this.dataService.getPersons();
+  public toggle() {
+    this.pauser.next(!this.pauser.value);
   }
+
+  private unSub() {
+    if (this.pauser) {
+      this.pauser.unsubscribe();
+    }
+  }
+
 }
