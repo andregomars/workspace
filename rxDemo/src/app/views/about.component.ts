@@ -3,7 +3,6 @@ import { Person } from '../person';
 import { Observable, never, from, of, timer, Subject, BehaviorSubject, NEVER } from 'rxjs';
 import { switchMap, tap, map, share, takeUntil, takeWhile, skipWhile, repeatWhen } from 'rxjs/operators';
 import { DataService } from '../data.service';
-import * as _ from 'lodash';
 
 @Component({
   selector: 'app-about',
@@ -40,7 +39,7 @@ export class AboutComponent implements OnInit, OnDestroy {
     );
 
     this.luckyMan$ = this.pausable$.pipe(
-      map(persons => persons[_.random(0, 2)])
+      map(persons => persons[Math.floor(Math.random() * 3 + 1)])
     );
   }
 
