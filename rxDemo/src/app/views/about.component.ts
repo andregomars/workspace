@@ -17,10 +17,8 @@ import * as _ from 'lodash';
     <app-employee [customers]="pausable$ | async"></app-employee>
     <a routerLink="/home">Back Home</a>
   `,
-  styles: []
 })
 export class AboutComponent implements OnInit, OnDestroy {
-  data$: Observable<Person[]>;
   persons$: Observable<Person[]>;
   luckyMan$: Observable<Person>;
   interval = 3000;
