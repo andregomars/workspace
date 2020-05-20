@@ -13,7 +13,9 @@ const screenshot = 'loggedin.png';
     await page.type('#mat-input-3', password); // password input
     await page.click('[type=submit]'); // sign in button
     // const loginError = await page.$('#mat-error-0');
-    const loginError = await page.waitForSelector('#mat-error-0');
+    // const loginError = await page.waitForSelector('#mat-error-0');
+    const loginError = await page.$eval('#mat-error-0', el => el.textContent);
+    console.log('login error: ', loginError);
     // if (loginError) {
     //     console.error('login failed');
     // } else {
