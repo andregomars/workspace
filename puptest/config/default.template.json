@@ -1,6 +1,13 @@
 {
+    "origin": "https://stagingak.papermart.com",
+    "screenshot": "./screenshots",
     "customer": {
         "email": "xxx@xxx.xxx",
         "password": "xxxxxxxx"
-    }
+    },
+    "cartitems": [
+        { "code": "11110", "quantity": "1" },
+        { "code": "11112", "quantity": "3" }
+    ]
+        
 }

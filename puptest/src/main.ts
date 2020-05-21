@@ -1,4 +1,3 @@
-import { AccountService } from './share';
+import { StartUp } from './startup';
 
-const accountService = new AccountService();
-accountService.login();
+StartUp.Run();
